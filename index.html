@@ -272,6 +272,27 @@
   .principle .pt .pmono{font-family:'JetBrains Mono', monospace; color:var(--teal); font-size:0.8rem;}
   .principle p{color:var(--ink-dim); margin-top:8px; font-size:0.92rem; line-height:1.6;}
 
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+  }
+  .service{
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:30px 26px; display:flex; flex-direction:column; gap:13px;
+    transition:border-color .3s, transform .3s;
+  }
+  .service:hover{border-color:var(--red); transform:translateY(-4px);}
+  .service .s-num{font-family:'JetBrains Mono', monospace; color:var(--red); font-size:0.8rem; letter-spacing:0.06em;}
+  .service h3{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.22rem; line-height:1.25;}
+  .service p{color:var(--ink-dim); font-size:0.93rem; line-height:1.65;}
+  .services-note{
+    margin-top:36px; max-width:760px;
+    border:1px dashed rgba(255,255,255,0.18); border-radius:10px;
+    padding:20px 24px;
+    color:var(--ink-dim); font-size:0.93rem; line-height:1.65;
+  }
+  .services-note b{color:var(--teal); font-weight:600;}
+
   /* ---------- CTA / CONTACT ---------- */
   .contact{
     background:var(--bg-soft);
@@ -330,6 +351,7 @@
     .stat-band{grid-template-columns:repeat(2,1fr);}
     .stat{border-bottom:1px solid var(--line);}
     .stack-grid{grid-template-columns:1fr; gap:40px;}
+    .services-grid{grid-template-columns:1fr;}
     section{padding:90px 6vw;}
     .scroll-cue{display:none;}
   }
@@ -348,6 +370,7 @@
       <li><a href="#o-mne" data-i18n="nav_about">O mně</a></li>
       <li><a href="#kariera" data-i18n="nav_career">Kariéra</a></li>
       <li><a href="#stack">Stack</a></li>
+      <li><a href="#sluzby" data-i18n="nav_services">Služby</a></li>
       <li><a href="#kontakt" data-i18n="nav_contact">Kontakt</a></li>
     </ul>
   </nav>
@@ -466,6 +489,34 @@
   </div>
 </section>
 
+<section id="sluzby">
+  <div class="section-head reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title" data-i18n="s3_title">Co pro tebe můžu udělat</h2>
+    <span class="section-sub" data-i18n="s3_sub">Jasná nabídka bez keců — tři věci, se kterými za mnou můžeš přijít.</span>
+  </div>
+
+  <div class="services-grid reveal">
+    <div class="service">
+      <span class="s-num">01</span>
+      <h3 data-i18n="sv1_title">Prezentační web (one-page)</h3>
+      <p data-i18n="sv1_desc">Moderní jednostránkový web jako tenhle — pro tebe, tvou firmu nebo projekt. Rychlý, responzivní, žádné šablony.</p>
+    </div>
+    <div class="service">
+      <span class="s-num">02</span>
+      <h3 data-i18n="sv2_title">Weby pro sportovce a kluby</h3>
+      <p data-i18n="sv2_desc">Profil hráče, trenéra nebo oddílu. Z první ruky vím, co sportovec potřebuje ukázat — výsledky, video, kontakt pro agenty a sponzory.</p>
+    </div>
+    <div class="service">
+      <span class="s-num">03</span>
+      <h3 data-i18n="sv3_title">Úpravy a údržba webu</h3>
+      <p data-i18n="sv3_desc">Máš web, který potřebuje oživit, zrychlit nebo jen pravidelně udržovat? Postarám se o něj.</p>
+    </div>
+  </div>
+
+  <div class="services-note reveal" data-i18n="sv_note">Upřímně: s weby teprve začínám. Pro tebe to znamená <b>férovou startovní cenu</b> a to, že tvému projektu dám maximum — potřebuju, aby moje první reference stály za to. Tahle stránka je zatím moje jediná ukázka. Posuď sám, jestli ti styl sedí.</div>
+</section>
+
 <section class="contact" id="kontakt">
   <div class="contact-inner reveal">
     <span class="eyebrow"><span class="bar"></span><span data-i18n="c_eyebrow">pojďme na to</span></span>
@@ -487,7 +538,7 @@
   const I18N = {
     cs: {
       _title: 'Jakub Kočvara — volejbal × kód',
-      nav_about: 'O mně', nav_career: 'Kariéra', nav_contact: 'Kontakt',
+      nav_about: 'O mně', nav_career: 'Kariéra', nav_services: 'Služby', nav_contact: 'Kontakt',
       hero_eyebrow: 'volejbalista // vývojář',
       hero_role: '24 let. <b>6 sezón</b> na profesionálních hřištích ve třech zemích, teď stejnou disciplínu a tah na branku přenáším do <b>kódu</b>. Tahle stránka je toho důkaz.',
       stat1_num: '<span>2.</span> &amp; <span>3.</span>',
@@ -522,6 +573,15 @@
       p2_body: 'Beru každou stránku jako zápas — nastuduju soupeře (zadání), připravím taktiku a jdu na sto procent.',
       p3_title: '<span class="pmono">return</span> výsledek, ne výmluvy',
       p3_body: 'Tři země, tři ligy, šest sezón — naučily mě dotahovat věci do konce i pod tlakem deadlinu.',
+      s3_title: 'Co pro tebe můžu udělat',
+      s3_sub: 'Jasná nabídka bez keců — tři věci, se kterými za mnou můžeš přijít.',
+      sv1_title: 'Prezentační web (one-page)',
+      sv1_desc: 'Moderní jednostránkový web jako tenhle — pro tebe, tvou firmu nebo projekt. Rychlý, responzivní, žádné šablony.',
+      sv2_title: 'Weby pro sportovce a kluby',
+      sv2_desc: 'Profil hráče, trenéra nebo oddílu. Z první ruky vím, co sportovec potřebuje ukázat — výsledky, video, kontakt pro agenty a sponzory.',
+      sv3_title: 'Úpravy a údržba webu',
+      sv3_desc: 'Máš web, který potřebuje oživit, zrychlit nebo jen pravidelně udržovat? Postarám se o něj.',
+      sv_note: 'Upřímně: s weby teprve začínám. Pro tebe to znamená <b>férovou startovní cenu</b> a to, že tvému projektu dám maximum — potřebuju, aby moje první reference stály za to. Tahle stránka je zatím moje jediná ukázka. Posuď sám, jestli ti styl sedí.',
       c_eyebrow: 'pojďme na to',
       c_title: 'Hledáš web, který <span class="accent">vyhraje set</span>? <br>Napiš mi.',
       f_note: 'postaveno ručně, řádek po řádku',
@@ -529,7 +589,7 @@
     },
     en: {
       _title: 'Jakub Kočvara — volleyball × code',
-      nav_about: 'About', nav_career: 'Career', nav_contact: 'Contact',
+      nav_about: 'About', nav_career: 'Career', nav_services: 'Services', nav_contact: 'Contact',
       hero_eyebrow: 'volleyball player // developer',
       hero_role: '24 years old. <b>6 seasons</b> on professional courts in three countries — now I bring the same discipline and drive into <b>code</b>. This page is the proof.',
       stat1_num: '<span>2nd</span> &amp; <span>3rd</span>',
@@ -564,6 +624,15 @@
       p2_body: 'I treat every website like a match — I study the opponent (the brief), prepare the tactics and give it a hundred percent.',
       p3_title: '<span class="pmono">return</span> results, not excuses',
       p3_body: 'Three countries, three leagues, six seasons — they taught me to finish things even under deadline pressure.',
+      s3_title: 'What I can do for you',
+      s3_sub: 'A clear offer, no fluff — three things you can come to me with.',
+      sv1_title: 'One-page website',
+      sv1_desc: 'A modern single-page site like this one — for you, your business or your project. Fast, responsive, no templates.',
+      sv2_title: 'Sites for athletes & clubs',
+      sv2_desc: 'A profile for a player, coach or club. I know first-hand what an athlete needs to show — results, video, contact for agents and sponsors.',
+      sv3_title: 'Website updates & maintenance',
+      sv3_desc: 'Got a site that needs a refresh, a speed-up, or just regular care? I\'ll look after it.',
+      sv_note: 'Honestly: I\'m just getting started with web work. For you that means a <b>fair starter price</b> and my full effort on your project — I need my first references to be worth showing. This page is my only sample so far. Judge for yourself whether the style fits.',
       c_eyebrow: 'let\'s do this',
       c_title: 'Looking for a website that <span class="accent">wins the set</span>? <br>Drop me a line.',
       f_note: 'built by hand, line by line',
