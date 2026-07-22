@@ -183,6 +183,10 @@
     color:var(--ink-dim); max-width:480px; margin-left:auto; font-size:0.95rem; line-height:1.6;
   }
 
+  /* offset only the short "O mně" anchor so its stat band lands below the
+     fixed header and dominates the view instead of surfacing Kariéra */
+  #o-mne{scroll-margin-top:88px;}
+
   /* ---------- STAT BAND ---------- */
   .stat-band{
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
