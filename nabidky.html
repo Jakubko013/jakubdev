@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a0b0d">
 <title>Cenové nabídky — stavby domů</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -116,7 +120,8 @@
 <body>
 
 <h1>Cenové <span>nabídky</span> — stavby domů</h1>
-<p class="sub">Interní nástroj: vlož poptávku, nech agenta vyplnit parametry, zkontroluj ceník a vygeneruj nabídku k tisku / PDF.</p>
+<p class="sub">Interní nástroj: vlož poptávku, nech agenta vyplnit parametry, zkontroluj ceník a vygeneruj nabídku k tisku / PDF.
+<button class="btn btn-ghost" id="btnInstall" type="button" style="display:none;margin-left:10px;padding:7px 14px;font-size:0.75rem;">📲 Nainstalovat aplikaci</button></p>
 
 <details class="settings">
   <summary>⚙ Nastavení — dodavatel, ceník, API klíč</summary>
@@ -581,6 +586,27 @@ document.getElementById("btnUvodAI").addEventListener("click", async () => {
 /* ---------------- init ---------------- */
 renderCenik();
 bindSettings();
+
+/* ---------------- PWA ---------------- */
+if("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")){
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+let installPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  installPrompt = e;
+  document.getElementById("btnInstall").style.display = "inline-block";
+});
+document.getElementById("btnInstall").addEventListener("click", async () => {
+  if(!installPrompt) return;
+  installPrompt.prompt();
+  await installPrompt.userChoice;
+  installPrompt = null;
+  document.getElementById("btnInstall").style.display = "none";
+});
+window.addEventListener("appinstalled", () => {
+  document.getElementById("btnInstall").style.display = "none";
+});
 </script>
 
 </body>

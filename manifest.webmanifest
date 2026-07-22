@@ -1,0 +1,17 @@
+{
+  "name": "Cenové nabídky — stavby domů",
+  "short_name": "Nabídky",
+  "description": "Interní nástroj pro tvorbu cenových nabídek na stavby rodinných domů.",
+  "id": "./nabidky.html",
+  "start_url": "./nabidky.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a0b0d",
+  "theme_color": "#0a0b0d",
+  "lang": "cs",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
