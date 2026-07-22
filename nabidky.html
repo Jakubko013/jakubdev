@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a0b0d">
+<title>Cenové nabídky — stavby domů</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0d;
+    --bg-soft:#101317;
+    --card:#15181d;
+    --line: rgba(255,255,255,0.08);
+    --ink:#f2f1ed;
+    --ink-dim:#9aa0a8;
+    --red:#e6304a;
+    --teal:#5eead4;
+    --amber:#ffb703;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    padding:40px 5vw 80px;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  h1{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;margin-bottom:6px;}
+  h1 span{color:var(--red);}
+  .sub{color:var(--ink-dim);font-size:0.92rem;margin-bottom:34px;}
+  h2{
+    font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:600;
+    margin-bottom:16px;display:flex;align-items:center;gap:10px;
+  }
+  h2 .num{font-family:'JetBrains Mono',monospace;color:var(--red);font-size:0.8rem;}
+  section.panel{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:26px;margin-bottom:22px;
+  }
+  label{display:block;font-size:0.8rem;color:var(--ink-dim);margin-bottom:5px;letter-spacing:0.02em;}
+  input[type=text],input[type=number],input[type=email],input[type=password],select,textarea{
+    width:100%;background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;
+    color:var(--ink);padding:10px 12px;font-family:'Inter',sans-serif;font-size:0.92rem;
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--red);}
+  textarea{resize:vertical;min-height:110px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+  .row{margin-bottom:14px;}
+  .checks{display:flex;gap:22px;flex-wrap:wrap;margin-top:4px;}
+  .checks label{display:flex;align-items:center;gap:8px;color:var(--ink);font-size:0.9rem;margin:0;cursor:pointer;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:0.85rem;border:none;cursor:pointer;
+    padding:12px 22px;border-radius:8px;transition:transform .15s, background .15s;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--red);color:#0a0b0d;font-weight:600;}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink-dim);}
+  .btn[disabled]{opacity:0.5;cursor:wait;transform:none;}
+  .btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;}
+  .hint{font-size:0.78rem;color:var(--ink-dim);margin-top:8px;line-height:1.5;}
+  .hint b{color:var(--teal);}
+  .status{font-size:0.82rem;margin-top:10px;font-family:'JetBrains Mono',monospace;}
+  .status.ok{color:var(--teal);}
+  .status.err{color:var(--red);white-space:pre-wrap;}
+  details.settings{margin-bottom:22px;}
+  details.settings summary{
+    cursor:pointer;color:var(--ink-dim);font-size:0.85rem;
+    font-family:'JetBrains Mono',monospace;padding:8px 0;
+  }
+  details.settings summary:hover{color:var(--ink);}
+  table.cenik{width:100%;border-collapse:collapse;font-size:0.88rem;}
+  table.cenik td{padding:7px 8px;border-bottom:1px solid var(--line);}
+  table.cenik td:first-child{color:var(--ink-dim);}
+  table.cenik input{max-width:130px;text-align:right;}
+  table.cenik .unit{color:var(--ink-dim);font-size:0.78rem;white-space:nowrap;}
+
+  /* ---------- výsledná nabídka ---------- */
+  #nabidka{display:none;}
+  #nabidka.visible{display:block;}
+  .doc{
+    background:#ffffff;color:#17191c;border-radius:12px;padding:44px 48px;
+    font-size:0.92rem;line-height:1.55;
+  }
+  .doc header{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:2px solid #17191c;padding-bottom:18px;margin-bottom:22px;}
+  .doc h3{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;margin-bottom:4px;}
+  .doc .meta{font-size:0.82rem;color:#555;}
+  .doc .parties{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:22px;}
+  .doc .party h4{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px;}
+  .doc .uvod{margin-bottom:22px;white-space:pre-wrap;}
+  .doc table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+  .doc th{
+    text-align:left;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;
+    color:#888;border-bottom:1px solid #ccc;padding:8px 6px;
+  }
+  .doc th:last-child, .doc td:last-child{text-align:right;}
+  .doc td{padding:9px 6px;border-bottom:1px solid #eee;}
+  .doc td.detail{color:#777;font-size:0.8rem;}
+  .doc .sums{margin-left:auto;max-width:340px;}
+  .doc .sums div{display:flex;justify-content:space-between;padding:5px 6px;}
+  .doc .sums .total{border-top:2px solid #17191c;font-weight:700;font-size:1.05rem;padding-top:9px;margin-top:4px;}
+  .doc .pozn{margin-top:24px;font-size:0.8rem;color:#666;white-space:pre-wrap;}
+  .doc footer{margin-top:30px;padding-top:14px;border-top:1px solid #ddd;font-size:0.75rem;color:#999;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media print{
+    body{background:#fff;padding:0;max-width:none;}
+    body > *:not(#nabidka){display:none !important;}
+    #nabidka{display:block !important;}
+    #nabidka .btnrow{display:none;}
+    .doc{border-radius:0;padding:10mm 6mm;}
+  }
+</style>
+</head>
+<body>
+
+<h1>Cenové <span>nabídky</span> — stavby domů</h1>
+<p class="sub">Interní nástroj: vlož poptávku, nech agenta vyplnit parametry, zkontroluj ceník a vygeneruj nabídku k tisku / PDF.
+<button class="btn btn-ghost" id="btnInstall" type="button" style="display:none;margin-left:10px;padding:7px 14px;font-size:0.75rem;">📲 Nainstalovat aplikaci</button></p>
+
+<details class="settings">
+  <summary>⚙ Nastavení — dodavatel, ceník, API klíč</summary>
+
+  <section class="panel">
+    <h2><span class="num">A</span>Dodavatel (zobrazí se na nabídce)</h2>
+    <div class="grid">
+      <div><label>Jméno / firma</label><input type="text" id="dodJmeno"></div>
+      <div><label>IČO</label><input type="text" id="dodIco"></div>
+      <div><label>E-mail</label><input type="email" id="dodEmail"></div>
+      <div><label>Telefon</label><input type="text" id="dodTel"></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2><span class="num">B</span>Ceník (jednotkové ceny bez DPH)</h2>
+    <table class="cenik" id="cenikTable"></table>
+    <div class="btnrow">
+      <button class="btn btn-ghost" id="btnCenikReset" type="button">Obnovit výchozí ceník</button>
+    </div>
+    <p class="hint">Ceny se ukládají v prohlížeči a použijí se pro každou další nabídku. Přirážky za standard: ekonomický −15 %, standardní ±0 %, nadstandardní +25 %. Konstrukce: zděná ±0 %, dřevostavba −10 %, montovaná −5 %.</p>
+  </section>
+
+  <section class="panel">
+    <h2><span class="num">C</span>Claude API klíč (pro AI agenta)</h2>
+    <div class="row"><label>API klíč (sk-ant-…)</label><input type="password" id="apiKey" placeholder="sk-ant-api03-…"></div>
+    <p class="hint">Klíč získáš na <b>platform.claude.com</b>. Ukládá se pouze lokálně v tomto prohlížeči (localStorage) a posílá se výhradně na api.anthropic.com. Bez klíče funguje vše kromě AI kroků.</p>
+  </section>
+</details>
+
+<section class="panel">
+  <h2><span class="num">01</span>Poptávka zákazníka → agent vyplní formulář</h2>
+  <div class="row">
+    <label>Sem vlož e-mail / zprávu od zákazníka (volný text)</label>
+    <textarea id="poptavka" placeholder="Dobrý den, chtěli bychom postavit zděný dům 10×12 m, patrový, se sedlovou střechou a garáží pro jedno auto…"></textarea>
+  </div>
+  <div class="btnrow">
+    <button class="btn btn-primary" id="btnAgent" type="button">🤖 Vyplnit parametry agentem</button>
+  </div>
+  <div class="status" id="agentStatus"></div>
+</section>
+
+<section class="panel">
+  <h2><span class="num">02</span>Parametry stavby a zákazník</h2>
+  <div class="grid" style="margin-bottom:14px;">
+    <div><label>Jméno zákazníka</label><input type="text" id="zJmeno"></div>
+    <div><label>E-mail</label><input type="email" id="zEmail"></div>
+    <div><label>Telefon</label><input type="text" id="zTel"></div>
+    <div><label>Místo stavby</label><input type="text" id="zMisto"></div>
+  </div>
+  <div class="grid">
+    <div>
+      <label>Typ konstrukce</label>
+      <select id="pKonstrukce">
+        <option value="zdena">Zděná</option>
+        <option value="drevostavba">Dřevostavba</option>
+        <option value="montovana">Montovaná</option>
+      </select>
+    </div>
+    <div><label>Zastavěná plocha (m²)</label><input type="number" id="pPlocha" value="100" min="10"></div>
+    <div><label>Počet podlaží</label><input type="number" id="pPodlazi" value="1" min="1" max="4"></div>
+    <div>
+      <label>Střecha</label>
+      <select id="pStrecha">
+        <option value="sedlova">Sedlová</option>
+        <option value="plocha">Plochá</option>
+      </select>
+    </div>
+    <div>
+      <label>Standard provedení</label>
+      <select id="pStandard">
+        <option value="ekonomicky">Ekonomický</option>
+        <option value="standardni" selected>Standardní</option>
+        <option value="nadstandardni">Nadstandardní</option>
+      </select>
+    </div>
+    <div>
+      <label>Sazba DPH</label>
+      <select id="pDph">
+        <option value="12" selected>12 % (bydlení)</option>
+        <option value="21">21 %</option>
+        <option value="0">0 % (neplátce)</option>
+      </select>
+    </div>
+  </div>
+  <div class="row" style="margin-top:14px;">
+    <div class="checks">
+      <label><input type="checkbox" id="pSklep"> Sklep</label>
+      <label><input type="checkbox" id="pGaraz"> Garáž</label>
+      <span id="garazPlochaWrap" style="display:none;"><label style="display:flex;align-items:center;gap:8px;">plocha garáže (m²) <input type="number" id="pGarazPlocha" value="20" min="5" style="max-width:90px;"></label></span>
+    </div>
+  </div>
+  <div class="row">
+    <label>Poznámky k nabídce (každý řádek = jedna poznámka)</label>
+    <textarea id="pPoznamky" style="min-height:70px;">Nabídka nezahrnuje cenu pozemku, projektovou dokumentaci ani přípojky inženýrských sítí.
+Konečná cena bude upřesněna po zaměření a projednání projektu.</textarea>
+  </div>
+  <div class="btnrow">
+    <button class="btn btn-primary" id="btnVypocet" type="button">Spočítat a sestavit nabídku</button>
+    <button class="btn btn-ghost" id="btnUvodAI" type="button">🤖 Vygenerovat průvodní text agentem</button>
+  </div>
+  <div class="status" id="vypocetStatus"></div>
+</section>
+
+<section id="nabidka">
+  <div class="btnrow" style="margin-bottom:14px;">
+    <button class="btn btn-primary" onclick="window.print()">🖨 Tisk / uložit jako PDF</button>
+  </div>
+  <div class="doc" id="doc"></div>
+</section>
+
+<script>
+"use strict";
+
+/* ---------------- ceník ---------------- */
+const CENIK_DEFAULT = [
+  {id:"zaklady",   label:"Zemní práce a základová deska",              cena:4500,  unit:"Kč/m² zastavěné plochy", basis:"zastavena"},
+  {id:"hruba",     label:"Hrubá stavba (zdivo, stropy, schodiště)",    cena:14000, unit:"Kč/m² podlahové plochy", basis:"podlahova"},
+  {id:"strecha",   label:"Střecha vč. krytiny a klempířských prvků",   cena:6500,  unit:"Kč/m² zastavěné plochy", basis:"zastavena"},
+  {id:"okna",      label:"Okna, vstupní a interiérové dveře",          cena:3500,  unit:"Kč/m² podlahové plochy", basis:"podlahova"},
+  {id:"instalace", label:"Instalace (elektro, voda, kanalizace, topení)", cena:7000, unit:"Kč/m² podlahové plochy", basis:"podlahova"},
+  {id:"dokonceni", label:"Povrchy, podlahy a dokončovací práce",       cena:8000,  unit:"Kč/m² podlahové plochy", basis:"podlahova"},
+  {id:"sklep",     label:"Sklep (podzemní podlaží)",                   cena:18000, unit:"Kč/m² zastavěné plochy", basis:"sklep"},
+  {id:"garaz",     label:"Garáž",                                      cena:12000, unit:"Kč/m² plochy garáže",    basis:"garaz"},
+];
+const KOEF_KONSTRUKCE = {zdena:1.0, drevostavba:0.9, montovana:0.95};
+const KOEF_STANDARD   = {ekonomicky:0.85, standardni:1.0, nadstandardni:1.25};
+const KOEF_STRECHA    = {sedlova:1.0, plocha:0.8}; // aplikuje se jen na položku střecha
+
+const LS = {cenik:"nab_cenik", dodavatel:"nab_dodavatel", apikey:"nab_apikey", counter:"nab_counter"};
+
+function loadCenik(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(LS.cenik) || "null");
+    if(saved) return CENIK_DEFAULT.map(d => ({...d, cena: (saved[d.id] ?? d.cena)}));
+  }catch(e){}
+  return CENIK_DEFAULT.map(d => ({...d}));
+}
+function saveCenik(cenik){
+  const map = {};
+  cenik.forEach(p => map[p.id] = p.cena);
+  localStorage.setItem(LS.cenik, JSON.stringify(map));
+}
+function renderCenik(){
+  const cenik = loadCenik();
+  const t = document.getElementById("cenikTable");
+  t.innerHTML = cenik.map(p =>
+    `<tr><td>${p.label}</td>
+     <td><input type="number" min="0" step="100" data-cenik="${p.id}" value="${p.cena}"></td>
+     <td class="unit">${p.unit}</td></tr>`).join("");
+  t.querySelectorAll("input[data-cenik]").forEach(inp => {
+    inp.addEventListener("change", () => {
+      const c = loadCenik();
+      const item = c.find(x => x.id === inp.dataset.cenik);
+      item.cena = Number(inp.value) || 0;
+      saveCenik(c);
+    });
+  });
+}
+document.getElementById("btnCenikReset").addEventListener("click", () => {
+  localStorage.removeItem(LS.cenik);
+  renderCenik();
+});
+
+/* ---------------- dodavatel + api key ---------------- */
+const DOD_DEFAULT = {jmeno:"Jakub Kočvara", ico:"24611581", email:"JakubDev@outlook.com", tel:""};
+function loadDod(){
+  try{ return {...DOD_DEFAULT, ...(JSON.parse(localStorage.getItem(LS.dodavatel) || "{}"))}; }
+  catch(e){ return {...DOD_DEFAULT}; }
+}
+function bindSettings(){
+  const d = loadDod();
+  const fields = {dodJmeno:"jmeno", dodIco:"ico", dodEmail:"email", dodTel:"tel"};
+  for(const [elId, key] of Object.entries(fields)){
+    const el = document.getElementById(elId);
+    el.value = d[key];
+    el.addEventListener("change", () => {
+      const cur = loadDod();
+      cur[key] = el.value.trim();
+      localStorage.setItem(LS.dodavatel, JSON.stringify(cur));
+    });
+  }
+  const keyEl = document.getElementById("apiKey");
+  keyEl.value = localStorage.getItem(LS.apikey) || "";
+  keyEl.addEventListener("change", () => localStorage.setItem(LS.apikey, keyEl.value.trim()));
+}
+
+/* ---------------- čtení formuláře + výpočet ---------------- */
+function getParams(){
+  return {
+    zakaznik: {
+      jmeno: document.getElementById("zJmeno").value.trim(),
+      email: document.getElementById("zEmail").value.trim(),
+      tel:   document.getElementById("zTel").value.trim(),
+      misto: document.getElementById("zMisto").value.trim(),
+    },
+    konstrukce: document.getElementById("pKonstrukce").value,
+    zastavenaPlocha: Number(document.getElementById("pPlocha").value) || 0,
+    podlazi: Math.max(1, Number(document.getElementById("pPodlazi").value) || 1),
+    strecha: document.getElementById("pStrecha").value,
+    standard: document.getElementById("pStandard").value,
+    dph: Number(document.getElementById("pDph").value),
+    sklep: document.getElementById("pSklep").checked,
+    garaz: document.getElementById("pGaraz").checked,
+    garazPlocha: Number(document.getElementById("pGarazPlocha").value) || 0,
+    poznamky: document.getElementById("pPoznamky").value.split("\n").map(s => s.trim()).filter(Boolean),
+  };
+}
+
+function spocitat(p){
+  const cenik = loadCenik();
+  const koef = KOEF_KONSTRUKCE[p.konstrukce] * KOEF_STANDARD[p.standard];
+  const podlahova = p.zastavenaPlocha * p.podlazi;
+  const polozky = [];
+
+  for(const item of cenik){
+    let mnozstvi = 0, extraKoef = 1;
+    if(item.basis === "zastavena") mnozstvi = p.zastavenaPlocha;
+    else if(item.basis === "podlahova") mnozstvi = podlahova;
+    else if(item.basis === "sklep") mnozstvi = p.sklep ? p.zastavenaPlocha : 0;
+    else if(item.basis === "garaz") mnozstvi = p.garaz ? p.garazPlocha : 0;
+    if(item.id === "strecha") extraKoef = KOEF_STRECHA[p.strecha];
+    if(mnozstvi <= 0) continue;
+
+    const jednotkova = Math.round(item.cena * koef * extraKoef);
+    polozky.push({
+      label: item.label,
+      detail: `${fmtNum(mnozstvi)} m² × ${fmtKc(jednotkova)}`,
+      castka: mnozstvi * jednotkova,
+    });
+  }
+
+  const zaklad = polozky.reduce((s, x) => s + x.castka, 0);
+  const dph = Math.round(zaklad * p.dph / 100);
+  return {polozky, zaklad, dph, celkem: zaklad + dph, podlahova};
+}
+
+function fmtKc(n){ return n.toLocaleString("cs-CZ") + " Kč"; }
+function fmtNum(n){ return n.toLocaleString("cs-CZ"); }
+
+let aktualniCislo = null; // jedno číslo na rozpracovanou nabídku — překreslení ho nemění
+function cisloNabidky(){
+  if(aktualniCislo) return aktualniCislo;
+  const rok = new Date().getFullYear();
+  let c = Number(localStorage.getItem(LS.counter) || 0) + 1;
+  localStorage.setItem(LS.counter, String(c));
+  aktualniCislo = `${rok}-${String(c).padStart(3, "0")}`;
+  return aktualniCislo;
+}
+
+let uvodniText = "";
+
+const KONSTRUKCE_LABEL = {zdena:"zděná", drevostavba:"dřevostavba", montovana:"montovaná"};
+const STRECHA_LABEL = {sedlova:"sedlová", plocha:"plochá"};
+const STANDARD_LABEL = {ekonomicky:"ekonomický", standardni:"standardní", nadstandardni:"nadstandardní"};
+
+function sestavNabidku(){
+  const p = getParams();
+  if(p.zastavenaPlocha <= 0){
+    setStatus("vypocetStatus", "Zadej zastavěnou plochu.", true);
+    return;
+  }
+  const v = spocitat(p);
+  const dod = loadDod();
+  const dnes = new Date();
+  const platnost = new Date(dnes.getTime() + 30*24*3600*1000);
+
+  const doc = document.getElementById("doc");
+  doc.innerHTML = `
+    <header>
+      <div>
+        <h3>Cenová nabídka č. ${cisloNabidky()}</h3>
+        <div class="meta">Stavba rodinného domu — ${KONSTRUKCE_LABEL[p.konstrukce]} konstrukce,
+          ${fmtNum(p.zastavenaPlocha)} m² zastavěné plochy, ${p.podlazi} ${p.podlazi === 1 ? "podlaží" : "podlaží"},
+          ${STRECHA_LABEL[p.strecha]} střecha, ${STANDARD_LABEL[p.standard]} standard${p.sklep ? ", sklep" : ""}${p.garaz ? ", garáž" : ""}</div>
+      </div>
+      <div class="meta" style="text-align:right;">
+        Datum: ${dnes.toLocaleDateString("cs-CZ")}<br>
+        Platnost do: ${platnost.toLocaleDateString("cs-CZ")}
+      </div>
+    </header>
+    <div class="parties">
+      <div class="party">
+        <h4>Dodavatel</h4>
+        <strong>${esc(dod.jmeno)}</strong><br>
+        IČO: ${esc(dod.ico)}<br>
+        ${esc(dod.email)}${dod.tel ? "<br>" + esc(dod.tel) : ""}
+      </div>
+      <div class="party">
+        <h4>Zákazník</h4>
+        <strong>${esc(p.zakaznik.jmeno) || "—"}</strong><br>
+        ${[p.zakaznik.email, p.zakaznik.tel, p.zakaznik.misto && ("Místo stavby: " + p.zakaznik.misto)]
+          .filter(Boolean).map(esc).join("<br>")}
+      </div>
+    </div>
+    ${uvodniText ? `<div class="uvod">${esc(uvodniText)}</div>` : ""}
+    <table>
+      <thead><tr><th>Položka</th><th>Výpočet</th><th>Cena bez DPH</th></tr></thead>
+      <tbody>
+        ${v.polozky.map(x => `<tr><td>${esc(x.label)}</td><td class="detail">${x.detail}</td><td>${fmtKc(x.castka)}</td></tr>`).join("")}
+      </tbody>
+    </table>
+    <div class="sums">
+      <div><span>Cena celkem bez DPH</span><strong>${fmtKc(v.zaklad)}</strong></div>
+      <div><span>DPH ${p.dph} %</span><strong>${fmtKc(v.dph)}</strong></div>
+      <div class="total"><span>Cena celkem s DPH</span><span>${fmtKc(v.celkem)}</span></div>
+    </div>
+    ${p.poznamky.length ? `<div class="pozn">${p.poznamky.map(x => "• " + esc(x)).join("\n")}</div>` : ""}
+    <footer>
+      <span>${esc(dod.jmeno)} · IČO ${esc(dod.ico)}</span>
+      <span>Orientační nabídka — není návrhem smlouvy.</span>
+    </footer>`;
+
+  document.getElementById("nabidka").classList.add("visible");
+  setStatus("vypocetStatus", `Hotovo — celkem ${fmtKc(v.celkem)} s DPH (${fmtNum(v.podlahova)} m² podlahové plochy).`, false);
+  document.getElementById("nabidka").scrollIntoView({behavior:"smooth"});
+}
+
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function setStatus(id, msg, isErr){
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = "status " + (isErr ? "err" : "ok");
+}
+
+document.getElementById("btnVypocet").addEventListener("click", sestavNabidku);
+document.getElementById("pGaraz").addEventListener("change", e => {
+  document.getElementById("garazPlochaWrap").style.display = e.target.checked ? "inline-flex" : "none";
+});
+
+/* ---------------- Claude API agent ---------------- */
+async function claudeRequest(body){
+  const key = localStorage.getItem(LS.apikey) || "";
+  if(!key) throw new Error("Chybí API klíč — vyplň ho v Nastavení (sekce C).");
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-api-key": key,
+      "anthropic-version": "2023-06-01",
+      "anthropic-dangerous-direct-browser-access": "true",
+    },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if(!res.ok){
+    throw new Error(`API chyba ${res.status}: ${data?.error?.message || JSON.stringify(data)}`);
+  }
+  if(data.stop_reason === "refusal"){
+    throw new Error("Model požadavek odmítl zpracovat.");
+  }
+  const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("");
+  if(!text) throw new Error("Prázdná odpověď modelu.");
+  return text;
+}
+
+const nullable = (schema) => ({anyOf: [schema, {type: "null"}]});
+const PARSE_SCHEMA = {
+  type: "object",
+  properties: {
+    zakaznik: {
+      type: "object",
+      properties: {
+        jmeno: nullable({type:"string"}),
+        email: nullable({type:"string"}),
+        telefon: nullable({type:"string"}),
+        mistoStavby: nullable({type:"string"}),
+      },
+      required: ["jmeno","email","telefon","mistoStavby"],
+      additionalProperties: false,
+    },
+    stavba: {
+      type: "object",
+      properties: {
+        konstrukce: nullable({type:"string", enum:["zdena","drevostavba","montovana"]}),
+        zastavenaPlochaM2: nullable({type:"number"}),
+        pocetPodlazi: nullable({type:"integer"}),
+        strecha: nullable({type:"string", enum:["sedlova","plocha"]}),
+        standard: nullable({type:"string", enum:["ekonomicky","standardni","nadstandardni"]}),
+        sklep: nullable({type:"boolean"}),
+        garaz: nullable({type:"boolean"}),
+        garazPlochaM2: nullable({type:"number"}),
+      },
+      required: ["konstrukce","zastavenaPlochaM2","pocetPodlazi","strecha","standard","sklep","garaz","garazPlochaM2"],
+      additionalProperties: false,
+    },
+    shrnuti: {type:"string"},
+  },
+  required: ["zakaznik","stavba","shrnuti"],
+  additionalProperties: false,
+};
+
+document.getElementById("btnAgent").addEventListener("click", async () => {
+  const poptavka = document.getElementById("poptavka").value.trim();
+  if(!poptavka){ setStatus("agentStatus", "Nejdřív vlož text poptávky.", true); return; }
+  const btn = document.getElementById("btnAgent");
+  btn.disabled = true;
+  setStatus("agentStatus", "Agent čte poptávku…", false);
+  try{
+    const text = await claudeRequest({
+      model: "claude-opus-4-8",
+      max_tokens: 4096,
+      system: "Jsi asistent stavební firmy v Česku. Z textu poptávky zákazníka vytěžíš parametry pro cenovou nabídku na stavbu rodinného domu. Rozměry jako '10×12 m' převeď na zastavěnou plochu v m². 'Patrový' nebo 'dvoupodlažní' dům = 2 podlaží, 'bungalov' nebo 'přízemní' = 1 podlaží. Pokud údaj v textu není, vrať null — nic si nevymýšlej.",
+      output_config: {format: {type: "json_schema", schema: PARSE_SCHEMA}},
+      messages: [{role: "user", content: "Poptávka zákazníka:\n\n" + poptavka}],
+    });
+    const r = JSON.parse(text);
+    const setVal = (id, val) => { if(val !== null && val !== undefined && val !== "") document.getElementById(id).value = val; };
+    setVal("zJmeno", r.zakaznik.jmeno);
+    setVal("zEmail", r.zakaznik.email);
+    setVal("zTel",   r.zakaznik.telefon);
+    setVal("zMisto", r.zakaznik.mistoStavby);
+    setVal("pKonstrukce", r.stavba.konstrukce);
+    setVal("pPlocha", r.stavba.zastavenaPlochaM2);
+    setVal("pPodlazi", r.stavba.pocetPodlazi);
+    setVal("pStrecha", r.stavba.strecha);
+    setVal("pStandard", r.stavba.standard);
+    if(r.stavba.sklep !== null) document.getElementById("pSklep").checked = r.stavba.sklep;
+    if(r.stavba.garaz !== null){
+      document.getElementById("pGaraz").checked = r.stavba.garaz;
+      document.getElementById("garazPlochaWrap").style.display = r.stavba.garaz ? "inline-flex" : "none";
+    }
+    setVal("pGarazPlocha", r.stavba.garazPlochaM2);
+    setStatus("agentStatus", "Vyplněno: " + r.shrnuti + " — zkontroluj hodnoty a spočítej nabídku.", false);
+  }catch(e){
+    setStatus("agentStatus", e.message, true);
+  }finally{
+    btn.disabled = false;
+  }
+});
+
+document.getElementById("btnUvodAI").addEventListener("click", async () => {
+  const btn = document.getElementById("btnUvodAI");
+  btn.disabled = true;
+  setStatus("vypocetStatus", "Agent píše průvodní text…", false);
+  try{
+    const p = getParams();
+    const v = spocitat(p);
+    const dod = loadDod();
+    const popis = `Konstrukce: ${KONSTRUKCE_LABEL[p.konstrukce]}, zastavěná plocha ${p.zastavenaPlocha} m², `
+      + `${p.podlazi} podlaží, střecha ${STRECHA_LABEL[p.strecha]}, standard ${STANDARD_LABEL[p.standard]}`
+      + `${p.sklep ? ", se sklepem" : ""}${p.garaz ? ", s garáží " + p.garazPlocha + " m²" : ""}. `
+      + `Celková cena ${fmtKc(v.celkem)} s DPH.`;
+    uvodniText = (await claudeRequest({
+      model: "claude-opus-4-8",
+      max_tokens: 2048,
+      system: `Jsi ${dod.jmeno}, dodavatel staveb rodinných domů. Piš česky, profesionálně, srdečně a stručně — 2 až 4 věty. Vrať pouze samotný text úvodního odstavce cenové nabídky (oslovení zákazníka, poděkování za poptávku, krátké shrnutí co nabídka pokrývá). Žádné nadpisy, žádný podpis, žádné ceny v textu.`,
+      messages: [{role: "user", content:
+        `Napiš úvodní odstavec nabídky pro zákazníka ${p.zakaznik.jmeno || "(jméno neuvedeno)"}. Parametry stavby: ${popis}`
+        + (document.getElementById("poptavka").value.trim() ? `\n\nPůvodní poptávka zákazníka:\n${document.getElementById("poptavka").value.trim()}` : "")}],
+    })).trim();
+    sestavNabidku();
+  }catch(e){
+    setStatus("vypocetStatus", e.message, true);
+  }finally{
+    btn.disabled = false;
+  }
+});
+
+/* ---------------- init ---------------- */
+renderCenik();
+bindSettings();
+
+/* ---------------- PWA ---------------- */
+if("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")){
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+let installPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  installPrompt = e;
+  document.getElementById("btnInstall").style.display = "inline-block";
+});
+document.getElementById("btnInstall").addEventListener("click", async () => {
+  if(!installPrompt) return;
+  installPrompt.prompt();
+  await installPrompt.userChoice;
+  installPrompt = null;
+  document.getElementById("btnInstall").style.display = "none";
+});
+window.addEventListener("appinstalled", () => {
+  document.getElementById("btnInstall").style.display = "none";
+});
+</script>
+
+</body>
+</html>
