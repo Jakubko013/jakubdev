@@ -1,28 +1,381 @@
 <!DOCTYPE html>
-<html lang="cs" data-title-cs="Jakub Kočvara — volejbal × kód" data-title-en="Jakub Kočvara — volleyball × code">
+<html lang="cs">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jakub Kočvara — volejbal × kód</title>
-<meta name="description" content="Jakub Kočvara — profesionální volejbalista a začínající webový vývojář. Moderní weby na míru, rychlé a bez šablon.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230a0b0d%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2214%22%20r%3D%227%22%20fill%3D%22%23e6304a%22/%3E%3Ctext%20x%3D%2231%22%20y%3D%2246%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2232%22%20fill%3D%22%23f2f1ed%22%20text-anchor%3D%22middle%22%3EJK%3C/text%3E%3C/svg%3E">
-<link rel="alternate icon" type="image/png" href="/icon.png">
+<link rel="alternate icon" type="image/png" href="data:image/png;base64,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">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --bg:#0a0b0d;
+    --bg-soft:#101317;
+    --card:#15181d;
+    --line: rgba(255,255,255,0.08);
+    --ink:#f2f1ed;
+    --ink-dim:#9aa0a8;
+    --red:#e6304a;
+    --red-deep:#8a1a2c;
+    --teal:#5eead4;
+    --amber:#ffb703;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--red); color:#fff;}
+
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .display{font-family:'Space Grotesk', sans-serif;}
+
+  a{color:inherit; text-decoration:none;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 6vw;
+    backdrop-filter:blur(10px);
+    background:linear-gradient(to bottom, rgba(10,11,13,0.85), rgba(10,11,13,0));
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:1.05rem; letter-spacing:0.02em;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{width:7px;height:7px;border-radius:50%;background:var(--red); box-shadow:0 0 10px var(--red);}
+  nav ul{list-style:none; display:flex; gap:34px;}
+  nav a{
+    font-size:0.85rem; color:var(--ink-dim); font-weight:500;
+    letter-spacing:0.03em; transition:color .25s;
+    position:relative;
+  }
+  nav a:hover{color:var(--ink);}
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:-6px; width:0; height:1px;
+    background:var(--red); transition:width .25s;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-toggle{
+    display:none; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+    width:38px; height:34px; margin-left:12px; flex-shrink:0;
+    background:transparent; border:1px solid var(--line); border-radius:8px; cursor:pointer;
+    transition:border-color .25s;
+  }
+  .nav-toggle:hover{border-color:var(--red);}
+  .nav-toggle span{display:block; width:16px; height:2px; background:var(--ink); border-radius:1px; transition:transform .25s, opacity .25s;}
+  header.nav-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  header.nav-open .nav-toggle span:nth-child(2){opacity:0;}
+  header.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:grid;
+    grid-template-columns:1fr 1.15fr;
+    align-items:stretch;
+    position:relative;
+    padding-top:84px;
+  }
+  .hero-photo{
+    position:relative;
+    overflow:hidden;
+    background:#000;
+  }
+  .hero-photo img{
+    width:100%; height:100%; object-fit:cover; object-position:50% 18%;
+    filter:grayscale(0.15) contrast(1.05);
+    opacity:0;
+    animation:fadeImg 1.4s ease forwards .2s;
+  }
+  @keyframes fadeImg{to{opacity:1;}}
+  .hero-photo::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(100deg, rgba(10,11,13,0.95) 0%, rgba(10,11,13,0.15) 35%, rgba(10,11,13,0) 60%),
+               linear-gradient(to top, rgba(10,11,13,0.9), rgba(10,11,13,0) 30%);
+  }
+  .court-lines{
+    position:absolute; inset:0; pointer-events:none; opacity:0.35;
+  }
+  .hero-right{
+    display:flex; flex-direction:column; justify-content:center;
+    padding:6vh 5vw 6vh 4vw;
+    position:relative;
+  }
+  .eyebrow{
+    font-size:0.78rem; color:var(--teal); letter-spacing:0.12em; text-transform:uppercase;
+    margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .bar{width:28px; height:1px; background:var(--teal);}
+  h1.name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(2.6rem, 5.2vw, 4.6rem);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+  }
+  h1.name .last{color:var(--red);}
+  .role-line{
+    margin-top:18px;
+    font-size:clamp(1rem, 1.4vw, 1.2rem);
+    color:var(--ink-dim);
+    max-width:520px;
+    line-height:1.55;
+  }
+  .role-line b{color:var(--ink); font-weight:600;}
+
+  .terminal{
+    margin-top:38px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    max-width:560px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:7px;
+    padding:11px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .terminal-bar span{width:10px;height:10px;border-radius:50%;}
+  .terminal-bar span:nth-child(1){background:#ff5f56;}
+  .terminal-bar span:nth-child(2){background:#ffbd2e;}
+  .terminal-bar span:nth-child(3){background:#27c93f;}
+  .terminal-bar small{margin-left:auto; color:var(--ink-dim); font-size:0.72rem; font-family:'JetBrains Mono', monospace;}
+  .terminal-body{
+    padding:18px 20px 22px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.83rem;
+    line-height:1.7;
+    color:#d4d8de;
+    min-height:230px;
+    white-space:pre-wrap;
+  }
+  .tk-key{color:var(--teal);}
+  .tk-str{color:var(--amber);}
+  .tk-num{color:#9ece6a;}
+  .tk-punct{color:var(--ink-dim);}
+  .tk-com{color:#5f6672;}
+  .cursor{
+    display:inline-block; width:7px; height:1em; background:var(--red);
+    vertical-align:text-bottom; animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  .scroll-cue{
+    position:absolute; bottom:34px; left:4vw;
+    display:flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--ink-dim);
+  }
+  .scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--ink-dim), transparent); animation:scrollMove 1.8s ease-in-out infinite;}
+  @keyframes scrollMove{0%{transform:translateY(0); opacity:1;}100%{transform:translateY(10px); opacity:0;}}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:130px 6vw;}
+  .section-head{
+    display:flex; align-items:baseline; gap:18px; margin-bottom:64px;
+    flex-wrap:wrap;
+  }
+  .section-num{
+    font-family:'JetBrains Mono', monospace; color:var(--red); font-size:0.85rem;
+  }
+  .section-title{
+    font-family:'Space Grotesk', sans-serif; font-weight:600;
+    font-size:clamp(1.8rem, 3vw, 2.6rem);
+  }
+  .section-sub{
+    color:var(--ink-dim); max-width:480px; margin-left:auto; font-size:0.95rem; line-height:1.6;
+  }
+
+  /* offset only the short "O mně" anchor so its stat band lands below the
+     fixed header and dominates the view instead of surfacing Kariéra */
+  #o-mne{scroll-margin-top:88px;}
+
+  /* ---------- STAT BAND ---------- */
+  .stat-band{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(4,1fr);
+    padding:0; margin:0;
+  }
+  .stat{
+    padding:48px 32px;
+    border-right:1px solid var(--line);
+  }
+  .stat:last-child{border-right:none;}
+  .stat .num{
+    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-size:clamp(2.2rem,3.4vw,3.2rem);
+    color:var(--ink);
+  }
+  .stat .num span{color:var(--red);}
+  .stat .label{
+    margin-top:8px; color:var(--ink-dim); font-size:0.82rem; line-height:1.5;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{
+    position:relative;
+    border-left:1px solid var(--line);
+    margin-left:8px;
+  }
+  .t-item{
+    position:relative;
+    padding:0 0 56px 38px;
+  }
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:'';
+    position:absolute; left:-5px; top:4px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--red);
+  }
+  .t-item.is-now::before{background:var(--red); box-shadow:0 0 0 4px rgba(230,48,74,0.18);}
+  .t-year{
+    font-family:'JetBrains Mono', monospace; color:var(--red); font-size:0.8rem; letter-spacing:0.04em;
+  }
+  .t-title{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.3rem; margin-top:6px;
+  }
+  .t-desc{color:var(--ink-dim); margin-top:8px; max-width:560px; line-height:1.65; font-size:0.95rem;}
+  .t-tags{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;}
+  .t-tags span{
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+    border:1px solid var(--line); padding:4px 10px; border-radius:100px; color:var(--ink-dim);
+  }
+
+  /* ---------- STACK ---------- */
+  .stack-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:60px;
+  }
+  .stack-list{display:flex; flex-direction:column; gap:0;}
+  .stack-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 0; border-bottom:1px solid var(--line);
+    font-family:'Space Grotesk', sans-serif; font-size:1.15rem; font-weight:500;
+  }
+  .stack-row:first-child{padding-top:0;}
+  .stack-row .bar-wrap{
+    width:140px; height:4px; background:var(--bg-soft); border-radius:2px; overflow:hidden;
+  }
+  .stack-row .bar{height:100%; background:linear-gradient(90deg,var(--red),var(--amber)); border-radius:2px; width:0; transition:width 1.2s cubic-bezier(.2,.8,.2,1);}
+  .stack-row.in-view .bar{width:var(--w);}
+
+  .principles{display:flex; flex-direction:column; gap:30px;}
+  .principle{padding:24px 0; border-bottom:1px solid var(--line);}
+  .principle:first-child{padding-top:0;}
+  .principle .pt{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.05rem; display:flex; gap:12px; align-items:baseline;}
+  .principle .pt .pmono{font-family:'JetBrains Mono', monospace; color:var(--teal); font-size:0.8rem;}
+  .principle p{color:var(--ink-dim); margin-top:8px; font-size:0.92rem; line-height:1.6;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+  }
+  .service{
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:30px 26px; display:flex; flex-direction:column; gap:13px;
+    transition:border-color .3s, transform .3s;
+  }
+  .service:hover{border-color:var(--red); transform:translateY(-4px);}
+  .service .s-num{font-family:'JetBrains Mono', monospace; color:var(--red); font-size:0.8rem; letter-spacing:0.06em;}
+  .service h3{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.22rem; line-height:1.25;}
+  .service p{color:var(--ink-dim); font-size:0.93rem; line-height:1.65;}
+  .services-note{
+    margin-top:36px; max-width:760px;
+    border:1px dashed rgba(255,255,255,0.18); border-radius:10px;
+    padding:20px 24px;
+    color:var(--ink-dim); font-size:0.93rem; line-height:1.65;
+  }
+  .services-note b{color:var(--teal); font-weight:600;}
+
+  /* ---------- CTA / CONTACT ---------- */
+  .contact{
+    background:var(--bg-soft);
+    border-top:1px solid var(--line);
+  }
+  .contact-inner{
+    display:flex; flex-direction:column; align-items:flex-start; gap:28px;
+  }
+  .contact h2{
+    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-size:clamp(2.2rem, 5vw, 4rem); line-height:1.05; max-width:780px;
+  }
+  .contact h2 .accent{color:var(--red);}
+  .contact-actions{display:flex; gap:18px; flex-wrap:wrap; margin-top:10px;}
+  .btn{
+    font-family:'JetBrains Mono', monospace; font-size:0.85rem;
+    padding:15px 26px; border-radius:8px; display:inline-flex; align-items:center; gap:10px;
+    transition:transform .2s, background .2s, border-color .2s;
+  }
+  .btn-primary{background:var(--red); color:#0a0b0d; font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px); background:#ff4a63;}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink-dim); transform:translateY(-2px);}
+
+  footer{
+    padding:30px 6vw; display:flex; justify-content:space-between; align-items:center;
+    color:var(--ink-dim); font-size:0.78rem; font-family:'JetBrains Mono', monospace;
+    border-top:1px solid var(--line); background:var(--bg-soft); flex-wrap:wrap; gap:10px;
+  }
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  .lang-toggle{
+    background:transparent; border:1px solid var(--line); color:var(--ink-dim);
+    font-size:0.78rem; font-weight:500; padding:6px 13px; border-radius:999px;
+    cursor:pointer; letter-spacing:0.08em; transition:color .25s, border-color .25s;
+    margin-left:18px;
+  }
+  .lang-toggle:hover{color:var(--ink); border-color:var(--red);}
+
+  @media (max-width:880px){
+    .hero{grid-template-columns:1fr; padding-top:78px;}
+    .hero-photo{height:46vh;}
+    .hero-photo::after{background:linear-gradient(to top, rgba(10,11,13,1) 5%, rgba(10,11,13,0.2) 60%, rgba(10,11,13,0) 100%);}
+    .hero-right{padding:5vh 6vw 6vh;}
+    .nav-toggle{display:flex;}
+    nav ul{display:none;}
+    header.nav-open nav ul{
+      display:flex; flex-direction:column; gap:22px;
+      position:absolute; top:100%; left:0; right:0;
+      background:rgba(10,11,13,0.96);
+      padding:20px 6vw 26px;
+      border-bottom:1px solid var(--line);
+    }
+    .stat-band{grid-template-columns:repeat(2,1fr);}
+    .stat{border-bottom:1px solid var(--line);}
+    .stack-grid{grid-template-columns:1fr; gap:40px;}
+    .services-grid{grid-template-columns:1fr;}
+    section{padding:90px 6vw;}
+    .scroll-cue{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    .hero-photo img{opacity:1;}
+  }
+</style>
 </head>
 <body>
+
 <header>
-  <a class="logo" href="index.html"><span class="dot"></span>JAKUB<span style="color:var(--ink-dim); font-weight:400;">.KOCVARA</span></a>
+  <div class="logo"><span class="dot"></span>JAKUB<span style="color:var(--ink-dim); font-weight:400;">.KOCVARA</span></div>
   <nav>
     <ul>
       <li><a href="#o-mne" data-i18n="nav_about">O mně</a></li>
       <li><a href="#kariera" data-i18n="nav_career">Kariéra</a></li>
       <li><a href="#stack">Stack</a></li>
-      <li><a href="sluzby.html" data-i18n="nav_services">Služby</a></li>
-      <li><a href="kontakt.html" data-i18n="nav_contact">Kontakt</a></li>
+      <li><a href="#sluzby" data-i18n="nav_services">Služby</a></li>
+      <li><a href="#kontakt" data-i18n="nav_contact">Kontakt</a></li>
     </ul>
   </nav>
   <button class="lang-toggle mono" id="langToggle" type="button" aria-label="Switch language">EN</button>
@@ -140,13 +493,41 @@
   </div>
 </section>
 
-<section class="contact" id="dalsi">
+<section id="sluzby">
+  <div class="section-head reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title" data-i18n="s3_title">Co pro tebe můžu udělat</h2>
+    <span class="section-sub" data-i18n="s3_sub">Jasná nabídka bez keců — tři věci, se kterými za mnou můžeš přijít.</span>
+  </div>
+
+  <div class="services-grid reveal">
+    <div class="service">
+      <span class="s-num">01</span>
+      <h3 data-i18n="sv1_title">Prezentační web (one-page)</h3>
+      <p data-i18n="sv1_desc">Moderní jednostránkový web jako tenhle — pro tebe, tvou firmu nebo projekt. Rychlý, responzivní, žádné šablony.</p>
+    </div>
+    <div class="service">
+      <span class="s-num">02</span>
+      <h3 data-i18n="sv2_title">Weby pro sportovce a kluby</h3>
+      <p data-i18n="sv2_desc">Profil hráče, trenéra nebo oddílu. Z první ruky vím, co sportovec potřebuje ukázat — výsledky, video, kontakt pro agenty a sponzory.</p>
+    </div>
+    <div class="service">
+      <span class="s-num">03</span>
+      <h3 data-i18n="sv3_title">Úpravy a údržba webu</h3>
+      <p data-i18n="sv3_desc">Máš web, který potřebuje oživit, zrychlit nebo jen pravidelně udržovat? Postarám se o něj.</p>
+    </div>
+  </div>
+
+  <div class="services-note reveal" data-i18n="sv_note">Weby jsem dělal už dřív — ale jen pro radost. Nikdy jsem v tom nepodnikal ani nenabízel služby. Teď přišel ten pravý čas. Pro tebe to znamená <b>férovou startovní cenu</b> a to, že tvému projektu dám maximum — potřebuju, aby moje první reference stály za to. Tahle stránka je moje vizitka, posuď sám, jestli ti styl sedí.</div>
+</section>
+
+<section class="contact" id="kontakt">
   <div class="contact-inner reveal">
-    <span class="eyebrow"><span class="bar"></span><span data-i18n="home_cta_eyebrow">a co teď</span></span>
-    <h2 data-i18n="home_cta_title">Líbí se ti, jak k tomu přistupuju? <br><span class="accent">Pojďme</span> na tvůj web.</h2>
+    <span class="eyebrow"><span class="bar"></span><span data-i18n="c_eyebrow">pojďme na to</span></span>
+    <h2 data-i18n="c_title">Hledáš web, který <span class="accent">vyhraje set</span>? <br>Napiš mi.</h2>
     <div class="contact-actions">
-      <a class="btn btn-primary" href="sluzby.html" data-i18n="home_cta_services">Co nabízím →</a>
-      <a class="btn btn-ghost" href="kontakt.html" data-i18n="home_cta_contact">Napiš mi</a>
+      <a class="btn btn-primary" href="mailto:JakubDev@outlook.com">JakubDev@outlook.com →</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/jakub_kocvara/" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
 </section>
@@ -156,6 +537,229 @@
   <span data-i18n="f_note">postaveno ručně, řádek po řádku</span>
 </footer>
 
-<script src="main.js"></script>
+<script>
+  // ---------- i18n ----------
+  const I18N = {
+    cs: {
+      _title: 'Jakub Kočvara — volejbal × kód',
+      nav_about: 'O mně', nav_career: 'Kariéra', nav_services: 'Služby', nav_contact: 'Kontakt',
+      hero_eyebrow: 'volejbalista // vývojář',
+      hero_role: '24 let. <b>6 sezón</b> na profesionálních hřištích ve třech zemích, teď stejnou disciplínu a tah na branku přenáším do <b>kódu</b>. Tahle stránka je toho důkaz.',
+      stat1_num: '<span>2.</span> &amp; <span>3.</span>',
+      stat1_label: 'Místo na MČR juniorů ve volejbale',
+      stat2_label: 'Bodující hráč — Španělsko Superliga 2',
+      stat3_num: '3 <span>roky</span>',
+      stat3_label: 'Česká volejbalová extraliga — Volejbal Brno',
+      stat4_label: 'Bodující hráč v Rakousku i Španělsku',
+      s1_title: 'Kariéra na hřišti',
+      s1_sub: 'Chronologicky — odkud jsem vyrazil a kam mě to zatím zavedlo.',
+      t1_year: 'Juniorská kategorie',
+      t1_title: '2. a 3. místo na MČR juniorů',
+      t1_desc: 'Dvakrát na stupních vítězů na mistrovství České republiky juniorů ve volejbale — jednou stříbro, jednou bronz.',
+      t1_tags: '<span>ČR</span><span>junioři</span><span>volejbal</span>',
+      t2_year: '3 sezóny',
+      t2_title: 'Volejbal Brno — česká extraliga',
+      t2_desc: 'Tři roky v nejvyšší české soutěži. Hřiště, na kterém se z nadějného juniora stává hráč, na kterého se dá spolehnout.',
+      t2_tags: '<span>Extraliga ČR</span><span>3 sezóny</span>',
+      t3_year: '2 sezóny',
+      t3_title: 'TJ Sokol Wien — rakouská Bundesliga',
+      t3_desc: 'Přesun do Rakouska a obě sezóny v top 5 bodujících hráčů ligy. Důkaz, že forma nebyla náhoda.',
+      t3_tags: '<span>Bundesliga</span><span>Top 5 — obě sezóny</span>',
+      t4_year: '1 sezóna',
+      t4_title: 'Španělsko — Superliga 2',
+      t4_desc: 'Poslední zastávka zatím: španělská Superliga 2, kde jsem skončil mezi top 3 bodujícími hráči soutěže.',
+      s2_title: 'Co umím mimo hřiště',
+      s2_sub: 'Volejbal mě naučil disciplíně a opakování. Stejný přístup teď dávám do programování.',
+      stack_git: 'Git / nasazování',
+      p1_title: '<span class="pmono">if</span> trénink == kód',
+      p1_body: 'Stejně jako na hřišti — žádné zkratky, jen opakovaná práce, dokud výsledek nesedí.',
+      p2_title: '<span class="pmono">for</span> každý projekt',
+      p2_body: 'Beru každou stránku jako zápas — nastuduju soupeře (zadání), připravím taktiku a jdu na sto procent.',
+      p3_title: '<span class="pmono">return</span> výsledek, ne výmluvy',
+      p3_body: 'Tři země, tři ligy, šest sezón — naučily mě dotahovat věci do konce i pod tlakem deadlinu.',
+      s3_title: 'Co pro tebe můžu udělat',
+      s3_sub: 'Jasná nabídka bez keců — tři věci, se kterými za mnou můžeš přijít.',
+      sv1_title: 'Prezentační web (one-page)',
+      sv1_desc: 'Moderní jednostránkový web jako tenhle — pro tebe, tvou firmu nebo projekt. Rychlý, responzivní, žádné šablony.',
+      sv2_title: 'Weby pro sportovce a kluby',
+      sv2_desc: 'Profil hráče, trenéra nebo oddílu. Z první ruky vím, co sportovec potřebuje ukázat — výsledky, video, kontakt pro agenty a sponzory.',
+      sv3_title: 'Úpravy a údržba webu',
+      sv3_desc: 'Máš web, který potřebuje oživit, zrychlit nebo jen pravidelně udržovat? Postarám se o něj.',
+      sv_note: 'Weby jsem dělal už dřív — ale jen pro radost. Nikdy jsem v tom nepodnikal ani nenabízel služby. Teď přišel ten pravý čas. Pro tebe to znamená <b>férovou startovní cenu</b> a to, že tvému projektu dám maximum — potřebuju, aby moje první reference stály za to. Tahle stránka je moje vizitka, posuď sám, jestli ti styl sedí.',
+      c_eyebrow: 'pojďme na to',
+      c_title: 'Hledáš web, který <span class="accent">vyhraje set</span>? <br>Napiš mi.',
+      f_note: 'postaveno ručně, řádek po řádku',
+      scroll_cue: 'scroll'
+    },
+    en: {
+      _title: 'Jakub Kočvara — volleyball × code',
+      nav_about: 'About', nav_career: 'Career', nav_services: 'Services', nav_contact: 'Contact',
+      hero_eyebrow: 'volleyball player // developer',
+      hero_role: '24 years old. <b>6 seasons</b> on professional courts in three countries — now I bring the same discipline and drive into <b>code</b>. This page is the proof.',
+      stat1_num: '<span>2nd</span> &amp; <span>3rd</span>',
+      stat1_label: 'Place at the Czech Junior Volleyball Championship',
+      stat2_label: 'Top scoring player — Spanish Superliga 2',
+      stat3_num: '3 <span>years</span>',
+      stat3_label: 'Czech Volleyball Extraliga — Volejbal Brno',
+      stat4_label: 'Top scoring player in Austria and Spain',
+      s1_title: 'Career on the court',
+      s1_sub: 'Chronologically — where I started and where it has taken me so far.',
+      t1_year: 'Junior category',
+      t1_title: '2nd &amp; 3rd place at the Czech Junior Championship',
+      t1_desc: 'Twice on the podium at the Czech junior volleyball championship — one silver, one bronze.',
+      t1_tags: '<span>Czechia</span><span>juniors</span><span>volleyball</span>',
+      t2_year: '3 seasons',
+      t2_title: 'Volejbal Brno — Czech Extraliga',
+      t2_desc: 'Three years in the top Czech league. The court where a promising junior becomes a player you can rely on.',
+      t2_tags: '<span>Czech Extraliga</span><span>3 seasons</span>',
+      t3_year: '2 seasons',
+      t3_title: 'TJ Sokol Wien — Austrian Bundesliga',
+      t3_desc: 'A move to Austria and both seasons among the league\'s top 5 scorers. Proof that the form was no accident.',
+      t3_tags: '<span>Bundesliga</span><span>Top 5 — both seasons</span>',
+      t4_year: '1 season',
+      t4_title: 'Spain — Superliga 2',
+      t4_desc: 'The latest stop so far: Spanish Superliga 2, where I finished among the top 3 scorers of the competition.',
+      s2_title: 'What I do off the court',
+      s2_sub: 'Volleyball taught me discipline and repetition. I now bring the same approach to programming.',
+      stack_git: 'Git / deployment',
+      p1_title: '<span class="pmono">if</span> training == code',
+      p1_body: 'Just like on the court — no shortcuts, only repeated work until the result is right.',
+      p2_title: '<span class="pmono">for</span> every project',
+      p2_body: 'I treat every website like a match — I study the opponent (the brief), prepare the tactics and give it a hundred percent.',
+      p3_title: '<span class="pmono">return</span> results, not excuses',
+      p3_body: 'Three countries, three leagues, six seasons — they taught me to finish things even under deadline pressure.',
+      s3_title: 'What I can do for you',
+      s3_sub: 'A clear offer, no fluff — three things you can come to me with.',
+      sv1_title: 'One-page website',
+      sv1_desc: 'A modern single-page site like this one — for you, your business or your project. Fast, responsive, no templates.',
+      sv2_title: 'Sites for athletes & clubs',
+      sv2_desc: 'A profile for a player, coach or club. I know first-hand what an athlete needs to show — results, video, contact for agents and sponsors.',
+      sv3_title: 'Website updates & maintenance',
+      sv3_desc: 'Got a site that needs a refresh, a speed-up, or just regular care? I\'ll look after it.',
+      sv_note: 'I\'ve been building websites for a while — but purely for the fun of it. I never ran it as a business or offered my services. Now the time is right. For you that means a <b>fair starter price</b> and my full effort on your project — I need my first references to be worth showing. This page is my calling card; judge for yourself whether the style fits.',
+      c_eyebrow: 'let\'s do this',
+      c_title: 'Looking for a website that <span class="accent">wins the set</span>? <br>Drop me a line.',
+      f_note: 'built by hand, line by line',
+      scroll_cue: 'scroll'
+    }
+  };
+
+  // typing terminal effect — one code array per language
+  const codeByLang = {
+    cs: [
+      {t:'const', c:'tk-key'}, {t:' jakub', c:''}, {t:' = ', c:'tk-punct'}, {t:'{\n', c:'tk-punct'},
+      {t:'  věk', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:'24', c:'tk-num'}, {t:',\n', c:'tk-punct'},
+      {t:'  pozice', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:"'diagonální útočník'", c:'tk-str'}, {t:',\n', c:'tk-punct'},
+      {t:'  ligy', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:'[', c:'tk-punct'}, {t:"'CZ'", c:'tk-str'}, {t:', ', c:'tk-punct'}, {t:"'AT'", c:'tk-str'}, {t:', ', c:'tk-punct'}, {t:"'ES'", c:'tk-str'}, {t:'],\n', c:'tk-punct'},
+      {t:'  tituly', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:"'2. a 3. místo MČR juniorů'", c:'tk-str'}, {t:',\n', c:'tk-punct'},
+      {t:'  topBodující', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:'true', c:'tk-num'}, {t:',\n', c:'tk-punct'},
+      {t:'  miluje', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:"'programování'", c:'tk-str'}, {t:',\n', c:'tk-punct'},
+      {t:'  dostupný', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:'true', c:'tk-num'}, {t:'\n', c:'tk-punct'},
+      {t:'}', c:'tk-punct'}, {t:';', c:'tk-punct'},
+      {t:'\n\n// stránku co čteš jsem napsal sám', c:'tk-com'}
+    ],
+    en: [
+      {t:'const', c:'tk-key'}, {t:' jakub', c:''}, {t:' = ', c:'tk-punct'}, {t:'{\n', c:'tk-punct'},
+      {t:'  age', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:'24', c:'tk-num'}, {t:',\n', c:'tk-punct'},
+      {t:'  position', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:"'opposite hitter'", c:'tk-str'}, {t:',\n', c:'tk-punct'},
+      {t:'  leagues', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:'[', c:'tk-punct'}, {t:"'CZ'", c:'tk-str'}, {t:', ', c:'tk-punct'}, {t:"'AT'", c:'tk-str'}, {t:', ', c:'tk-punct'}, {t:"'ES'", c:'tk-str'}, {t:'],\n', c:'tk-punct'},
+      {t:'  titles', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:"'2nd & 3rd at Czech Junior Championship'", c:'tk-str'}, {t:',\n', c:'tk-punct'},
+      {t:'  topScorer', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:'true', c:'tk-num'}, {t:',\n', c:'tk-punct'},
+      {t:'  loves', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:"'programming'", c:'tk-str'}, {t:',\n', c:'tk-punct'},
+      {t:'  available', c:'tk-key'}, {t:': ', c:'tk-punct'}, {t:'true', c:'tk-num'}, {t:'\n', c:'tk-punct'},
+      {t:'}', c:'tk-punct'}, {t:';', c:'tk-punct'},
+      {t:'\n\n// I wrote the page you\'re reading myself', c:'tk-com'}
+    ]
+  };
+
+  const target = document.getElementById('typeTarget');
+  let typingGen = 0;
+
+  function startTyping(codeArr){
+    const gen = ++typingGen;
+    target.innerHTML = '';
+    let idx = 0;
+    function typeNext(){
+      if(gen !== typingGen) return;
+      if(idx >= codeArr.length){
+        const cur = document.createElement('span');
+        cur.className='cursor';
+        target.appendChild(cur);
+        return;
+      }
+      const chunk = codeArr[idx];
+      const span = document.createElement('span');
+      if(chunk.c) span.className = chunk.c;
+      let i = 0;
+      const text = chunk.t;
+      function typeChar(){
+        if(gen !== typingGen) return;
+        if(i < text.length){
+          span.textContent += text[i];
+          i++;
+          setTimeout(typeChar, 12 + Math.random()*18);
+        } else {
+          idx++;
+          setTimeout(typeNext, 30);
+        }
+      }
+      target.appendChild(span);
+      typeChar();
+    }
+    typeNext();
+  }
+
+  // ---------- language switching ----------
+  let lang = 'cs';
+
+  function applyLang(l){
+    lang = l;
+    const dict = I18N[l];
+    document.documentElement.setAttribute('lang', l);
+    document.title = dict._title;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    const btn = document.getElementById('langToggle');
+    btn.textContent = (l === 'cs') ? 'EN' : 'CZ';
+    btn.setAttribute('aria-label', (l === 'cs') ? 'Switch to English' : 'Přepnout do češtiny');
+    startTyping(codeByLang[l]);
+  }
+
+  document.getElementById('langToggle').addEventListener('click', ()=>{
+    applyLang(lang === 'cs' ? 'en' : 'cs');
+  });
+
+  // don't restart typing if a language toggle already kicked it off
+  setTimeout(()=>{ if(typingGen === 0) startTyping(codeByLang[lang]); }, 500);
+
+  // mobile nav
+  const headerEl = document.querySelector('header');
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', ()=>{
+    const open = headerEl.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click', ()=>{
+    headerEl.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded','false');
+  }));
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        if(e.target.classList.contains('stack-grid')){
+          e.target.querySelectorAll('.stack-row').forEach(r=>r.classList.add('in-view'));
+        }
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
 </body>
 </html>
