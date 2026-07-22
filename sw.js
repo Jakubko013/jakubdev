@@ -1,12 +1,13 @@
 /* Service worker aplikace Cenové nabídky.
    Při změně nabidky.html nebo tohoto souboru zvyš CACHE_VERSION,
    jinak si nainstalované aplikace nechají starou verzi. */
-const CACHE_VERSION = "nabidky-v1";
+const CACHE_VERSION = "nabidky-v2";
 const PRECACHE = [
   "./nabidky.html",
   "./manifest.webmanifest",
   "./icon-192.png",
   "./icon-512.png",
+  "./logo-isopaneels.png",
 ];
 
 self.addEventListener("install", (event) => {

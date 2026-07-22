@@ -4,80 +4,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0a0b0d">
-<title>Cenové nabídky — stavby domů</title>
+<meta name="theme-color" content="#ffffff">
+<title>ISO.Paneels — Cenové nabídky</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a0b0d;
-    --bg-soft:#101317;
-    --card:#15181d;
-    --line: rgba(255,255,255,0.08);
-    --ink:#f2f1ed;
-    --ink-dim:#9aa0a8;
-    --red:#e6304a;
-    --teal:#5eead4;
-    --amber:#ffb703;
+    --bg:#f4f8fb;
+    --card:#ffffff;
+    --line:#dbe5ee;
+    --ink:#22334d;
+    --ink-dim:#64748b;
+    --blue:#01adee;
+    --blue-soft:#e5f6fd;
+    --navy:#27436e;
+    --ok:#0e9f6e;
+    --err:#d64545;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:'Inter', sans-serif;
+    font-family:'Inter', system-ui, sans-serif;
     padding:40px 5vw 80px;
     max-width:1100px;
     margin:0 auto;
   }
-  h1{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;margin-bottom:6px;}
-  h1 span{color:var(--red);}
-  .sub{color:var(--ink-dim);font-size:0.92rem;margin-bottom:34px;}
+  .apphead{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:30px;}
+  .brand-logo{height:58px;width:auto;}
+  h1{font-family:'Poppins',sans-serif;font-size:1.55rem;font-weight:600;color:var(--navy);margin-bottom:2px;}
+  .sub{color:var(--ink-dim);font-size:0.9rem;}
   h2{
-    font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:600;
+    font-family:'Poppins',sans-serif;font-size:1.08rem;font-weight:600;color:var(--navy);
     margin-bottom:16px;display:flex;align-items:center;gap:10px;
   }
-  h2 .num{font-family:'JetBrains Mono',monospace;color:var(--red);font-size:0.8rem;}
+  h2 .num{
+    background:var(--blue);color:#fff;font-size:0.72rem;font-weight:700;
+    width:22px;height:22px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;
+  }
   section.panel{
     background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:26px;margin-bottom:22px;
+    padding:26px;margin-bottom:22px;box-shadow:0 1px 3px rgba(39,67,110,0.06);
   }
-  label{display:block;font-size:0.8rem;color:var(--ink-dim);margin-bottom:5px;letter-spacing:0.02em;}
+  label{display:block;font-size:0.8rem;color:var(--ink-dim);margin-bottom:5px;}
   input[type=text],input[type=number],input[type=email],input[type=password],select,textarea{
-    width:100%;background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;
-    color:var(--ink);padding:10px 12px;font-family:'Inter',sans-serif;font-size:0.92rem;
+    width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;
+    color:var(--ink);padding:10px 12px;font-family:'Inter',system-ui,sans-serif;font-size:0.92rem;
   }
-  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--red);}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft);}
   textarea{resize:vertical;min-height:110px;}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
   .row{margin-bottom:14px;}
   .checks{display:flex;gap:22px;flex-wrap:wrap;margin-top:4px;}
   .checks label{display:flex;align-items:center;gap:8px;color:var(--ink);font-size:0.9rem;margin:0;cursor:pointer;}
+  .checks input[type=checkbox]{accent-color:var(--blue);}
   .btn{
-    font-family:'JetBrains Mono',monospace;font-size:0.85rem;border:none;cursor:pointer;
-    padding:12px 22px;border-radius:8px;transition:transform .15s, background .15s;
+    font-family:'Poppins',sans-serif;font-weight:600;font-size:0.85rem;border:none;cursor:pointer;
+    padding:12px 22px;border-radius:8px;transition:transform .15s, background .15s, border-color .15s;
   }
   .btn:hover{transform:translateY(-1px);}
-  .btn-primary{background:var(--red);color:#0a0b0d;font-weight:600;}
-  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink);}
-  .btn-ghost:hover{border-color:var(--ink-dim);}
+  .btn-primary{background:var(--blue);color:#fff;}
+  .btn-primary:hover{background:#0092cc;}
+  .btn-ghost{background:#fff;border:1px solid var(--line);color:var(--navy);}
+  .btn-ghost:hover{border-color:var(--blue);}
   .btn[disabled]{opacity:0.5;cursor:wait;transform:none;}
   .btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;}
   .hint{font-size:0.78rem;color:var(--ink-dim);margin-top:8px;line-height:1.5;}
-  .hint b{color:var(--teal);}
-  .status{font-size:0.82rem;margin-top:10px;font-family:'JetBrains Mono',monospace;}
-  .status.ok{color:var(--teal);}
-  .status.err{color:var(--red);white-space:pre-wrap;}
+  .hint b{color:var(--blue);}
+  .status{font-size:0.84rem;margin-top:10px;font-weight:500;}
+  .status.ok{color:var(--ok);}
+  .status.err{color:var(--err);white-space:pre-wrap;}
   details.settings{margin-bottom:22px;}
   details.settings summary{
-    cursor:pointer;color:var(--ink-dim);font-size:0.85rem;
-    font-family:'JetBrains Mono',monospace;padding:8px 0;
+    cursor:pointer;color:var(--ink-dim);font-size:0.85rem;font-weight:500;padding:8px 0;
   }
-  details.settings summary:hover{color:var(--ink);}
-  table.cenik{width:100%;border-collapse:collapse;font-size:0.88rem;}
+  details.settings summary:hover{color:var(--navy);}
+  table.cenik{width:100%;border-collapse:collapse;font-size:0.88rem;font-variant-numeric:tabular-nums;}
   table.cenik td{padding:7px 8px;border-bottom:1px solid var(--line);}
-  table.cenik td:first-child{color:var(--ink-dim);}
+  table.cenik td:first-child{color:var(--ink);}
   table.cenik input{max-width:130px;text-align:right;}
   table.cenik .unit{color:var(--ink-dim);font-size:0.78rem;white-space:nowrap;}
 
@@ -85,43 +93,49 @@
   #nabidka{display:none;}
   #nabidka.visible{display:block;}
   .doc{
-    background:#ffffff;color:#17191c;border-radius:12px;padding:44px 48px;
-    font-size:0.92rem;line-height:1.55;
+    background:#ffffff;color:#22334d;border:1px solid var(--line);border-radius:12px;padding:44px 48px;
+    font-size:0.92rem;line-height:1.55;font-variant-numeric:tabular-nums;
   }
-  .doc header{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:2px solid #17191c;padding-bottom:18px;margin-bottom:22px;}
-  .doc h3{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;margin-bottom:4px;}
-  .doc .meta{font-size:0.82rem;color:#555;}
+  .doc header{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:3px solid var(--navy);padding-bottom:18px;margin-bottom:22px;}
+  .doc-logo{height:44px;width:auto;margin-bottom:12px;display:block;}
+  .doc h3{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.35rem;color:var(--navy);margin-bottom:4px;}
+  .doc .meta{font-size:0.82rem;color:#64748b;}
   .doc .parties{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:22px;}
-  .doc .party h4{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px;}
+  .doc .party h4{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:6px;font-weight:700;}
   .doc .uvod{margin-bottom:22px;white-space:pre-wrap;}
   .doc table{width:100%;border-collapse:collapse;margin-bottom:20px;}
   .doc th{
-    text-align:left;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;
-    color:#888;border-bottom:1px solid #ccc;padding:8px 6px;
+    text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;
+    color:var(--navy);border-bottom:2px solid var(--navy);padding:8px 6px;
   }
   .doc th:last-child, .doc td:last-child{text-align:right;}
-  .doc td{padding:9px 6px;border-bottom:1px solid #eee;}
-  .doc td.detail{color:#777;font-size:0.8rem;}
+  .doc td{padding:9px 6px;border-bottom:1px solid #e6edf4;}
+  .doc td.detail{color:#64748b;font-size:0.8rem;}
   .doc .sums{margin-left:auto;max-width:340px;}
   .doc .sums div{display:flex;justify-content:space-between;padding:5px 6px;}
-  .doc .sums .total{border-top:2px solid #17191c;font-weight:700;font-size:1.05rem;padding-top:9px;margin-top:4px;}
-  .doc .pozn{margin-top:24px;font-size:0.8rem;color:#666;white-space:pre-wrap;}
-  .doc footer{margin-top:30px;padding-top:14px;border-top:1px solid #ddd;font-size:0.75rem;color:#999;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .doc .sums .total{border-top:3px solid var(--navy);font-weight:700;font-size:1.05rem;padding-top:9px;margin-top:4px;color:var(--navy);}
+  .doc .pozn{margin-top:24px;font-size:0.8rem;color:#64748b;white-space:pre-wrap;}
+  .doc footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);font-size:0.75rem;color:#8a99ab;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 
   @media print{
     body{background:#fff;padding:0;max-width:none;}
     body > *:not(#nabidka){display:none !important;}
     #nabidka{display:block !important;}
     #nabidka .btnrow{display:none;}
-    .doc{border-radius:0;padding:10mm 6mm;}
+    .doc{border:none;border-radius:0;padding:10mm 6mm;}
   }
 </style>
 </head>
 <body>
 
-<h1>Cenové <span>nabídky</span> — stavby domů</h1>
-<p class="sub">Interní nástroj: vlož poptávku, nech agenta vyplnit parametry, zkontroluj ceník a vygeneruj nabídku k tisku / PDF.
-<button class="btn btn-ghost" id="btnInstall" type="button" style="display:none;margin-left:10px;padding:7px 14px;font-size:0.75rem;">📲 Nainstalovat aplikaci</button></p>
+<header class="apphead">
+  <img id="brandLogo" class="brand-logo" alt="ISO.Paneels s.r.o.">
+  <div>
+    <h1>Cenové nabídky</h1>
+    <p class="sub">Vlož poptávku, nech agenta vyplnit parametry, zkontroluj ceník a vygeneruj nabídku k tisku / PDF.
+    <button class="btn btn-ghost" id="btnInstall" type="button" style="display:none;margin-left:10px;padding:7px 14px;font-size:0.75rem;">📲 Nainstalovat aplikaci</button></p>
+  </div>
+</header>
 
 <details class="settings">
   <summary>⚙ Nastavení — dodavatel, ceník, API klíč</summary>
@@ -142,7 +156,7 @@
     <div class="btnrow">
       <button class="btn btn-ghost" id="btnCenikReset" type="button">Obnovit výchozí ceník</button>
     </div>
-    <p class="hint">Ceny se ukládají v prohlížeči a použijí se pro každou další nabídku. Přirážky za standard: ekonomický −15 %, standardní ±0 %, nadstandardní +25 %. Konstrukce: zděná ±0 %, dřevostavba −10 %, montovaná −5 %.</p>
+    <p class="hint">Ceny se ukládají v prohlížeči a použijí se pro každou další nabídku. Přirážky za standard: ekonomický −15 %, standardní ±0 %, nadstandardní +25 %. Konstrukce: zděná ±0 %, dřevostavba/CLT −10 %, montovaná −5 %.</p>
   </section>
 
   <section class="panel">
@@ -153,10 +167,10 @@
 </details>
 
 <section class="panel">
-  <h2><span class="num">01</span>Poptávka zákazníka → agent vyplní formulář</h2>
+  <h2><span class="num">1</span>Poptávka zákazníka → agent vyplní formulář</h2>
   <div class="row">
     <label>Sem vlož e-mail / zprávu od zákazníka (volný text)</label>
-    <textarea id="poptavka" placeholder="Dobrý den, chtěli bychom postavit zděný dům 10×12 m, patrový, se sedlovou střechou a garáží pro jedno auto…"></textarea>
+    <textarea id="poptavka" placeholder="Dobrý den, chtěli bychom postavit dům z CLT panelů 10×12 m, patrový, se sedlovou střechou a garáží pro jedno auto…"></textarea>
   </div>
   <div class="btnrow">
     <button class="btn btn-primary" id="btnAgent" type="button">🤖 Vyplnit parametry agentem</button>
@@ -165,7 +179,7 @@
 </section>
 
 <section class="panel">
-  <h2><span class="num">02</span>Parametry stavby a zákazník</h2>
+  <h2><span class="num">2</span>Parametry stavby a zákazník</h2>
   <div class="grid" style="margin-bottom:14px;">
     <div><label>Jméno zákazníka</label><input type="text" id="zJmeno"></div>
     <div><label>E-mail</label><input type="email" id="zEmail"></div>
@@ -177,7 +191,7 @@
       <label>Typ konstrukce</label>
       <select id="pKonstrukce">
         <option value="zdena">Zděná</option>
-        <option value="drevostavba">Dřevostavba</option>
+        <option value="drevostavba">Dřevostavba / CLT</option>
         <option value="montovana">Montovaná</option>
       </select>
     </div>
@@ -236,10 +250,13 @@ Konečná cena bude upřesněna po zaměření a projednání projektu.</textare
 <script>
 "use strict";
 
+const LOGO_SRC = "logo-isopaneels.png";
+document.getElementById("brandLogo").src = LOGO_SRC;
+
 /* ---------------- ceník ---------------- */
 const CENIK_DEFAULT = [
   {id:"zaklady",   label:"Zemní práce a základová deska",              cena:4500,  unit:"Kč/m² zastavěné plochy", basis:"zastavena"},
-  {id:"hruba",     label:"Hrubá stavba (zdivo, stropy, schodiště)",    cena:14000, unit:"Kč/m² podlahové plochy", basis:"podlahova"},
+  {id:"hruba",     label:"Hrubá stavba (nosné konstrukce, stropy, schodiště)", cena:14000, unit:"Kč/m² podlahové plochy", basis:"podlahova"},
   {id:"strecha",   label:"Střecha vč. krytiny a klempířských prvků",   cena:6500,  unit:"Kč/m² zastavěné plochy", basis:"zastavena"},
   {id:"okna",      label:"Okna, vstupní a interiérové dveře",          cena:3500,  unit:"Kč/m² podlahové plochy", basis:"podlahova"},
   {id:"instalace", label:"Instalace (elektro, voda, kanalizace, topení)", cena:7000, unit:"Kč/m² podlahové plochy", basis:"podlahova"},
@@ -287,7 +304,7 @@ document.getElementById("btnCenikReset").addEventListener("click", () => {
 });
 
 /* ---------------- dodavatel + api key ---------------- */
-const DOD_DEFAULT = {jmeno:"Jakub Kočvara", ico:"24611581", email:"JakubDev@outlook.com", tel:""};
+const DOD_DEFAULT = {jmeno:"ISO.Paneels s.r.o.", ico:"", email:"", tel:""};
 function loadDod(){
   try{ return {...DOD_DEFAULT, ...(JSON.parse(localStorage.getItem(LS.dodavatel) || "{}"))}; }
   catch(e){ return {...DOD_DEFAULT}; }
@@ -374,7 +391,7 @@ function cisloNabidky(){
 
 let uvodniText = "";
 
-const KONSTRUKCE_LABEL = {zdena:"zděná", drevostavba:"dřevostavba", montovana:"montovaná"};
+const KONSTRUKCE_LABEL = {zdena:"zděná", drevostavba:"dřevostavba / CLT", montovana:"montovaná"};
 const STRECHA_LABEL = {sedlova:"sedlová", plocha:"plochá"};
 const STANDARD_LABEL = {ekonomicky:"ekonomický", standardni:"standardní", nadstandardni:"nadstandardní"};
 
@@ -393,10 +410,11 @@ function sestavNabidku(){
   doc.innerHTML = `
     <header>
       <div>
+        <img class="doc-logo" src="${LOGO_SRC}" alt="${esc(dod.jmeno)}">
         <h3>Cenová nabídka č. ${cisloNabidky()}</h3>
         <div class="meta">Stavba rodinného domu — ${KONSTRUKCE_LABEL[p.konstrukce]} konstrukce,
-          ${fmtNum(p.zastavenaPlocha)} m² zastavěné plochy, ${p.podlazi} ${p.podlazi === 1 ? "podlaží" : "podlaží"},
-          ${STRECHA_LABEL[p.strecha]} střecha, ${STANDARD_LABEL[p.standard]} standard${p.sklep ? ", sklep" : ""}${p.garaz ? ", garáž" : ""}</div>
+          ${fmtNum(p.zastavenaPlocha)} m² zastavěné plochy, ${p.podlazi} podlaží,
+          ${STRECHA_LABEL[p.strecha]} střecha, ${STANDARD_LABEL[p.standard]} provedení${p.sklep ? ", sklep" : ""}${p.garaz ? ", garáž" : ""}</div>
       </div>
       <div class="meta" style="text-align:right;">
         Datum: ${dnes.toLocaleDateString("cs-CZ")}<br>
@@ -407,7 +425,7 @@ function sestavNabidku(){
       <div class="party">
         <h4>Dodavatel</h4>
         <strong>${esc(dod.jmeno)}</strong><br>
-        IČO: ${esc(dod.ico)}<br>
+        ${dod.ico ? "IČO: " + esc(dod.ico) + "<br>" : ""}
         ${esc(dod.email)}${dod.tel ? "<br>" + esc(dod.tel) : ""}
       </div>
       <div class="party">
@@ -431,7 +449,7 @@ function sestavNabidku(){
     </div>
     ${p.poznamky.length ? `<div class="pozn">${p.poznamky.map(x => "• " + esc(x)).join("\n")}</div>` : ""}
     <footer>
-      <span>${esc(dod.jmeno)} · IČO ${esc(dod.ico)}</span>
+      <span>${esc(dod.jmeno)}${dod.ico ? " · IČO " + esc(dod.ico) : ""}</span>
       <span>Orientační nabídka — není návrhem smlouvy.</span>
     </footer>`;
 
@@ -526,7 +544,7 @@ document.getElementById("btnAgent").addEventListener("click", async () => {
     const text = await claudeRequest({
       model: "claude-opus-4-8",
       max_tokens: 4096,
-      system: "Jsi asistent stavební firmy v Česku. Z textu poptávky zákazníka vytěžíš parametry pro cenovou nabídku na stavbu rodinného domu. Rozměry jako '10×12 m' převeď na zastavěnou plochu v m². 'Patrový' nebo 'dvoupodlažní' dům = 2 podlaží, 'bungalov' nebo 'přízemní' = 1 podlaží. Pokud údaj v textu není, vrať null — nic si nevymýšlej.",
+      system: "Jsi asistent stavební firmy ISO.Paneels s.r.o. (stavby z CLT panelů, sendvičové panely, průmyslové haly i rodinné domy). Z textu poptávky zákazníka vytěžíš parametry pro cenovou nabídku na stavbu domu. Rozměry jako '10×12 m' převeď na zastavěnou plochu v m². 'Patrový' nebo 'dvoupodlažní' dům = 2 podlaží, 'bungalov' nebo 'přízemní' = 1 podlaží. Stavby z CLT nebo panelů spadají pod konstrukci 'drevostavba'. Pokud údaj v textu není, vrať null — nic si nevymýšlej.",
       output_config: {format: {type: "json_schema", schema: PARSE_SCHEMA}},
       messages: [{role: "user", content: "Poptávka zákazníka:\n\n" + poptavka}],
     });
@@ -570,7 +588,7 @@ document.getElementById("btnUvodAI").addEventListener("click", async () => {
     uvodniText = (await claudeRequest({
       model: "claude-opus-4-8",
       max_tokens: 2048,
-      system: `Jsi ${dod.jmeno}, dodavatel staveb rodinných domů. Piš česky, profesionálně, srdečně a stručně — 2 až 4 věty. Vrať pouze samotný text úvodního odstavce cenové nabídky (oslovení zákazníka, poděkování za poptávku, krátké shrnutí co nabídka pokrývá). Žádné nadpisy, žádný podpis, žádné ceny v textu.`,
+      system: `Píšeš za firmu ${dod.jmeno} (moderní stavby z CLT panelů, sendvičové panely). Piš česky, profesionálně, srdečně a stručně — 2 až 4 věty. Vrať pouze samotný text úvodního odstavce cenové nabídky (oslovení zákazníka, poděkování za poptávku, krátké shrnutí co nabídka pokrývá). Žádné nadpisy, žádný podpis, žádné ceny v textu.`,
       messages: [{role: "user", content:
         `Napiš úvodní odstavec nabídky pro zákazníka ${p.zakaznik.jmeno || "(jméno neuvedeno)"}. Parametry stavby: ${popis}`
         + (document.getElementById("poptavka").value.trim() ? `\n\nPůvodní poptávka zákazníka:\n${document.getElementById("poptavka").value.trim()}` : "")}],
