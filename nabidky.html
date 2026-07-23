@@ -118,11 +118,29 @@
   .doc footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);font-size:0.75rem;color:#8a99ab;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 
   @media print{
+    @page{size:A4;margin:10mm 12mm;}
     body{background:#fff;padding:0;max-width:none;}
     body > *:not(#nabidka){display:none !important;}
     #nabidka{display:block !important;}
     #nabidka .btnrow{display:none;}
-    .doc{border:none;border-radius:0;padding:10mm 6mm;}
+    /* zhuštění, ať se nabídka vejde na jednu A4 */
+    .doc{border:none;border-radius:0;padding:0;font-size:9pt;line-height:1.35;}
+    .doc-logo{height:30px;margin-bottom:6px;}
+    .doc h3{font-size:13pt;margin-bottom:2px;}
+    .doc .meta{font-size:7.5pt;}
+    .doc header{padding-bottom:8px;margin-bottom:10px;border-bottom-width:2px;}
+    .doc .parties{margin-bottom:10px;gap:16px;}
+    .doc .party h4{font-size:6.5pt;margin-bottom:3px;}
+    .doc .uvod{margin-bottom:10px;}
+    .doc table{margin-bottom:8px;}
+    .doc th{padding:4px 5px;font-size:6.5pt;}
+    .doc td{padding:4px 5px;}
+    .doc td.detail{font-size:7.5pt;}
+    .doc tr{break-inside:avoid;}
+    .doc .sums div{padding:2px 5px;}
+    .doc .sums .total{font-size:10.5pt;padding-top:5px;margin-top:2px;border-top-width:2px;}
+    .doc .pozn{margin-top:10px;font-size:7.5pt;}
+    .doc footer{margin-top:12px;padding-top:6px;font-size:7pt;}
   }
 </style>
 </head>
