@@ -1,7 +1,7 @@
 /* Service worker aplikace Cenové nabídky.
    Při změně nabidky.html nebo tohoto souboru zvyš CACHE_VERSION,
    jinak si nainstalované aplikace nechají starou verzi. */
-const CACHE_VERSION = "nabidky-v3";
+const CACHE_VERSION = "nabidky-v4";
 const PRECACHE = [
   "./nabidky.html",
   "./manifest.webmanifest",

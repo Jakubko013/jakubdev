@@ -422,7 +422,7 @@ function sestavNabidku(){
   const v = spocitat(p);
   const dod = loadDod();
   const dnes = new Date();
-  const platnost = new Date(dnes.getTime() + 30*24*3600*1000);
+  const platnost = new Date(dnes.getTime() + 14*24*3600*1000); // platnost nabídky 14 dní
 
   const doc = document.getElementById("doc");
   doc.innerHTML = `
