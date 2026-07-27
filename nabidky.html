@@ -254,6 +254,52 @@
   .doc .signs div{border-top:1px solid #9aabbf;padding-top:5px;font-size:.75rem;color:#6b7d95;text-align:center;}
   .doc .dfoot{margin-top:20px;padding-top:9px;border-top:1px solid #e9eff5;font-size:.72rem;color:#8798ac;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
 
+  /* ---------- dialog importu ---------- */
+  .modal{
+    position:fixed;inset:0;z-index:150;background:rgba(27,47,78,.55);
+    display:none;align-items:flex-start;justify-content:center;padding:4vh 4vw;overflow-y:auto;
+  }
+  .modal.show{display:flex;}
+  .modal-box{
+    background:var(--card);border-radius:16px;box-shadow:0 24px 60px -12px rgba(27,47,78,.5);
+    width:min(920px,100%);overflow:hidden;
+  }
+  .modal-head{
+    display:flex;align-items:center;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line);
+  }
+  .modal-head h2{margin-right:auto;}
+  .modal-body{padding:22px 24px;}
+  .steps{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+  .step{
+    font-size:.75rem;font-weight:600;color:var(--ink-dim);padding:5px 12px;border-radius:99px;
+    background:var(--line-soft);display:flex;align-items:center;gap:6px;
+  }
+  .step.on{background:var(--blue);color:#fff;}
+  .step.done{background:var(--ok-soft);color:var(--ok);}
+  .drop{
+    border:2px dashed var(--line);border-radius:12px;padding:32px 20px;text-align:center;
+    transition:border-color .15s,background .15s;cursor:pointer;
+  }
+  .drop:hover,.drop.over{border-color:var(--blue);background:var(--blue-soft);}
+  .drop .big{font-size:1.6rem;margin-bottom:8px;}
+  .drop .t{font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-weight:600;color:var(--navy);margin-bottom:4px;}
+  .prevwrap{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:10px;margin-bottom:16px;}
+  table.prev{width:100%;border-collapse:collapse;font-size:.78rem;white-space:nowrap;}
+  table.prev td{padding:5px 9px;border-bottom:1px solid var(--line-soft);border-right:1px solid var(--line-soft);}
+  table.prev tr.hdr td{background:var(--blue-soft);font-weight:700;color:var(--navy);position:sticky;top:0;}
+  table.prev tr.skip td{color:var(--ink-dim);background:#fbfcfe;}
+  .impinfo{
+    background:var(--blue-soft);border-radius:10px;padding:12px 16px;font-size:.84rem;
+    margin-bottom:16px;line-height:1.5;
+  }
+  .impinfo b{color:var(--navy);}
+  .impwarn{background:var(--warn-soft,#fdf3e2);color:#8a5a08;}
+  .impres{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:18px;}
+  .impres .r{background:var(--line-soft);border-radius:10px;padding:14px 16px;}
+  .impres .r .n{font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-size:1.5rem;font-weight:600;color:var(--navy);}
+  .impres .r .l{font-size:.74rem;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.05em;}
+  .impres .r.good .n{color:var(--ok);}
+
   /* ---------- tisk: vejít se na A4 ---------- */
   @media print{
     @page{size:A4;margin:9mm 11mm;}
@@ -542,6 +588,15 @@
 <!-- ============ CENÍK ============ -->
 <section class="view" id="view-cenik">
   <div class="panel">
+    <div class="panel-head"><h2>📥 Načtení ceníku ze souboru</h2>
+      <span class="note">Ceník stavebních prací (ČSP), ÚRS, RTS nebo vlastní tabulka</span></div>
+    <p class="sechint" style="margin-bottom:14px;">Vyexportuj ceník ze svého programu do <b>Excelu</b> nebo <b>CSV</b> a nahraj ho sem. Aplikace si sloupce zkusí rozpoznat sama; co netrefí, přiřadíš ručně. Podle <b>kódu položky</b> pak umí u dalšího importu jen zaktualizovat ceny, aniž by ti rozbila vlastní úpravy.</p>
+    <div class="btnrow">
+      <button class="btn btn-navy" id="btnImportCenik" type="button">📥 Načíst ceník ze souboru</button>
+    </div>
+  </div>
+
+  <div class="panel">
     <div class="panel-head"><h2>🏠 Rodinné domy — základní stavba</h2>
       <span class="note">Vloží se automaticky do každé nabídky domu</span></div>
     <div class="tblwrap"><table class="data" id="cenikDumBase"></table></div>
@@ -673,6 +728,16 @@
       <button class="btn btn-ghost" id="btnSave" type="button">💾 Uložit</button>
       <button class="btn btn-primary" id="btnPrint" type="button">🖨 Tisk / PDF</button>
     </div>
+  </div>
+</div>
+
+<div class="modal" id="importModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>Načtení ceníku ze souboru</h2>
+      <button class="icobtn" id="impClose" type="button" title="Zavřít">✕</button>
+    </div>
+    <div class="modal-body" id="impBody"></div>
   </div>
 </div>
 
@@ -1901,6 +1966,392 @@ async function runMail() {
   }
 }
 
+/* =======================================================================
+   Import ceníku ze souboru (XLSX / CSV)
+
+   XLSX je ZIP s XML uvnitř. Rozbalujeme ho vestavěnou funkcí prohlížeče
+   (DecompressionStream), takže aplikace nepotřebuje žádnou knihovnu navíc
+   a zůstává jedním souborem, který funguje i offline.
+   ======================================================================= */
+
+const IMP = {file:null, rows:[], head:-1, map:{}, cil:"base|dum", rezim:"both"};
+
+function colToIndex(letters) {
+  let n = 0;
+  for (const ch of letters.toUpperCase()) n = n * 26 + (ch.charCodeAt(0) - 64);
+  return n - 1;
+}
+
+async function unzip(buffer) {
+  const dv = new DataView(buffer), u8 = new Uint8Array(buffer);
+  let eocd = -1;
+  for (let i = u8.length - 22; i >= 0 && i > u8.length - 66000; i--) {
+    if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+  }
+  if (eocd < 0) throw new Error("Tohle není platný soubor XLSX.");
+  const count = dv.getUint16(eocd + 10, true);
+  let off = dv.getUint32(eocd + 16, true);
+  const files = {};
+  for (let i = 0; i < count && dv.getUint32(off, true) === 0x02014b50; i++) {
+    const nameLen = dv.getUint16(off + 28, true);
+    files[new TextDecoder().decode(u8.subarray(off + 46, off + 46 + nameLen))] = {
+      method: dv.getUint16(off + 10, true),
+      size: dv.getUint32(off + 20, true),
+      local: dv.getUint32(off + 42, true),
+    };
+    off += 46 + nameLen + dv.getUint16(off + 30, true) + dv.getUint16(off + 32, true);
+  }
+  return {files, dv, u8};
+}
+
+async function unzipEntry(zip, name) {
+  const f = zip.files[name];
+  if (!f) return null;
+  const lo = f.local;
+  if (zip.dv.getUint32(lo, true) !== 0x04034b50) throw new Error("Poškozený soubor XLSX.");
+  const start = lo + 30 + zip.dv.getUint16(lo + 26, true) + zip.dv.getUint16(lo + 28, true);
+  const data = zip.u8.subarray(start, start + f.size);
+  if (f.method === 0) return new TextDecoder().decode(data);
+  if (f.method !== 8) throw new Error("Soubor XLSX používá nepodporovanou kompresi.");
+  if (typeof DecompressionStream === "undefined") {
+    throw new Error("Tento prohlížeč neumí rozbalit XLSX — ulož soubor jako CSV a zkus to znovu.");
+  }
+  const stream = new Blob([data]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+  return await new Response(stream).text();
+}
+
+async function readXlsx(buffer) {
+  const zip = await unzip(buffer);
+  const sharedXml = await unzipEntry(zip, "xl/sharedStrings.xml");
+  const shared = sharedXml
+    ? Array.from(new DOMParser().parseFromString(sharedXml, "application/xml").getElementsByTagName("si"))
+        .map(si => Array.from(si.getElementsByTagName("t")).map(t => t.textContent).join(""))
+    : [];
+  const sheetName = Object.keys(zip.files)
+    .filter(n => /^xl\/worksheets\/sheet\d+\.xml$/.test(n)).sort()[0];
+  if (!sheetName) throw new Error("V souboru XLSX není žádný list.");
+  const doc = new DOMParser().parseFromString(await unzipEntry(zip, sheetName), "application/xml");
+
+  const rows = [];
+  Array.from(doc.getElementsByTagName("row")).forEach(rowEl => {
+    const cells = [];
+    Array.from(rowEl.getElementsByTagName("c")).forEach(c => {
+      const ref = (c.getAttribute("r") || "").replace(/[0-9]/g, "");
+      const idx = ref ? colToIndex(ref) : cells.length;
+      const t = c.getAttribute("t");
+      let v = "";
+      if (t === "inlineStr") {
+        v = Array.from(c.getElementsByTagName("t")).map(x => x.textContent).join("");
+      } else {
+        const vEl = c.getElementsByTagName("v")[0];
+        v = vEl ? vEl.textContent : "";
+        if (t === "s") v = shared[Number(v)] ?? "";
+      }
+      cells[idx] = v;
+    });
+    rows.push(Array.from(cells, x => x ?? ""));
+  });
+  return rows;
+}
+
+// Excel v Česku ukládá CSV ve Windows-1250 a se středníkem.
+function decodeBytes(buffer) {
+  const utf8 = new TextDecoder("utf-8").decode(buffer);
+  if (!/�/.test(utf8)) return utf8.replace(/^﻿/, "");
+  try { return new TextDecoder("windows-1250").decode(buffer); }
+  catch (e) { return utf8.replace(/^﻿/, ""); }
+}
+
+function parseCsv(text) {
+  const first = text.split(/\r?\n/)[0] || "";
+  const delim = (first.split(";").length >= first.split(",").length) ? ";" : ",";
+  const rows = [];
+  let row = [], cell = "", quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (quoted) {
+      if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else quoted = false; }
+      else cell += ch;
+    } else if (ch === '"') quoted = true;
+    else if (ch === delim) { row.push(cell); cell = ""; }
+    else if (ch === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
+    else if (ch !== "\r") cell += ch;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  return rows.filter(r => r.some(c => String(c).trim() !== ""));
+}
+
+// "1 234,56 Kč" i "1,234.56" → 1234.56
+function parsePrice(v) {
+  if (typeof v === "number") return v;
+  let s = String(v ?? "").replace(/[\s ]/g, "").replace(/kč|czk/gi, "");
+  if (s.includes(",") && s.includes(".")) {
+    s = s.lastIndexOf(",") > s.lastIndexOf(".")
+      ? s.replace(/\./g, "").replace(",", ".")
+      : s.replace(/,/g, "");
+  } else s = s.replace(",", ".");
+  const n = Number(s.replace(/[^0-9.\-]/g, ""));
+  return Number.isFinite(n) ? n : NaN;
+}
+
+const IMP_VZORY = {
+  kod:   /k[oó]d|[čc][ií]slo\s*polo|^kat|ozna[čc]|^id$/i,
+  popis: /popis|n[aá]zev|text|specifikace|polo[žz]k/i,
+  unit:  /^mj$|m\.\s*j|jednotk|m[ěe]rn/i,
+  price: /cena|sazba|jednotkov/i,
+};
+
+// Najde řádek s hlavičkou — ten, kde nejvíc buněk vypadá jako názvy sloupců.
+function detectHeader(rows) {
+  let best = -1, bestScore = 0;
+  rows.slice(0, 25).forEach((row, i) => {
+    let score = 0;
+    row.forEach(cell => {
+      const t = String(cell || "");
+      if (!t.trim()) return;
+      Object.values(IMP_VZORY).forEach(re => { if (re.test(t)) score++; });
+    });
+    if (score > bestScore) { bestScore = score; best = i; }
+  });
+  return bestScore >= 2 ? best : -1;
+}
+
+function detectColumns(header) {
+  const map = {};
+  const used = new Set();
+  // kód hledáme dřív než popis — "Kód položky" by jinak spadl do popisu
+  ["kod", "price", "unit", "popis"].forEach(field => {
+    header.forEach((cell, i) => {
+      if (map[field] !== undefined || used.has(i)) return;
+      if (IMP_VZORY[field].test(String(cell || ""))) { map[field] = i; used.add(i); }
+    });
+  });
+  return map;
+}
+
+function impDataRows() {
+  const start = IMP.head >= 0 ? IMP.head + 1 : 0;
+  return IMP.rows.slice(start).filter(r => {
+    const popis = String(r[IMP.map.popis] ?? "").trim();
+    const cena = parsePrice(r[IMP.map.price]);
+    return popis !== "" && Number.isFinite(cena) && cena > 0;
+  });
+}
+
+function openImport() {
+  IMP.file = null; IMP.rows = []; IMP.head = -1; IMP.map = {};
+  $("importModal").classList.add("show");
+  renderImportStep1();
+}
+
+function closeImport() { $("importModal").classList.remove("show"); }
+
+function impSteps(active) {
+  const kroky = ["Soubor", "Kontrola sloupců", "Načtení"];
+  return '<div class="steps">' + kroky.map((k, i) =>
+    `<span class="step ${i === active ? "on" : i < active ? "done" : ""}">${i < active ? "✓" : i + 1} ${esc(k)}</span>`
+  ).join("") + "</div>";
+}
+
+function renderImportStep1() {
+  $("impBody").innerHTML = impSteps(0) + `
+    <div class="drop" id="impDrop">
+      <div class="big">📄</div>
+      <div class="t">Přetáhni sem soubor, nebo klikni pro výběr</div>
+      <div class="sechint">Podporované formáty: <b>.xlsx</b> (Excel) a <b>.csv</b></div>
+      <input type="file" id="impFile" accept=".xlsx,.csv,.txt" style="display:none;">
+    </div>
+    <p class="sechint" style="margin-top:16px;">V programu Ceník stavebních prací najdeš export pod <b>Soubor → Export</b> (do MS Excel). Nahrát můžeš i jen jednu kapitolu — položky se přidají k těm stávajícím.</p>`;
+
+  const drop = $("impDrop"), input = $("impFile");
+  drop.addEventListener("click", () => input.click());
+  input.addEventListener("change", () => { if (input.files[0]) handleImportFile(input.files[0]); });
+  ["dragenter", "dragover"].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault(); drop.classList.add("over");
+  }));
+  ["dragleave", "drop"].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault(); drop.classList.remove("over");
+  }));
+  drop.addEventListener("drop", e => {
+    const f = e.dataTransfer.files[0];
+    if (f) handleImportFile(f);
+  });
+}
+
+async function handleImportFile(file) {
+  $("impBody").innerHTML = impSteps(0) +
+    '<p class="sechint">Načítám <b>' + esc(file.name) + '</b>…</p>';
+  try {
+    const buffer = await file.arrayBuffer();
+    const jeXlsx = /\.xlsx$/i.test(file.name) ||
+      (new Uint8Array(buffer, 0, 2)[0] === 0x50 && new Uint8Array(buffer, 0, 2)[1] === 0x4b);
+    IMP.rows = jeXlsx ? await readXlsx(buffer) : parseCsv(decodeBytes(buffer));
+    if (!IMP.rows.length) throw new Error("Soubor neobsahuje žádná data.");
+    IMP.file = file;
+    IMP.head = detectHeader(IMP.rows);
+    IMP.map = IMP.head >= 0 ? detectColumns(IMP.rows[IMP.head]) : {};
+    renderImportStep2();
+  } catch (e) {
+    $("impBody").innerHTML = impSteps(0) +
+      '<div class="impinfo impwarn">Soubor se nepodařilo přečíst: ' + esc(e.message) + "</div>" +
+      '<div class="btnrow"><button class="btn btn-ghost" onclick="renderImportStep1()" type="button">Zkusit jiný soubor</button></div>';
+  }
+}
+
+function renderImportStep2() {
+  const sirka = Math.max(...IMP.rows.slice(0, 40).map(r => r.length), 1);
+  const nahled = IMP.rows.slice(0, 12);
+  const sloupce = Array.from({length: sirka}, (_, i) => i);
+  const volba = (field, popisek) => `<div>
+      <label>${popisek}</label>
+      <select data-impcol="${field}">
+        <option value="">— nepoužít —</option>
+        ${sloupce.map(i => {
+          const nazev = IMP.head >= 0 ? String(IMP.rows[IMP.head][i] || "").trim() : "";
+          return `<option value="${i}" ${IMP.map[field] === i ? "selected" : ""}>Sloupec ${i + 1}${nazev ? " — " + esc(nazev) : ""}</option>`;
+        }).join("")}
+      </select></div>`;
+
+  const pocet = impDataRows().length;
+  $("impBody").innerHTML = impSteps(1) + `
+    <div class="prevwrap"><table class="prev"><tbody>
+      ${nahled.map((r, i) => `<tr class="${i === IMP.head ? "hdr" : (IMP.head >= 0 && i < IMP.head) ? "skip" : ""}">
+        ${sloupce.map(c => `<td>${esc(String(r[c] ?? "").slice(0, 44))}</td>`).join("")}</tr>`).join("")}
+    </tbody></table></div>
+
+    <div class="grid" style="margin-bottom:16px;">
+      ${volba("kod", "Kód položky")}
+      ${volba("popis", "Popis položky")}
+      ${volba("unit", "Měrná jednotka")}
+      ${volba("price", "Cena za jednotku")}
+    </div>
+
+    <div class="grid" style="margin-bottom:16px;">
+      <div><label>Řádek s hlavičkou</label>
+        <select id="impHead">
+          <option value="-1" ${IMP.head < 0 ? "selected" : ""}>Bez hlavičky</option>
+          ${IMP.rows.slice(0, 12).map((r, i) =>
+            `<option value="${i}" ${IMP.head === i ? "selected" : ""}>Řádek ${i + 1} — ${esc(String(r.filter(Boolean)[0] || "").slice(0, 30))}</option>`).join("")}
+        </select></div>
+      <div><label>Kam položky zařadit</label>
+        <select id="impCil">
+          <option value="base|dum">🏠 Domy — základní stavba</option>
+          <option value="extra|dum">🏠 Domy — volitelné položky</option>
+          <option value="base|hala">🏭 Haly — základní konstrukce</option>
+          <option value="extra|hala">🏭 Haly — volitelné položky</option>
+          <option value="extra|vse">🚜 Mechanizace a doprava</option>
+        </select></div>
+      <div><label>Co s existujícím ceníkem</label>
+        <select id="impRezim">
+          <option value="both">Přidat nové a zaktualizovat ceny</option>
+          <option value="add">Jen přidat nové položky</option>
+          <option value="update">Jen zaktualizovat ceny podle kódu</option>
+        </select></div>
+    </div>
+
+    <div class="impinfo ${pocet ? "" : "impwarn"}" id="impSouhrn">
+      ${pocet ? "K načtení připraveno <b>" + pocet + "</b> položek." :
+        "Zatím nevidím žádné platné položky — zkontroluj přiřazení sloupců <b>Popis</b> a <b>Cena</b>."}
+    </div>
+
+    <div class="btnrow">
+      <button class="btn btn-primary" id="impRun" type="button" ${pocet ? "" : "disabled"}>Načíst ${pocet} položek</button>
+      <button class="btn btn-ghost" id="impBack" type="button">Jiný soubor</button>
+    </div>`;
+
+  $("impCil").value = IMP.cil;
+  $("impRezim").value = IMP.rezim;
+  document.querySelectorAll("[data-impcol]").forEach(sel => sel.addEventListener("change", () => {
+    const v = sel.value;
+    if (v === "") delete IMP.map[sel.dataset.impcol];
+    else IMP.map[sel.dataset.impcol] = num(v);
+    renderImportStep2();
+  }));
+  $("impHead").addEventListener("change", () => {
+    IMP.head = num($("impHead").value, -1);
+    if (IMP.head >= 0) IMP.map = Object.assign(detectColumns(IMP.rows[IMP.head]), IMP.map);
+    renderImportStep2();
+  });
+  $("impCil").addEventListener("change", () => { IMP.cil = $("impCil").value; });
+  $("impRezim").addEventListener("change", () => { IMP.rezim = $("impRezim").value; });
+  $("impBack").addEventListener("click", renderImportStep1);
+  $("impRun").addEventListener("click", runImport);
+}
+
+function runImport() {
+  const radky = impDataRows();
+  if (!radky.length) return;
+  if (radky.length > 2000 &&
+      !confirm("Soubor obsahuje " + radky.length + " položek.\n\nTak velký ceník se nemusí do prohlížeče vejít. " +
+               "Doporučuji načíst jen kapitoly, které opravdu používáš.\n\nPokračovat i tak?")) return;
+
+  const [grp, mode] = IMP.cil.split("|");
+  const podleKodu = {};
+  DB.cenik.forEach(it => { if (it.kod) podleKodu[String(it.kod).trim()] = it; });
+
+  let pridano = 0, zmeneno = 0, beze_zmeny = 0, preskoceno = 0;
+  const zaloha = deepCopy(DB.cenik);
+
+  radky.forEach(r => {
+    const kod = String(r[IMP.map.kod] ?? "").trim();
+    const popis = String(r[IMP.map.popis] ?? "").trim();
+    const cena = Math.round(parsePrice(r[IMP.map.price]) * 100) / 100;
+    const unit = String(r[IMP.map.unit] ?? "").trim() || "ks";
+    if (!popis || !Number.isFinite(cena) || cena <= 0) { preskoceno++; return; }
+
+    const existuje = kod ? podleKodu[kod] : null;
+    if (existuje) {
+      if (IMP.rezim === "add") { beze_zmeny++; return; }
+      if (Math.abs(num(existuje.price) - cena) < 0.005) { beze_zmeny++; return; }
+      existuje.price = cena;
+      zmeneno++;
+      return;
+    }
+    if (IMP.rezim === "update") { preskoceno++; return; }
+
+    const it = {
+      id: "i" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      kod: kod || undefined, grp, mode, label: popis, price: cena, unit,
+      basis: grp === "extra" ? "fix" : (mode === "hala" ? "zastavena" : "podlahova"),
+      koef: false, qty: 1,
+    };
+    DB.cenik.push(it);
+    if (kod) podleKodu[kod] = it;
+    pridano++;
+  });
+
+  if (!save()) {                       // nevešlo se do úložiště — vrátit původní stav
+    DB.cenik = zaloha;
+    save();
+    $("impBody").innerHTML = impSteps(2) +
+      '<div class="impinfo impwarn">Ceník se nevešel do paměti prohlížeče, proto jsem nic nezměnil. ' +
+      "Načti prosím menší část ceníku — třeba jen kapitoly, které používáš.</div>" +
+      '<div class="btnrow"><button class="btn btn-ghost" id="impBack2" type="button">Zpět</button></div>';
+    $("impBack2").addEventListener("click", renderImportStep2);
+    return;
+  }
+
+  rebuildItems(); renderCenik(); renderExtras(); renderItems(); renderTotals(); renderDoc();
+
+  $("impBody").innerHTML = impSteps(2) + `
+    <div class="impres">
+      <div class="r good"><div class="n">${pridano}</div><div class="l">přidáno položek</div></div>
+      <div class="r"><div class="n">${zmeneno}</div><div class="l">zaktualizována cena</div></div>
+      <div class="r"><div class="n">${beze_zmeny}</div><div class="l">beze změny</div></div>
+      <div class="r"><div class="n">${preskoceno}</div><div class="l">přeskočeno</div></div>
+    </div>
+    <div class="impinfo">Položky najdeš v sekci <b>${esc($("impCil").selectedOptions[0].textContent)}</b>.
+      Zkontroluj u nich <b>způsob výpočtu množství</b> — nové položky jsou nastavené na vlastní množství,
+      takže se do nabídky vloží tak, jak je zadáš. U položek počítaných z plochy přepni sloupec „Množství".</div>
+    <div class="btnrow">
+      <button class="btn btn-primary" id="impDone" type="button">Hotovo</button>
+      <button class="btn btn-ghost" id="impMore" type="button">Načíst další soubor</button>
+    </div>`;
+  $("impDone").addEventListener("click", closeImport);
+  $("impMore").addEventListener("click", renderImportStep1);
+  toast("Ceník načten — " + pridano + " nových, " + zmeneno + " s novou cenou", "ok");
+}
+
 /* ---------------- navigace a vykreslení ---------------- */
 
 function showView(name) {
@@ -2015,6 +2466,12 @@ function bindGlobal() {
   };
   $("btnNewDum").addEventListener("click", () => nova("dum"));
   $("btnNewHala").addEventListener("click", () => nova("hala"));
+  $("btnImportCenik").addEventListener("click", openImport);
+  $("impClose").addEventListener("click", closeImport);
+  $("importModal").addEventListener("click", e => { if (e.target.id === "importModal") closeImport(); });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && $("importModal").classList.contains("show")) closeImport();
+  });
   $("archSearch").addEventListener("input", renderArchive);
   $("archFilter").addEventListener("change", renderArchive);
   $("btnExportCsv").addEventListener("click", exportCsv);
