@@ -11,489 +11,1529 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f4f8fb;
+    --bg:#eef4f9;
     --card:#ffffff;
     --line:#dbe5ee;
-    --ink:#22334d;
-    --ink-dim:#64748b;
+    --line-soft:#eaf0f6;
+    --ink:#1d2e47;
+    --ink-mid:#4a5c75;
+    --ink-dim:#7688a0;
     --blue:#01adee;
+    --blue-dark:#0092cc;
     --blue-soft:#e5f6fd;
     --navy:#27436e;
-    --ok:#0e9f6e;
-    --err:#d64545;
+    --navy-dark:#1b2f4e;
+    --ok:#0d9268;
+    --ok-soft:#e3f7ef;
+    --warn:#b8730b;
+    --warn-soft:#fdf3e2;
+    --err:#c93a3a;
+    --err-soft:#fdeded;
+    --shadow:0 1px 2px rgba(27,47,78,.06), 0 4px 16px -6px rgba(27,47,78,.12);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
   body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter', system-ui, sans-serif;
-    padding:40px 5vw 80px;
-    max-width:1100px;
-    margin:0 auto;
+    background:var(--bg);color:var(--ink);
+    font-family:'Inter','Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.5;
+    padding-bottom:120px;
   }
-  .apphead{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:30px;}
-  .brand-logo{height:58px;width:auto;}
-  h1{font-family:'Poppins',sans-serif;font-size:1.55rem;font-weight:600;color:var(--navy);margin-bottom:2px;}
-  .sub{color:var(--ink-dim);font-size:0.9rem;}
-  h2{
-    font-family:'Poppins',sans-serif;font-size:1.08rem;font-weight:600;color:var(--navy);
-    margin-bottom:16px;display:flex;align-items:center;gap:10px;
+  .wrap{max-width:1180px;margin:0 auto;padding:0 5vw;}
+
+  /* ---------- hlavička ---------- */
+  .topbar{
+    background:var(--card);border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:40;box-shadow:0 1px 3px rgba(27,47,78,.05);
   }
-  h2 .num{
-    background:var(--blue);color:#fff;font-size:0.72rem;font-weight:700;
-    width:22px;height:22px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;
+  .topbar-in{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:14px 0 0;}
+  .brand{display:flex;align-items:center;gap:14px;margin-right:auto;}
+  .brand img{height:42px;width:auto;display:block;}
+  .brand-txt{font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-weight:600;font-size:1.02rem;color:var(--navy);line-height:1.2;}
+  .brand-txt small{display:block;font-family:'Inter',sans-serif;font-weight:400;font-size:.76rem;color:var(--ink-dim);}
+  .tabs{display:flex;gap:2px;flex-wrap:wrap;width:100%;margin-top:12px;}
+  .tab{
+    background:none;border:none;cursor:pointer;font-family:'Poppins','Segoe UI',system-ui,sans-serif;
+    font-size:.86rem;font-weight:500;color:var(--ink-dim);padding:11px 16px;
+    border-bottom:3px solid transparent;transition:color .15s,border-color .15s;
+    display:flex;align-items:center;gap:7px;
   }
-  section.panel{
-    background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:26px;margin-bottom:22px;box-shadow:0 1px 3px rgba(39,67,110,0.06);
+  .tab:hover{color:var(--navy);}
+  .tab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:600;}
+  .tab .cnt{
+    background:var(--blue-soft);color:var(--navy);font-size:.7rem;font-weight:700;
+    padding:1px 7px;border-radius:99px;
   }
-  label{display:block;font-size:0.8rem;color:var(--ink-dim);margin-bottom:5px;}
-  input[type=text],input[type=number],input[type=email],input[type=password],select,textarea{
-    width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;
-    color:var(--ink);padding:10px 12px;font-family:'Inter',system-ui,sans-serif;font-size:0.92rem;
+  .tab.active .cnt{background:var(--blue);color:#fff;}
+
+  /* ---------- obecné ---------- */
+  .view{display:none;padding-top:26px;}
+  .view.active{display:block;}
+  .panel{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 24px;margin-bottom:18px;box-shadow:var(--shadow);
+  }
+  .panel-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:18px;}
+  h2{font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-size:1.06rem;font-weight:600;color:var(--navy);}
+  h3{font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-size:.92rem;font-weight:600;color:var(--navy);margin-bottom:12px;}
+  .panel-head .note{font-size:.8rem;color:var(--ink-dim);margin-left:auto;}
+  .sechint{font-size:.8rem;color:var(--ink-dim);line-height:1.55;}
+  .sechint b{color:var(--blue);font-weight:600;}
+
+  label{display:block;font-size:.76rem;font-weight:500;color:var(--ink-mid);margin-bottom:5px;letter-spacing:.01em;}
+  input[type=text],input[type=number],input[type=email],input[type=password],input[type=date],select,textarea{
+    width:100%;background:#fff;border:1px solid var(--line);border-radius:9px;color:var(--ink);
+    padding:9px 11px;font-family:'Inter','Segoe UI',system-ui,sans-serif;font-size:.92rem;transition:border-color .15s,box-shadow .15s;
   }
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft);}
-  textarea{resize:vertical;min-height:110px;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+  input[type=number]{text-align:right;font-variant-numeric:tabular-nums;}
+  textarea{resize:vertical;min-height:96px;line-height:1.55;}
+  select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237688a0' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+  .grid.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
   .row{margin-bottom:14px;}
-  .checks{display:flex;gap:22px;flex-wrap:wrap;margin-top:4px;}
-  .checks label{display:flex;align-items:center;gap:8px;color:var(--ink);font-size:0.9rem;margin:0;cursor:pointer;}
-  .checks input[type=checkbox]{accent-color:var(--blue);}
+  .row:last-child{margin-bottom:0;}
+  .inline{display:flex;align-items:center;gap:9px;}
+  .inline label{margin:0;}
+
   .btn{
-    font-family:'Poppins',sans-serif;font-weight:600;font-size:0.85rem;border:none;cursor:pointer;
-    padding:12px 22px;border-radius:8px;transition:transform .15s, background .15s, border-color .15s;
+    font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-weight:600;font-size:.85rem;border:1px solid transparent;
+    cursor:pointer;padding:10px 18px;border-radius:9px;display:inline-flex;align-items:center;gap:8px;
+    transition:transform .12s,background .15s,border-color .15s,color .15s;white-space:nowrap;
   }
-  .btn:hover{transform:translateY(-1px);}
+  .btn:active{transform:translateY(1px);}
   .btn-primary{background:var(--blue);color:#fff;}
-  .btn-primary:hover{background:#0092cc;}
-  .btn-ghost{background:#fff;border:1px solid var(--line);color:var(--navy);}
-  .btn-ghost:hover{border-color:var(--blue);}
-  .btn[disabled]{opacity:0.5;cursor:wait;transform:none;}
-  .btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;}
-  .hint{font-size:0.78rem;color:var(--ink-dim);margin-top:8px;line-height:1.5;}
-  .hint b{color:var(--blue);}
-  .status{font-size:0.84rem;margin-top:10px;font-weight:500;}
-  .status.ok{color:var(--ok);}
-  .status.err{color:var(--err);white-space:pre-wrap;}
-  details.settings{margin-bottom:22px;}
-  details.settings summary{
-    cursor:pointer;color:var(--ink-dim);font-size:0.85rem;font-weight:500;padding:8px 0;
+  .btn-primary:hover{background:var(--blue-dark);}
+  .btn-navy{background:var(--navy);color:#fff;}
+  .btn-navy:hover{background:var(--navy-dark);}
+  .btn-ghost{background:#fff;border-color:var(--line);color:var(--navy);}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
+  .btn-danger{background:#fff;border-color:var(--line);color:var(--err);}
+  .btn-danger:hover{background:var(--err-soft);border-color:var(--err);}
+  .btn-sm{padding:6px 12px;font-size:.78rem;border-radius:7px;}
+  .btn[disabled]{opacity:.5;cursor:wait;transform:none;}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;}
+  .btnrow.mt{margin-top:16px;}
+  .icobtn{
+    background:none;border:none;cursor:pointer;color:var(--ink-dim);font-size:1rem;
+    padding:4px 7px;border-radius:6px;line-height:1;transition:color .15s,background .15s;
   }
-  details.settings summary:hover{color:var(--navy);}
-  table.cenik{width:100%;border-collapse:collapse;font-size:0.88rem;font-variant-numeric:tabular-nums;}
-  table.cenik td{padding:7px 8px;border-bottom:1px solid var(--line);}
-  table.cenik td:first-child{color:var(--ink);}
-  table.cenik input{max-width:130px;text-align:right;}
-  table.cenik .unit{color:var(--ink-dim);font-size:0.78rem;white-space:nowrap;}
+  .icobtn:hover{color:var(--err);background:var(--err-soft);}
 
-  /* ---------- výsledná nabídka ---------- */
-  #nabidka{display:none;}
-  #nabidka.visible{display:block;}
+  .chip{
+    display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;
+    padding:3px 10px;border-radius:99px;white-space:nowrap;
+  }
+  .chip-koncept{background:var(--line-soft);color:var(--ink-mid);}
+  .chip-odeslana{background:var(--blue-soft);color:var(--navy);}
+  .chip-prijata{background:var(--ok-soft);color:var(--ok);}
+  .chip-zamitnuta{background:var(--err-soft);color:var(--err);}
+
+  /* ---------- statistiky ---------- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);}
+  .stat .lbl{font-size:.72rem;font-weight:600;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.06em;}
+  .stat .val{font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-size:1.4rem;font-weight:600;color:var(--navy);margin-top:4px;font-variant-numeric:tabular-nums;}
+  .stat.accent .val{color:var(--blue);}
+  .stat.good .val{color:var(--ok);}
+
+  /* ---------- tabulky ---------- */
+  .tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px;padding:0 4px;}
+  table.data{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums;min-width:520px;}
+  table.data th{
+    text-align:left;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--ink-dim);border-bottom:1px solid var(--line);padding:8px 8px;white-space:nowrap;
+  }
+  table.data td{padding:7px 8px;border-bottom:1px solid var(--line-soft);vertical-align:middle;}
+  table.data tr:last-child td{border-bottom:none;}
+  table.data .num{text-align:right;}
+  table.data .money{text-align:right;font-weight:600;white-space:nowrap;}
+  table.data tbody tr:hover{background:#fafcfe;}
+  table.data input[type=number]{padding:6px 8px;font-size:.85rem;}
+  table.data input[type=text]{padding:6px 8px;font-size:.85rem;}
+  .w-qty{width:92px;}
+  .w-price{width:118px;}
+  .w-unit{width:74px;}
+  .empty{text-align:center;color:var(--ink-dim);font-size:.88rem;padding:34px 10px;}
+  .empty b{display:block;color:var(--navy);font-size:1rem;margin-bottom:6px;font-family:'Poppins','Segoe UI',system-ui,sans-serif;}
+
+  .clickrow{cursor:pointer;}
+  .archline{font-weight:600;color:var(--navy);}
+  .archsub{font-size:.76rem;color:var(--ink-dim);}
+
+  /* ---------- volitelné položky ---------- */
+  .extras{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;}
+  .extra{
+    display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;cursor:pointer;transition:border-color .15s,background .15s;background:#fff;
+  }
+  .extra:hover{border-color:var(--blue);}
+  .extra.on{border-color:var(--blue);background:var(--blue-soft);}
+  .extra input[type=checkbox]{accent-color:var(--blue);width:16px;height:16px;flex-shrink:0;cursor:pointer;}
+  .extra .ex-t{flex:1;min-width:0;}
+  .extra .ex-l{font-size:.85rem;font-weight:500;line-height:1.25;}
+  .extra .ex-p{font-size:.73rem;color:var(--ink-dim);}
+  .extra input[type=number]{width:74px;padding:5px 7px;font-size:.82rem;flex-shrink:0;}
+
+  /* ---------- lepicí souhrn ---------- */
+  .sticky{
+    position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--navy);color:#fff;
+    box-shadow:0 -4px 20px rgba(27,47,78,.22);transform:translateY(105%);transition:transform .22s ease;
+  }
+  .sticky.show{transform:translateY(0);}
+  .sticky-in{
+    max-width:1180px;margin:0 auto;padding:12px 5vw;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  }
+  .sticky .sums{display:flex;gap:22px;flex-wrap:wrap;margin-right:auto;}
+  .sticky .s{line-height:1.25;}
+  .sticky .s .l{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;opacity:.72;}
+  .sticky .s .v{font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-weight:600;font-size:1.06rem;font-variant-numeric:tabular-nums;}
+  .sticky .s.big .v{font-size:1.3rem;color:#7fdcff;}
+  .sticky .btn-ghost{background:transparent;border-color:rgba(255,255,255,.32);color:#fff;}
+  .sticky .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff;color:#fff;}
+
+  /* ---------- oznámení ---------- */
+  #toasts{position:fixed;top:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:8px;max-width:min(380px,88vw);}
+  .toast{
+    background:var(--navy);color:#fff;padding:11px 15px;border-radius:10px;font-size:.86rem;
+    box-shadow:0 8px 24px -6px rgba(27,47,78,.5);animation:tin .2s ease;line-height:1.4;
+  }
+  .toast.ok{background:var(--ok);}
+  .toast.err{background:var(--err);}
+  @keyframes tin{from{opacity:0;transform:translateX(20px);}}
+
+  /* ---------- dokument ---------- */
+  .docwrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:var(--shadow);overflow-x:auto;}
   .doc{
-    background:#ffffff;color:#22334d;border:1px solid var(--line);border-radius:12px;padding:44px 48px;
-    font-size:0.92rem;line-height:1.55;font-variant-numeric:tabular-nums;
+    background:#fff;color:#1d2e47;padding:34px 38px;font-size:.9rem;line-height:1.5;
+    font-variant-numeric:tabular-nums;min-width:600px;
   }
-  .doc header{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:3px solid var(--navy);padding-bottom:18px;margin-bottom:22px;}
-  .doc-logo{height:44px;width:auto;margin-bottom:12px;display:block;}
-  .doc h3{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.35rem;color:var(--navy);margin-bottom:4px;}
-  .doc .meta{font-size:0.82rem;color:#64748b;}
-  .doc .parties{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:22px;}
-  .doc .party h4{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:6px;font-weight:700;}
-  .doc .uvod{margin-bottom:22px;white-space:pre-wrap;}
-  .doc table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+  .doc .dhead{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;border-bottom:3px solid var(--navy);padding-bottom:14px;margin-bottom:18px;}
+  .doc-logo{height:38px;width:auto;margin-bottom:9px;display:block;}
+  .doc h4{font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-weight:600;font-size:1.24rem;color:var(--navy);margin-bottom:3px;}
+  .doc .meta{font-size:.79rem;color:#5c6e88;}
+  .doc .meta b{color:var(--navy);}
+  .doc .parties{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:16px;}
+  .doc .party .h{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);font-weight:700;margin-bottom:4px;}
+  .doc .party .nm{font-weight:700;}
+  .doc .party div{font-size:.84rem;}
+  .doc .uvod{margin-bottom:16px;white-space:pre-wrap;}
+  .doc table{width:100%;border-collapse:collapse;margin-bottom:14px;}
   .doc th{
-    text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;
-    color:var(--navy);border-bottom:2px solid var(--navy);padding:8px 6px;
+    text-align:left;font-size:.67rem;text-transform:uppercase;letter-spacing:.05em;color:var(--navy);
+    border-bottom:2px solid var(--navy);padding:6px 5px;font-weight:700;
   }
-  .doc th:last-child, .doc td:last-child{text-align:right;}
-  .doc td{padding:9px 6px;border-bottom:1px solid #e6edf4;}
-  .doc td.detail{color:#64748b;font-size:0.8rem;}
-  .doc .sums{margin-left:auto;max-width:340px;}
-  .doc .sums div{display:flex;justify-content:space-between;padding:5px 6px;}
-  .doc .sums .total{border-top:3px solid var(--navy);font-weight:700;font-size:1.05rem;padding-top:9px;margin-top:4px;color:var(--navy);}
-  .doc .pozn{margin-top:24px;font-size:0.8rem;color:#64748b;white-space:pre-wrap;}
-  .doc footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);font-size:0.75rem;color:#8a99ab;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .doc td{padding:6px 5px;border-bottom:1px solid #e9eff5;font-size:.85rem;}
+  .doc th.r,.doc td.r{text-align:right;}
+  .doc td.dim{color:#6b7d95;font-size:.79rem;}
+  .doc .grp td{background:#f6f9fc;font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--navy);padding:5px;}
+  .doc .totals{display:flex;justify-content:flex-end;margin-bottom:14px;}
+  .doc .totals .box{min-width:320px;}
+  .doc .totals .l{display:flex;justify-content:space-between;padding:3px 5px;font-size:.86rem;}
+  .doc .totals .l.disc{color:var(--ok);}
+  .doc .totals .l.tot{
+    border-top:3px solid var(--navy);margin-top:4px;padding-top:7px;
+    font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:1.06rem;color:var(--navy);
+  }
+  .doc .perm2{background:var(--blue-soft);border-radius:8px;padding:7px 11px;font-size:.82rem;margin-bottom:14px;display:flex;justify-content:space-between;gap:10px;}
+  .doc .perm2 b{color:var(--navy);}
+  .doc .sect{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);font-weight:700;margin:0 0 6px;}
+  .doc .pozn{font-size:.79rem;color:#5c6e88;white-space:pre-wrap;margin-bottom:14px;}
+  .doc .signs{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:26px;}
+  .doc .signs div{border-top:1px solid #9aabbf;padding-top:5px;font-size:.75rem;color:#6b7d95;text-align:center;}
+  .doc .dfoot{margin-top:20px;padding-top:9px;border-top:1px solid #e9eff5;font-size:.72rem;color:#8798ac;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
 
+  /* ---------- tisk: vejít se na A4 ---------- */
   @media print{
-    @page{size:A4;margin:10mm 12mm;}
-    body{background:#fff;padding:0;max-width:none;}
-    body > *:not(#nabidka){display:none !important;}
-    #nabidka{display:block !important;}
-    #nabidka .btnrow{display:none;}
-    /* zhuštění, ať se nabídka vejde na jednu A4 */
-    .doc{border:none;border-radius:0;padding:0;font-size:9pt;line-height:1.35;}
-    .doc-logo{height:30px;margin-bottom:6px;}
-    .doc h3{font-size:13pt;margin-bottom:2px;}
-    .doc .meta{font-size:7.5pt;}
-    .doc header{padding-bottom:8px;margin-bottom:10px;border-bottom-width:2px;}
-    .doc .parties{margin-bottom:10px;gap:16px;}
-    .doc .party h4{font-size:6.5pt;margin-bottom:3px;}
-    .doc .uvod{margin-bottom:10px;}
-    .doc table{margin-bottom:8px;}
-    .doc th{padding:4px 5px;font-size:6.5pt;}
-    .doc td{padding:4px 5px;}
-    .doc td.detail{font-size:7.5pt;}
+    @page{size:A4;margin:9mm 11mm;}
+    body{background:#fff;padding:0;}
+    body>*:not(#printHost){display:none!important;}
+    #printHost{display:block!important;position:static;}
+    #toasts,.sticky{display:none!important;}
+    .docwrap{border:none;box-shadow:none;padding:0;border-radius:0;overflow:visible;}
+    .doc{padding:0;font-size:8.4pt;line-height:1.3;min-width:0;}
+    .doc-logo{height:26px;margin-bottom:5px;}
+    .doc h4{font-size:12.5pt;margin-bottom:1px;}
+    .doc .meta{font-size:7pt;}
+    .doc .dhead{padding-bottom:7px;margin-bottom:9px;border-bottom-width:2px;}
+    .doc .parties{margin-bottom:9px;gap:18px;}
+    .doc .party .h{font-size:6pt;margin-bottom:2px;}
+    .doc .party div{font-size:7.6pt;}
+    .doc .uvod{margin-bottom:9px;font-size:8.2pt;}
+    .doc table{margin-bottom:7px;}
+    .doc th{padding:3px 4px;font-size:6pt;}
+    .doc td{padding:2.6px 4px;font-size:7.7pt;}
+    .doc td.dim{font-size:7pt;}
+    .doc .grp td{padding:2.6px 4px;font-size:6.2pt;}
     .doc tr{break-inside:avoid;}
-    .doc .sums div{padding:2px 5px;}
-    .doc .sums .total{font-size:10.5pt;padding-top:5px;margin-top:2px;border-top-width:2px;}
-    .doc .pozn{margin-top:10px;font-size:7.5pt;}
-    .doc footer{margin-top:12px;padding-top:6px;font-size:7pt;}
+    .doc .totals{margin-bottom:8px;}
+    .doc .totals .l{padding:1.6px 4px;font-size:8pt;}
+    .doc .totals .l.tot{font-size:10.5pt;padding-top:4px;border-top-width:2px;}
+    .doc .perm2{padding:4px 8px;font-size:7.6pt;margin-bottom:8px;}
+    .doc .sect{font-size:6pt;margin-bottom:3px;}
+    .doc .pozn{font-size:7pt;margin-bottom:8px;}
+    .doc .signs{margin-top:16px;gap:34px;}
+    .doc .signs div{font-size:6.8pt;padding-top:3px;}
+    .doc .dfoot{margin-top:11px;padding-top:5px;font-size:6.4pt;}
+  }
+  #printHost{display:none;}
+
+  @media (max-width:760px){
+    .wrap{padding:0 4vw;}
+    .panel{padding:18px 16px;border-radius:12px;}
+    .doc{padding:20px 18px;}
+    .sticky .sums{gap:14px;}
+    .sticky .s .v{font-size:.95rem;}
+    .sticky .s.big .v{font-size:1.1rem;}
+    .brand img{height:34px;}
+    .tab{padding:10px 11px;font-size:.8rem;}
   }
 </style>
 </head>
 <body>
 
-<header class="apphead">
-  <img id="brandLogo" class="brand-logo" alt="ISO.Paneels s.r.o.">
-  <div>
-    <h1>Cenové nabídky</h1>
-    <p class="sub">Vlož poptávku, nech agenta vyplnit parametry, zkontroluj ceník a vygeneruj nabídku k tisku / PDF.
-    <button class="btn btn-ghost" id="btnInstall" type="button" style="display:none;margin-left:10px;padding:7px 14px;font-size:0.75rem;">📲 Nainstalovat aplikaci</button></p>
+<div id="toasts"></div>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <div class="brand">
+      <img id="brandLogo" alt="ISO.Paneels s.r.o.">
+      <div class="brand-txt">Cenové nabídky<small id="brandSub">interní systém</small></div>
+    </div>
+    <button class="btn btn-ghost btn-sm" id="btnInstall" type="button" style="display:none;">📲 Nainstalovat</button>
+    <nav class="tabs">
+      <button class="tab active" data-view="archiv" type="button">📁 Nabídky <span class="cnt" id="cntQuotes">0</span></button>
+      <button class="tab" data-view="nabidka" type="button">✏️ Rozpracovaná</button>
+      <button class="tab" data-view="cenik" type="button">📊 Ceník</button>
+      <button class="tab" data-view="nastaveni" type="button">⚙️ Nastavení</button>
+    </nav>
   </div>
 </header>
 
-<details class="settings">
-  <summary>⚙ Nastavení — dodavatel, ceník, API klíč</summary>
+<main class="wrap">
 
-  <section class="panel">
-    <h2><span class="num">A</span>Dodavatel (zobrazí se na nabídce)</h2>
-    <div class="grid">
-      <div><label>Jméno / firma</label><input type="text" id="dodJmeno"></div>
-      <div><label>IČO</label><input type="text" id="dodIco"></div>
-      <div><label>E-mail</label><input type="email" id="dodEmail"></div>
-      <div><label>Telefon</label><input type="text" id="dodTel"></div>
+<!-- ============ ARCHIV ============ -->
+<section class="view active" id="view-archiv">
+  <div class="stats" id="statsBox"></div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Archiv nabídek</h2>
+      <span class="note" id="archNote"></span>
     </div>
-  </section>
+    <div class="grid g2" style="margin-bottom:16px;">
+      <div><label>Hledat (zákazník, číslo, místo)</label><input type="text" id="archSearch" placeholder="např. Novák nebo 2026-004"></div>
+      <div>
+        <label>Filtr stavu</label>
+        <select id="archFilter">
+          <option value="">Všechny stavy</option>
+          <option value="koncept">Koncept</option>
+          <option value="odeslana">Odeslaná</option>
+          <option value="prijata">Přijatá</option>
+          <option value="zamitnuta">Zamítnutá</option>
+        </select>
+      </div>
+    </div>
+    <div class="tblwrap"><table class="data" id="archTable"></table></div>
+    <div class="btnrow mt">
+      <button class="btn btn-primary" id="btnNew" type="button">＋ Nová nabídka</button>
+      <button class="btn btn-ghost btn-sm" id="btnExportCsv" type="button">⬇ Přehled do CSV</button>
+    </div>
+  </div>
+</section>
 
-  <section class="panel">
-    <h2><span class="num">B</span>Ceník (jednotkové ceny bez DPH)</h2>
-    <table class="cenik" id="cenikTable"></table>
+<!-- ============ NABÍDKA ============ -->
+<section class="view" id="view-nabidka">
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>1 · Poptávka zákazníka</h2>
+      <span class="note">Agent z textu vytěží parametry i kontakt</span>
+    </div>
+    <div class="row">
+      <label>Vlož e-mail nebo zprávu od zákazníka (volný text)</label>
+      <textarea id="poptavka" placeholder="Dobrý den, chtěli bychom postavit dům z CLT panelů 10×12 m, patrový, se sedlovou střechou, garáží pro jedno auto a tepelným čerpadlem. Stavět budeme v Kuřimi. Jan Novák, 777 123 456"></textarea>
+    </div>
     <div class="btnrow">
-      <button class="btn btn-ghost" id="btnCenikReset" type="button">Obnovit výchozí ceník</button>
+      <button class="btn btn-primary" id="btnAgent" type="button">🤖 Vyplnit parametry agentem</button>
     </div>
-    <p class="hint">Ceny se ukládají v prohlížeči a použijí se pro každou další nabídku. Přirážky za standard: ekonomický −15 %, standardní ±0 %, nadstandardní +25 %. Konstrukce: zděná ±0 %, dřevostavba/CLT −10 %, montovaná −5 %.</p>
-  </section>
-
-  <section class="panel">
-    <h2><span class="num">C</span>Claude API klíč (pro AI agenta)</h2>
-    <div class="row"><label>API klíč (sk-ant-…)</label><input type="password" id="apiKey" placeholder="sk-ant-api03-…"></div>
-    <p class="hint">Klíč získáš na <b>platform.claude.com</b>. Ukládá se pouze lokálně v tomto prohlížeči (localStorage) a posílá se výhradně na api.anthropic.com. Bez klíče funguje vše kromě AI kroků.</p>
-  </section>
-</details>
-
-<section class="panel">
-  <h2><span class="num">1</span>Poptávka zákazníka → agent vyplní formulář</h2>
-  <div class="row">
-    <label>Sem vlož e-mail / zprávu od zákazníka (volný text)</label>
-    <textarea id="poptavka" placeholder="Dobrý den, chtěli bychom postavit dům z CLT panelů 10×12 m, patrový, se sedlovou střechou a garáží pro jedno auto…"></textarea>
   </div>
-  <div class="btnrow">
-    <button class="btn btn-primary" id="btnAgent" type="button">🤖 Vyplnit parametry agentem</button>
+
+  <div class="panel">
+    <div class="panel-head"><h2>2 · Zákazník</h2></div>
+    <div class="grid">
+      <div><label>Jméno / firma</label><input type="text" id="zJmeno" placeholder="Jan Novák"></div>
+      <div><label>E-mail</label><input type="email" id="zEmail"></div>
+      <div><label>Telefon</label><input type="text" id="zTel"></div>
+      <div><label>Místo stavby</label><input type="text" id="zMisto"></div>
+    </div>
   </div>
-  <div class="status" id="agentStatus"></div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>3 · Parametry stavby</h2>
+      <span class="note" id="plochaNote"></span>
+    </div>
+    <div class="grid">
+      <div>
+        <label>Typ konstrukce</label>
+        <select id="pKonstrukce">
+          <option value="clt">CLT panely</option>
+          <option value="sendvic">Sendvičové panely</option>
+          <option value="drevostavba">Dřevostavba</option>
+          <option value="zdena">Zděná</option>
+        </select>
+      </div>
+      <div><label>Zastavěná plocha (m²)</label><input type="number" id="pPlocha" value="100" min="10" step="1"></div>
+      <div><label>Počet podlaží</label><input type="number" id="pPodlazi" value="1" min="1" max="4" step="1"></div>
+      <div>
+        <label>Střecha</label>
+        <select id="pStrecha">
+          <option value="sedlova">Sedlová</option>
+          <option value="pultova">Pultová</option>
+          <option value="plocha">Plochá</option>
+        </select>
+      </div>
+      <div>
+        <label>Standard provedení</label>
+        <select id="pStandard">
+          <option value="ekonomicky">Ekonomický</option>
+          <option value="standardni" selected>Standardní</option>
+          <option value="nadstandardni">Nadstandardní</option>
+        </select>
+      </div>
+      <div>
+        <label>Sazba DPH</label>
+        <select id="pDph">
+          <option value="12" selected>12 % (bydlení)</option>
+          <option value="21">21 %</option>
+          <option value="0">0 %</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>4 · Volitelné položky</h2>
+      <span class="note">Zaškrtnutím se přidají do nabídky</span>
+    </div>
+    <div class="extras" id="extrasBox"></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>5 · Položky nabídky</h2>
+      <span class="note">Množství i ceny lze ručně přepsat — ✎ označuje upravený řádek</span>
+    </div>
+    <div class="tblwrap"><table class="data" id="itemsTable"></table></div>
+    <div class="btnrow mt">
+      <button class="btn btn-ghost btn-sm" id="btnAddItem" type="button">＋ Vlastní řádek</button>
+      <button class="btn btn-ghost btn-sm" id="btnResetItems" type="button">↻ Přepočítat z ceníku</button>
+    </div>
+    <div class="grid g2" style="margin-top:18px;">
+      <div>
+        <label>Sleva</label>
+        <div class="inline">
+          <input type="number" id="slevaVal" value="0" min="0" step="1000">
+          <select id="slevaTyp" style="width:120px;">
+            <option value="kc">Kč</option>
+            <option value="pct">%</option>
+          </select>
+        </div>
+      </div>
+      <div><label>Popis slevy (na dokumentu)</label><input type="text" id="slevaPopis" placeholder="např. Sleva při podpisu do 14 dnů"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>6 · Splátkový kalendář</h2>
+      <span class="note" id="splatkyNote"></span>
+    </div>
+    <div class="tblwrap"><table class="data" id="splatkyTable"></table></div>
+    <div class="btnrow mt">
+      <button class="btn btn-ghost btn-sm" id="btnAddSplatka" type="button">＋ Přidat splátku</button>
+      <button class="btn btn-ghost btn-sm" id="btnResetSplatky" type="button">↻ Výchozí rozvrh</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>7 · Texty a stav</h2></div>
+    <div class="row">
+      <label>Průvodní text (úvodní odstavec nabídky)</label>
+      <textarea id="uvod" placeholder="Oslovení a krátké shrnutí — nebo nech napsat agentem."></textarea>
+      <div class="btnrow" style="margin-top:10px;">
+        <button class="btn btn-ghost btn-sm" id="btnUvodAI" type="button">🤖 Napsat průvodní text</button>
+        <button class="btn btn-ghost btn-sm" id="btnMailAI" type="button">✉️ Připravit e-mail zákazníkovi</button>
+      </div>
+    </div>
+    <div class="row">
+      <label>Poznámky k nabídce (každý řádek = jedna odrážka)</label>
+      <textarea id="poznamky" style="min-height:74px;"></textarea>
+    </div>
+    <div class="grid">
+      <div>
+        <label>Stav nabídky</label>
+        <select id="qStatus">
+          <option value="koncept">Koncept</option>
+          <option value="odeslana">Odeslaná</option>
+          <option value="prijata">Přijatá</option>
+          <option value="zamitnuta">Zamítnutá</option>
+        </select>
+      </div>
+      <div><label>Číslo nabídky</label><input type="text" id="qNumber" readonly></div>
+      <div><label>Datum vystavení</label><input type="date" id="qDate"></div>
+      <div><label>Platnost (dní)</label><input type="number" id="qValid" min="1" max="365"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Náhled dokumentu</h2>
+      <span class="note">Přesně to, co se vytiskne — vejde se na jednu A4</span>
+    </div>
+    <div class="docwrap"><div class="doc" id="docPreview"></div></div>
+  </div>
 </section>
 
-<section class="panel">
-  <h2><span class="num">2</span>Parametry stavby a zákazník</h2>
-  <div class="grid" style="margin-bottom:14px;">
-    <div><label>Jméno zákazníka</label><input type="text" id="zJmeno"></div>
-    <div><label>E-mail</label><input type="email" id="zEmail"></div>
-    <div><label>Telefon</label><input type="text" id="zTel"></div>
-    <div><label>Místo stavby</label><input type="text" id="zMisto"></div>
-  </div>
-  <div class="grid">
-    <div>
-      <label>Typ konstrukce</label>
-      <select id="pKonstrukce">
-        <option value="zdena">Zděná</option>
-        <option value="drevostavba">Dřevostavba / CLT</option>
-        <option value="montovana">Montovaná</option>
-      </select>
+<!-- ============ CENÍK ============ -->
+<section class="view" id="view-cenik">
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Základní stavba</h2>
+      <span class="note">Položky, které se do každé nabídky vloží automaticky</span>
     </div>
-    <div><label>Zastavěná plocha (m²)</label><input type="number" id="pPlocha" value="100" min="10"></div>
-    <div><label>Počet podlaží</label><input type="number" id="pPodlazi" value="1" min="1" max="4"></div>
-    <div>
-      <label>Střecha</label>
-      <select id="pStrecha">
-        <option value="sedlova">Sedlová</option>
-        <option value="plocha">Plochá</option>
-      </select>
-    </div>
-    <div>
-      <label>Standard provedení</label>
-      <select id="pStandard">
-        <option value="ekonomicky">Ekonomický</option>
-        <option value="standardni" selected>Standardní</option>
-        <option value="nadstandardni">Nadstandardní</option>
-      </select>
-    </div>
-    <div>
-      <label>Sazba DPH</label>
-      <select id="pDph">
-        <option value="12" selected>12 % (bydlení)</option>
-        <option value="21">21 %</option>
-        <option value="0">0 % (neplátce)</option>
-      </select>
-    </div>
+    <div class="tblwrap"><table class="data" id="cenikBase"></table></div>
+    <div class="btnrow mt"><button class="btn btn-ghost btn-sm" data-addcenik="base" type="button">＋ Přidat položku</button></div>
   </div>
-  <div class="row" style="margin-top:14px;">
-    <div class="checks">
-      <label><input type="checkbox" id="pSklep"> Sklep</label>
-      <label><input type="checkbox" id="pGaraz"> Garáž</label>
-      <span id="garazPlochaWrap" style="display:none;"><label style="display:flex;align-items:center;gap:8px;">plocha garáže (m²) <input type="number" id="pGarazPlocha" value="20" min="5" style="max-width:90px;"></label></span>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Volitelné položky a příplatky</h2>
+      <span class="note">Nabízí se k zaškrtnutí u každé nabídky</span>
     </div>
+    <div class="tblwrap"><table class="data" id="cenikExtra"></table></div>
+    <div class="btnrow mt"><button class="btn btn-ghost btn-sm" data-addcenik="extra" type="button">＋ Přidat položku</button></div>
   </div>
-  <div class="row">
-    <label>Poznámky k nabídce (každý řádek = jedna poznámka)</label>
-    <textarea id="pPoznamky" style="min-height:70px;">Nabídka nezahrnuje cenu pozemku, projektovou dokumentaci ani přípojky inženýrských sítí.
-Konečná cena bude upřesněna po zaměření a projednání projektu.</textarea>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Koeficienty</h2></div>
+    <h3>Typ konstrukce</h3>
+    <div class="grid" id="koefKonstrukce"></div>
+    <h3 style="margin-top:20px;">Standard provedení</h3>
+    <div class="grid" id="koefStandard"></div>
+    <h3 style="margin-top:20px;">Střecha</h3>
+    <div class="grid" id="koefStrecha"></div>
+    <p class="sechint" style="margin-top:16px;">Koeficient <b>1,00</b> znamená cenu podle ceníku, <b>0,90</b> je o 10 % méně, <b>1,25</b> o 25 % více. Násobí se jen položky se zaškrtnutým <b>K</b> v ceníku — vybavení jako tepelné čerpadlo nebo projekt se tím nepřepočítává.</p>
+    <div class="btnrow mt"><button class="btn btn-ghost btn-sm" id="btnResetCenik" type="button">↻ Obnovit celý výchozí ceník</button></div>
   </div>
-  <div class="btnrow">
-    <button class="btn btn-primary" id="btnVypocet" type="button">Spočítat a sestavit nabídku</button>
-    <button class="btn btn-ghost" id="btnUvodAI" type="button">🤖 Vygenerovat průvodní text agentem</button>
-  </div>
-  <div class="status" id="vypocetStatus"></div>
 </section>
 
-<section id="nabidka">
-  <div class="btnrow" style="margin-bottom:14px;">
-    <button class="btn btn-primary" onclick="window.print()">🖨 Tisk / uložit jako PDF</button>
+<!-- ============ NASTAVENÍ ============ -->
+<section class="view" id="view-nastaveni">
+  <div class="panel">
+    <div class="panel-head"><h2>Dodavatel</h2><span class="note">Zobrazí se v hlavičce každé nabídky</span></div>
+    <div class="grid">
+      <div><label>Název firmy</label><input type="text" id="sJmeno"></div>
+      <div><label>IČO</label><input type="text" id="sIco"></div>
+      <div><label>DIČ</label><input type="text" id="sDic"></div>
+      <div><label>Telefon</label><input type="text" id="sTel"></div>
+      <div><label>E-mail</label><input type="email" id="sEmail"></div>
+      <div><label>Web</label><input type="text" id="sWeb"></div>
+      <div><label>Adresa</label><input type="text" id="sAdresa"></div>
+      <div><label>Bankovní spojení</label><input type="text" id="sBanka" placeholder="123456789/0800"></div>
+    </div>
+    <div class="row" style="margin-top:14px;">
+      <label>Vlastní logo (nahraje se do dokumentu)</label>
+      <div class="btnrow">
+        <input type="file" id="logoFile" accept="image/png,image/jpeg,image/svg+xml" style="max-width:280px;">
+        <button class="btn btn-ghost btn-sm" id="btnLogoReset" type="button">Zpět na výchozí logo</button>
+      </div>
+    </div>
   </div>
-  <div class="doc" id="doc"></div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Výchozí hodnoty nabídek</h2></div>
+    <div class="grid">
+      <div><label>Platnost nabídky (dní)</label><input type="number" id="sValid" min="1" max="365"></div>
+      <div>
+        <label>Výchozí DPH</label>
+        <select id="sDph"><option value="12">12 %</option><option value="21">21 %</option><option value="0">0 %</option></select>
+      </div>
+      <div class="inline" style="align-items:flex-end;padding-bottom:8px;">
+        <input type="checkbox" id="sPodpisy" style="width:16px;height:16px;accent-color:var(--blue);">
+        <label for="sPodpisy" style="margin:0;">Místo pro podpisy na dokumentu</label>
+      </div>
+      <div class="inline" style="align-items:flex-end;padding-bottom:8px;">
+        <input type="checkbox" id="sSplatkyDoc" style="width:16px;height:16px;accent-color:var(--blue);">
+        <label for="sSplatkyDoc" style="margin:0;">Splátkový kalendář na dokumentu</label>
+      </div>
+    </div>
+    <div class="row" style="margin-top:14px;">
+      <label>Výchozí poznámky nových nabídek</label>
+      <textarea id="sPoznamky" style="min-height:74px;"></textarea>
+    </div>
+    <div class="row">
+      <label>Text v patičce dokumentu</label>
+      <input type="text" id="sFooter">
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>AI agent</h2><span class="note">Volitelné — bez klíče funguje vše ostatní</span></div>
+    <div class="row"><label>Claude API klíč</label><input type="password" id="sApiKey" placeholder="sk-ant-api03-…"></div>
+    <p class="sechint">Klíč získáš na <b>platform.claude.com</b> (sekce API keys, je potřeba dobitý kredit). Ukládá se pouze v tomto zařízení a odesílá se výhradně na api.anthropic.com. Jedno vytěžení poptávky stojí zlomek koruny.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Záloha dat</h2><span class="note">Data jsou jen v tomto zařízení — zálohuj je</span></div>
+    <p class="sechint" style="margin-bottom:14px;">Export uloží <b>všechny nabídky, ceník i nastavení</b> do jednoho souboru. Ten samý soubor lze načíst na jiném počítači nebo po přeinstalaci systému.</p>
+    <div class="btnrow">
+      <button class="btn btn-navy" id="btnExport" type="button">⬇ Exportovat zálohu</button>
+      <button class="btn btn-ghost" id="btnImport" type="button">⬆ Načíst zálohu</button>
+      <input type="file" id="importFile" accept="application/json,.json" style="display:none;">
+    </div>
+    <p class="sechint" style="margin-top:16px;">Verze aplikace <b id="verInfo">2.0</b></p>
+  </div>
 </section>
+
+</main>
+
+<div class="sticky" id="stickyBar">
+  <div class="sticky-in">
+    <div class="sums">
+      <div class="s"><div class="l">Bez DPH</div><div class="v" id="sumBase">—</div></div>
+      <div class="s"><div class="l" id="sumDphLbl">DPH</div><div class="v" id="sumDph">—</div></div>
+      <div class="s big"><div class="l">Celkem s DPH</div><div class="v" id="sumTotal">—</div></div>
+      <div class="s"><div class="l">Za m² podlahové</div><div class="v" id="sumPerM2">—</div></div>
+    </div>
+    <div class="btnrow">
+      <button class="btn btn-ghost" id="btnSave" type="button">💾 Uložit</button>
+      <button class="btn btn-primary" id="btnPrint" type="button">🖨 Tisk / PDF</button>
+    </div>
+  </div>
+</div>
+
+<div id="printHost"><div class="docwrap"><div class="doc" id="docPrint"></div></div></div>
 
 <script>
 "use strict";
 
-const LOGO_SRC = "logo-isopaneels.png";
-document.getElementById("brandLogo").src = LOGO_SRC;
+/* =======================================================================
+   ISO.Paneels — systém cenových nabídek
+   Data zůstávají v prohlížeči (localStorage), nic se neodesílá na server.
+   ======================================================================= */
 
-/* ---------------- ceník ---------------- */
-const CENIK_DEFAULT = [
-  {id:"zaklady",   label:"Zemní práce a základová deska",              cena:4500,  unit:"Kč/m² zastavěné plochy", basis:"zastavena"},
-  {id:"hruba",     label:"Hrubá stavba (nosné konstrukce, stropy, schodiště)", cena:14000, unit:"Kč/m² podlahové plochy", basis:"podlahova"},
-  {id:"strecha",   label:"Střecha vč. krytiny a klempířských prvků",   cena:6500,  unit:"Kč/m² zastavěné plochy", basis:"zastavena"},
-  {id:"okna",      label:"Okna, vstupní a interiérové dveře",          cena:3500,  unit:"Kč/m² podlahové plochy", basis:"podlahova"},
-  {id:"instalace", label:"Instalace (elektro, voda, kanalizace, topení)", cena:7000, unit:"Kč/m² podlahové plochy", basis:"podlahova"},
-  {id:"dokonceni", label:"Povrchy, podlahy a dokončovací práce",       cena:8000,  unit:"Kč/m² podlahové plochy", basis:"podlahova"},
-  {id:"sklep",     label:"Sklep (podzemní podlaží)",                   cena:18000, unit:"Kč/m² zastavěné plochy", basis:"sklep"},
-  {id:"garaz",     label:"Garáž",                                      cena:12000, unit:"Kč/m² plochy garáže",    basis:"garaz"},
+const DEFAULT_LOGO = "logo-isopaneels.png";
+const STORE_KEY = "isopaneels_nabidky_v2";
+const APP_VERSION = "2.0";
+
+/* ---------------- výchozí data ---------------- */
+
+const DEFAULT_CENIK = [
+  // Základní stavba — vkládá se automaticky. koef = násobí se koeficienty.
+  {id:"zaklady",   grp:"base",  label:"Zemní práce a základová deska",                 price:4500,  unit:"m²", basis:"zastavena", koef:true},
+  {id:"hruba",     grp:"base",  label:"Hrubá stavba — nosné konstrukce, stropy",       price:14000, unit:"m²", basis:"podlahova", koef:true},
+  {id:"strecha",   grp:"base",  label:"Střecha vč. krytiny a klempířských prvků",      price:6500,  unit:"m²", basis:"zastavena", koef:true, roof:true},
+  {id:"okna",      grp:"base",  label:"Okna, vstupní a interiérové dveře",             price:3500,  unit:"m²", basis:"podlahova", koef:true},
+  {id:"instalace", grp:"base",  label:"Instalace — elektro, voda, kanalizace, topení", price:7000,  unit:"m²", basis:"podlahova", koef:true},
+  {id:"dokonceni", grp:"base",  label:"Povrchy, podlahy a dokončovací práce",          price:8000,  unit:"m²", basis:"podlahova", koef:true},
+  // Volitelné položky — nabízí se k zaškrtnutí.
+  {id:"sklep",     grp:"extra", label:"Sklep — podzemní podlaží",                      price:18000, unit:"m²", basis:"zastavena", koef:true},
+  {id:"garaz",     grp:"extra", label:"Garáž",                                         price:12000, unit:"m²", basis:"fix",       koef:true, qty:20},
+  {id:"terasa",    grp:"extra", label:"Krytá terasa",                                  price:5500,  unit:"m²", basis:"fix",       koef:true, qty:20},
+  {id:"cerpadlo",  grp:"extra", label:"Tepelné čerpadlo vzduch/voda vč. montáže",      price:320000,unit:"ks", basis:"fix",       koef:false, qty:1},
+  {id:"rekuperace",grp:"extra", label:"Řízené větrání s rekuperací",                   price:185000,unit:"ks", basis:"fix",       koef:false, qty:1},
+  {id:"fve",       grp:"extra", label:"Fotovoltaika 6 kWp vč. instalace",              price:290000,unit:"ks", basis:"fix",       koef:false, qty:1},
+  {id:"plochy",    grp:"extra", label:"Zpevněné plochy a příjezdová cesta",            price:2200,  unit:"m²", basis:"fix",       koef:false, qty:60},
+  {id:"plot",      grp:"extra", label:"Plot vč. základů",                              price:3200,  unit:"bm", basis:"fix",       koef:false, qty:40},
+  {id:"projekt",   grp:"extra", label:"Projektová dokumentace pro stavební povolení",  price:95000, unit:"ks", basis:"fix",       koef:false, qty:1},
+  {id:"pripojky",  grp:"extra", label:"Přípojky inženýrských sítí",                    price:180000,unit:"ks", basis:"fix",       koef:false, qty:1},
 ];
-const KOEF_KONSTRUKCE = {zdena:1.0, drevostavba:0.9, montovana:0.95};
-const KOEF_STANDARD   = {ekonomicky:0.85, standardni:1.0, nadstandardni:1.25};
-const KOEF_STRECHA    = {sedlova:1.0, plocha:0.8}; // aplikuje se jen na položku střecha
 
-const LS = {cenik:"nab_cenik", dodavatel:"nab_dodavatel", apikey:"nab_apikey", counter:"nab_counter"};
+const DEFAULT_KOEF = {
+  konstrukce: {clt:1.0, sendvic:0.92, drevostavba:0.95, zdena:1.05},
+  standard:   {ekonomicky:0.85, standardni:1.0, nadstandardni:1.25},
+  strecha:    {sedlova:1.0, pultova:0.92, plocha:0.85},
+};
 
-function loadCenik(){
-  try{
-    const saved = JSON.parse(localStorage.getItem(LS.cenik) || "null");
-    if(saved) return CENIK_DEFAULT.map(d => ({...d, cena: (saved[d.id] ?? d.cena)}));
-  }catch(e){}
-  return CENIK_DEFAULT.map(d => ({...d}));
-}
-function saveCenik(cenik){
-  const map = {};
-  cenik.forEach(p => map[p.id] = p.cena);
-  localStorage.setItem(LS.cenik, JSON.stringify(map));
-}
-function renderCenik(){
-  const cenik = loadCenik();
-  const t = document.getElementById("cenikTable");
-  t.innerHTML = cenik.map(p =>
-    `<tr><td>${p.label}</td>
-     <td><input type="number" min="0" step="100" data-cenik="${p.id}" value="${p.cena}"></td>
-     <td class="unit">${p.unit}</td></tr>`).join("");
-  t.querySelectorAll("input[data-cenik]").forEach(inp => {
-    inp.addEventListener("change", () => {
-      const c = loadCenik();
-      const item = c.find(x => x.id === inp.dataset.cenik);
-      item.cena = Number(inp.value) || 0;
-      saveCenik(c);
-    });
-  });
-}
-document.getElementById("btnCenikReset").addEventListener("click", () => {
-  localStorage.removeItem(LS.cenik);
-  renderCenik();
-});
+const DEFAULT_SPLATKY = [
+  {label:"Při podpisu smlouvy o dílo",              pct:20},
+  {label:"Po dokončení základové desky",            pct:15},
+  {label:"Po dokončení hrubé stavby",               pct:30},
+  {label:"Po zastřešení a osazení výplní otvorů",   pct:20},
+  {label:"Po dokončovacích pracích a předání",      pct:15},
+];
 
-/* ---------------- dodavatel + api key ---------------- */
-const DOD_DEFAULT = {jmeno:"ISO.Paneels s.r.o.", ico:"", email:"", tel:""};
-function loadDod(){
-  try{ return {...DOD_DEFAULT, ...(JSON.parse(localStorage.getItem(LS.dodavatel) || "{}"))}; }
-  catch(e){ return {...DOD_DEFAULT}; }
-}
-function bindSettings(){
-  const d = loadDod();
-  const fields = {dodJmeno:"jmeno", dodIco:"ico", dodEmail:"email", dodTel:"tel"};
-  for(const [elId, key] of Object.entries(fields)){
-    const el = document.getElementById(elId);
-    el.value = d[key];
-    el.addEventListener("change", () => {
-      const cur = loadDod();
-      cur[key] = el.value.trim();
-      localStorage.setItem(LS.dodavatel, JSON.stringify(cur));
-    });
-  }
-  const keyEl = document.getElementById("apiKey");
-  keyEl.value = localStorage.getItem(LS.apikey) || "";
-  keyEl.addEventListener("change", () => localStorage.setItem(LS.apikey, keyEl.value.trim()));
-}
+const DEFAULT_SETTINGS = {
+  supplier: {jmeno:"ISO.Paneels s.r.o.", ico:"", dic:"", tel:"", email:"", web:"isopaneels.cz", adresa:"", banka:""},
+  logo: null,
+  validDays: 14,
+  dph: 12,
+  podpisy: true,
+  splatkyDoc: true,
+  poznamky: "Nabídka nezahrnuje cenu pozemku ani správní poplatky.\nKonečná cena bude potvrzena po zaměření pozemku a odsouhlasení projektu.\nNa dílo poskytujeme záruku 20 let na konstrukci.",
+  footer: "Orientační nabídka — není návrhem na uzavření smlouvy.",
+  apiKey: "",
+};
 
-/* ---------------- čtení formuláře + výpočet ---------------- */
-function getParams(){
+const LABELS = {
+  konstrukce: {clt:"CLT panely", sendvic:"sendvičové panely", drevostavba:"dřevostavba", zdena:"zděná konstrukce"},
+  strecha:    {sedlova:"sedlová", pultova:"pultová", plocha:"plochá"},
+  standard:   {ekonomicky:"ekonomický", standardni:"standardní", nadstandardni:"nadstandardní"},
+  status:     {koncept:"Koncept", odeslana:"Odeslaná", prijata:"Přijatá", zamitnuta:"Zamítnutá"},
+};
+
+/* ---------------- stav ---------------- */
+
+let DB = null;      // { settings, cenik, koef, splatkyTpl, quotes, counter }
+let Q = null;       // rozpracovaná nabídka
+let calc = null;    // poslední výpočet
+
+/* ---------------- ukládání ---------------- */
+
+function freshQuote() {
   return {
-    zakaznik: {
-      jmeno: document.getElementById("zJmeno").value.trim(),
-      email: document.getElementById("zEmail").value.trim(),
-      tel:   document.getElementById("zTel").value.trim(),
-      misto: document.getElementById("zMisto").value.trim(),
-    },
-    konstrukce: document.getElementById("pKonstrukce").value,
-    zastavenaPlocha: Number(document.getElementById("pPlocha").value) || 0,
-    podlazi: Math.max(1, Number(document.getElementById("pPodlazi").value) || 1),
-    strecha: document.getElementById("pStrecha").value,
-    standard: document.getElementById("pStandard").value,
-    dph: Number(document.getElementById("pDph").value),
-    sklep: document.getElementById("pSklep").checked,
-    garaz: document.getElementById("pGaraz").checked,
-    garazPlocha: Number(document.getElementById("pGarazPlocha").value) || 0,
-    poznamky: document.getElementById("pPoznamky").value.split("\n").map(s => s.trim()).filter(Boolean),
+    id: "q" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+    number: null,
+    date: todayISO(),
+    validDays: DB.settings.validDays,
+    status: "koncept",
+    customer: {jmeno:"", email:"", tel:"", misto:""},
+    params: {konstrukce:"clt", plocha:100, podlazi:1, strecha:"sedlova", standard:"standardni", dph:DB.settings.dph},
+    extras: {},                       // id -> qty
+    items: [],                        // {key,label,qty,unit,price,koef,manual,custom}
+    sleva: {val:0, typ:"kc", popis:""},
+    splatky: deepCopy(DB.splatkyTpl || DEFAULT_SPLATKY),
+    uvod: "",
+    poznamky: DB.settings.poznamky,
+    poptavka: "",
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
   };
 }
 
-function spocitat(p){
-  const cenik = loadCenik();
-  const koef = KOEF_KONSTRUKCE[p.konstrukce] * KOEF_STANDARD[p.standard];
-  const podlahova = p.zastavenaPlocha * p.podlazi;
-  const polozky = [];
+function defaultDB() {
+  return {
+    version: 2,
+    settings: deepCopy(DEFAULT_SETTINGS),
+    cenik: deepCopy(DEFAULT_CENIK),
+    koef: deepCopy(DEFAULT_KOEF),
+    splatkyTpl: deepCopy(DEFAULT_SPLATKY),
+    quotes: [],
+    counter: {year: new Date().getFullYear(), n: 0},
+    draft: null,
+  };
+}
 
-  for(const item of cenik){
-    let mnozstvi = 0, extraKoef = 1;
-    if(item.basis === "zastavena") mnozstvi = p.zastavenaPlocha;
-    else if(item.basis === "podlahova") mnozstvi = podlahova;
-    else if(item.basis === "sklep") mnozstvi = p.sklep ? p.zastavenaPlocha : 0;
-    else if(item.basis === "garaz") mnozstvi = p.garaz ? p.garazPlocha : 0;
-    if(item.id === "strecha") extraKoef = KOEF_STRECHA[p.strecha];
-    if(mnozstvi <= 0) continue;
-
-    const jednotkova = Math.round(item.cena * koef * extraKoef);
-    polozky.push({
-      label: item.label,
-      detail: `${fmtNum(mnozstvi)} m² × ${fmtKc(jednotkova)}`,
-      castka: mnozstvi * jednotkova,
-    });
+function load() {
+  let db = null;
+  try { db = JSON.parse(localStorage.getItem(STORE_KEY) || "null"); } catch (e) { db = null; }
+  if (!db || typeof db !== "object") {
+    db = defaultDB();
+    migrateFromV1(db);
   }
-
-  const zaklad = polozky.reduce((s, x) => s + x.castka, 0);
-  const dph = Math.round(zaklad * p.dph / 100);
-  return {polozky, zaklad, dph, celkem: zaklad + dph, podlahova};
+  // doplnění chybějících klíčů po případné aktualizaci
+  const base = defaultDB();
+  db.settings = Object.assign({}, base.settings, db.settings || {});
+  db.settings.supplier = Object.assign({}, base.settings.supplier, (db.settings.supplier || {}));
+  db.koef = Object.assign({}, base.koef, db.koef || {});
+  if (!Array.isArray(db.cenik) || !db.cenik.length) db.cenik = base.cenik;
+  if (!Array.isArray(db.splatkyTpl) || !db.splatkyTpl.length) db.splatkyTpl = base.splatkyTpl;
+  if (!Array.isArray(db.quotes)) db.quotes = [];
+  if (!db.counter) db.counter = base.counter;
+  DB = db;
 }
 
-function fmtKc(n){ return n.toLocaleString("cs-CZ") + " Kč"; }
-function fmtNum(n){ return n.toLocaleString("cs-CZ"); }
-
-let aktualniCislo = null; // jedno číslo na rozpracovanou nabídku — překreslení ho nemění
-function cisloNabidky(){
-  if(aktualniCislo) return aktualniCislo;
-  const rok = new Date().getFullYear();
-  let c = Number(localStorage.getItem(LS.counter) || 0) + 1;
-  localStorage.setItem(LS.counter, String(c));
-  aktualniCislo = `${rok}-${String(c).padStart(3, "0")}`;
-  return aktualniCislo;
+// Přenos dat z první verze aplikace, aby uživatel nepřišel o ceník a nastavení.
+function migrateFromV1(db) {
+  try {
+    const oldCenik = JSON.parse(localStorage.getItem("nab_cenik") || "null");
+    if (oldCenik) {
+      const map = {zaklady:"zaklady", hruba:"hruba", strecha:"strecha", okna:"okna",
+                   instalace:"instalace", dokonceni:"dokonceni", sklep:"sklep", garaz:"garaz"};
+      db.cenik.forEach(it => {
+        const key = map[it.id];
+        if (key && typeof oldCenik[key] === "number") it.price = oldCenik[key];
+      });
+    }
+    const oldDod = JSON.parse(localStorage.getItem("nab_dodavatel") || "null");
+    if (oldDod) {
+      if (oldDod.jmeno) db.settings.supplier.jmeno = oldDod.jmeno;
+      if (oldDod.ico) db.settings.supplier.ico = oldDod.ico;
+      if (oldDod.email) db.settings.supplier.email = oldDod.email;
+      if (oldDod.tel) db.settings.supplier.tel = oldDod.tel;
+    }
+    const oldKey = localStorage.getItem("nab_apikey");
+    if (oldKey) db.settings.apiKey = oldKey;
+    const oldCounter = Number(localStorage.getItem("nab_counter") || 0);
+    if (oldCounter > 0) db.counter = {year: new Date().getFullYear(), n: oldCounter};
+  } catch (e) { /* stará data nejsou k dispozici */ }
 }
 
-let uvodniText = "";
+function save() {
+  DB.draft = Q;
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify(DB));
+    return true;
+  } catch (e) {
+    toast("Data se nepodařilo uložit — pravděpodobně je plná paměť prohlížeče.", "err");
+    return false;
+  }
+}
 
-const KONSTRUKCE_LABEL = {zdena:"zděná", drevostavba:"dřevostavba / CLT", montovana:"montovaná"};
-const STRECHA_LABEL = {sedlova:"sedlová", plocha:"plochá"};
-const STANDARD_LABEL = {ekonomicky:"ekonomický", standardni:"standardní", nadstandardni:"nadstandardní"};
+/* ---------------- pomocné ---------------- */
 
-function sestavNabidku(){
-  const p = getParams();
-  if(p.zastavenaPlocha <= 0){
-    setStatus("vypocetStatus", "Zadej zastavěnou plochu.", true);
+const deepCopy = (o) => JSON.parse(JSON.stringify(o));
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const num = (v, d = 0) => { const n = Number(String(v).replace(",", ".")); return Number.isFinite(n) ? n : d; };
+const kc = (n) => Math.round(n).toLocaleString("cs-CZ") + " Kč";
+const fmt = (n) => Number(n).toLocaleString("cs-CZ", {maximumFractionDigits: 2});
+const todayISO = () => new Date().toISOString().slice(0, 10);
+
+function czDate(iso) {
+  const d = new Date(iso + "T12:00:00");
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString("cs-CZ");
+}
+function addDays(iso, days) {
+  const d = new Date(iso + "T12:00:00");
+  d.setDate(d.getDate() + days);
+  return d.toLocaleDateString("cs-CZ");
+}
+function toast(msg, kind) {
+  const el = document.createElement("div");
+  el.className = "toast" + (kind ? " " + kind : "");
+  el.textContent = msg;
+  $("toasts").appendChild(el);
+  setTimeout(() => { el.style.opacity = "0"; el.style.transition = "opacity .3s"; }, kind === "err" ? 6000 : 2600);
+  setTimeout(() => el.remove(), kind === "err" ? 6400 : 3000);
+}
+function logoSrc() { return DB.settings.logo || DEFAULT_LOGO; }
+
+/* ---------------- výpočet ---------------- */
+
+function itemsFromCenik() {
+  const p = Q.params;
+  const podlahova = num(p.plocha) * Math.max(1, num(p.podlazi, 1));
+  const out = [];
+
+  DB.cenik.forEach(it => {
+    let qty = 0;
+    if (it.grp === "base") {
+      qty = it.basis === "podlahova" ? podlahova : num(p.plocha);
+    } else {
+      if (!(it.id in Q.extras)) return;                    // volitelná položka není zaškrtnutá
+      qty = it.basis === "podlahova" ? podlahova
+          : it.basis === "zastavena" ? num(p.plocha)
+          : num(Q.extras[it.id], num(it.qty, 1));
+    }
+    if (qty <= 0) return;
+    out.push({
+      key: it.id, label: it.label, qty: qty, unit: it.unit,
+      price: it.price, koef: !!it.koef, roof: !!it.roof,
+      manual: false, custom: false, grp: it.grp,
+    });
+  });
+  return out;
+}
+
+// Sloučí položky z ceníku s ručními úpravami, které uživatel udělal.
+function rebuildItems() {
+  const manualByKey = {};
+  const customRows = [];
+  (Q.items || []).forEach(it => {
+    if (it.custom) customRows.push(it);
+    else if (it.manual) manualByKey[it.key] = it;
+  });
+
+  const fresh = itemsFromCenik();
+  fresh.forEach(it => {
+    const m = manualByKey[it.key];
+    if (m) { it.qty = m.qty; it.price = m.price; it.label = m.label; it.unit = m.unit; it.manual = true; }
+  });
+  Q.items = fresh.concat(customRows);
+}
+
+function unitPriceOf(it) {
+  if (it.manual || it.custom || !it.koef) return it.price;
+  const k = DB.koef;
+  let mult = num(k.konstrukce[Q.params.konstrukce], 1) * num(k.standard[Q.params.standard], 1);
+  if (it.roof) mult *= num(k.strecha[Q.params.strecha], 1);
+  return Math.round(it.price * mult);
+}
+
+function recalc() {
+  const rows = (Q.items || []).map(it => {
+    const up = unitPriceOf(it);
+    return {...it, unitPrice: up, total: num(it.qty) * up};
+  });
+  const subtotal = rows.reduce((s, r) => s + r.total, 0);
+  const sleva = Q.sleva.typ === "pct"
+    ? Math.round(subtotal * Math.min(100, Math.max(0, num(Q.sleva.val))) / 100)
+    : Math.min(subtotal, Math.max(0, num(Q.sleva.val)));
+  const base = subtotal - sleva;
+  const dphRate = num(Q.params.dph);
+  const dph = Math.round(base * dphRate / 100);
+  const total = base + dph;
+  const podlahova = num(Q.params.plocha) * Math.max(1, num(Q.params.podlazi, 1));
+  calc = {
+    rows, subtotal, sleva, base, dph, dphRate, total, podlahova,
+    perM2: podlahova > 0 ? total / podlahova : 0,
+    splatkySum: (Q.splatky || []).reduce((s, x) => s + num(x.pct), 0),
+  };
+  return calc;
+}
+
+/* ---------------- vykreslení: nabídka ---------------- */
+
+function fillForm() {
+  $("poptavka").value = Q.poptavka || "";
+  $("zJmeno").value = Q.customer.jmeno; $("zEmail").value = Q.customer.email;
+  $("zTel").value = Q.customer.tel;     $("zMisto").value = Q.customer.misto;
+  $("pKonstrukce").value = Q.params.konstrukce; $("pPlocha").value = Q.params.plocha;
+  $("pPodlazi").value = Q.params.podlazi;       $("pStrecha").value = Q.params.strecha;
+  $("pStandard").value = Q.params.standard;     $("pDph").value = String(Q.params.dph);
+  $("slevaVal").value = Q.sleva.val; $("slevaTyp").value = Q.sleva.typ; $("slevaPopis").value = Q.sleva.popis || "";
+  $("uvod").value = Q.uvod || ""; $("poznamky").value = Q.poznamky || "";
+  $("qStatus").value = Q.status; $("qNumber").value = Q.number || "(přidělí se při uložení)";
+  $("qDate").value = Q.date; $("qValid").value = Q.validDays;
+}
+
+function renderExtras() {
+  const box = $("extrasBox");
+  const extras = DB.cenik.filter(it => it.grp === "extra");
+  if (!extras.length) { box.innerHTML = '<p class="sechint">V ceníku nejsou žádné volitelné položky.</p>'; return; }
+  box.innerHTML = extras.map(it => {
+    const on = it.id in Q.extras;
+    const qtyEditable = it.basis === "fix";
+    const qty = qtyEditable ? num(Q.extras[it.id], num(it.qty, 1)) : null;
+    return `<label class="extra ${on ? "on" : ""}" data-ex="${esc(it.id)}">
+      <input type="checkbox" data-exchk="${esc(it.id)}" ${on ? "checked" : ""}>
+      <span class="ex-t"><span class="ex-l">${esc(it.label)}</span>
+        <span class="ex-p">${kc(it.price)} / ${esc(it.unit)}${it.basis !== "fix" ? " · dle plochy" : ""}</span></span>
+      ${qtyEditable ? `<input type="number" min="0" step="1" data-exqty="${esc(it.id)}" value="${qty}" ${on ? "" : "disabled"} title="množství (${esc(it.unit)})">` : ""}
+    </label>`;
+  }).join("");
+
+  box.querySelectorAll("[data-exchk]").forEach(chk => {
+    chk.addEventListener("change", () => {
+      const id = chk.dataset.exchk;
+      const it = DB.cenik.find(x => x.id === id);
+      if (chk.checked) Q.extras[id] = num(it.qty, 1);
+      else delete Q.extras[id];
+      rebuildItems(); renderAll(); autosave();
+    });
+  });
+  box.querySelectorAll("[data-exqty]").forEach(inp => {
+    inp.addEventListener("click", e => e.preventDefault());
+    inp.addEventListener("input", () => {
+      Q.extras[inp.dataset.exqty] = Math.max(0, num(inp.value));
+      rebuildItems(); renderItems(); renderTotals(); renderDoc(); autosave();
+    });
+  });
+}
+
+function renderItems() {
+  const c = recalc();
+  const t = $("itemsTable");
+  if (!c.rows.length) {
+    t.innerHTML = `<tbody><tr><td class="empty"><b>Žádné položky</b>Zadej zastavěnou plochu nebo přidej vlastní řádek.</td></tr></tbody>`;
     return;
   }
-  const v = spocitat(p);
-  const dod = loadDod();
-  const dnes = new Date();
-  const platnost = new Date(dnes.getTime() + 14*24*3600*1000); // platnost nabídky 14 dní
+  const mark = '<span class="manmark" title="ručně upravená hodnota" style="color:var(--blue);font-weight:700;"> ✎</span>';
+  const rowHtml = (r, i) => `<tr>
+    <td>${r.custom
+      ? `<input type="text" data-ilabel="${i}" value="${esc(r.label)}" placeholder="Název položky">`
+      : `<span data-ilbl="${i}">${esc(r.label)}${r.manual ? mark : ""}</span>`}</td>
+    <td class="num"><input type="number" class="w-qty" data-iqty="${i}" value="${r.qty}" min="0" step="1"></td>
+    <td>${r.custom ? `<input type="text" class="w-unit" data-iunit="${i}" value="${esc(r.unit)}">` : esc(r.unit)}</td>
+    <td class="num"><input type="number" class="w-price" data-iprice="${i}" value="${r.unitPrice}" min="0" step="100"></td>
+    <td class="money" data-isum="${i}">${kc(r.total)}</td>
+    <td style="width:34px;"><button class="icobtn" data-idel="${i}" title="Odebrat řádek" type="button">✕</button></td>
+  </tr>`;
 
-  const doc = document.getElementById("doc");
-  doc.innerHTML = `
-    <header>
-      <div>
-        <img class="doc-logo" src="${LOGO_SRC}" alt="${esc(dod.jmeno)}">
-        <h3>Cenová nabídka č. ${cisloNabidky()}</h3>
-        <div class="meta">Stavba rodinného domu — ${KONSTRUKCE_LABEL[p.konstrukce]} konstrukce,
-          ${fmtNum(p.zastavenaPlocha)} m² zastavěné plochy, ${p.podlazi} podlaží,
-          ${STRECHA_LABEL[p.strecha]} střecha, ${STANDARD_LABEL[p.standard]} provedení${p.sklep ? ", sklep" : ""}${p.garaz ? ", garáž" : ""}</div>
-      </div>
-      <div class="meta" style="text-align:right;">
-        Datum: ${dnes.toLocaleDateString("cs-CZ")}<br>
-        Platnost do: ${platnost.toLocaleDateString("cs-CZ")}
-      </div>
-    </header>
-    <div class="parties">
-      <div class="party">
-        <h4>Dodavatel</h4>
-        <strong>${esc(dod.jmeno)}</strong><br>
-        ${dod.ico ? "IČO: " + esc(dod.ico) + "<br>" : ""}
-        ${esc(dod.email)}${dod.tel ? "<br>" + esc(dod.tel) : ""}
-      </div>
-      <div class="party">
-        <h4>Zákazník</h4>
-        <strong>${esc(p.zakaznik.jmeno) || "—"}</strong><br>
-        ${[p.zakaznik.email, p.zakaznik.tel, p.zakaznik.misto && ("Místo stavby: " + p.zakaznik.misto)]
-          .filter(Boolean).map(esc).join("<br>")}
-      </div>
+  const base = c.rows.map((r, i) => ({r, i})).filter(x => x.r.grp === "base" && !x.r.custom);
+  const extra = c.rows.map((r, i) => ({r, i})).filter(x => x.r.grp === "extra" && !x.r.custom);
+  const own = c.rows.map((r, i) => ({r, i})).filter(x => x.r.custom);
+  const grp = (title, list) => list.length
+    ? `<tr class="grp"><td colspan="6">${title}</td></tr>` + list.map(x => rowHtml(x.r, x.i)).join("") : "";
+
+  t.innerHTML = `<thead><tr>
+      <th>Položka</th><th class="num">Množství</th><th>Jedn.</th>
+      <th class="num">Cena / jedn.</th><th class="num">Celkem</th><th></th>
+    </tr></thead><tbody>
+      ${grp("Základní stavba", base)}${grp("Volitelné položky", extra)}${grp("Vlastní položky", own)}
+    </tbody>`;
+
+  t.querySelectorAll("[data-iqty]").forEach(inp => inp.addEventListener("input", () => {
+    const i = num(inp.dataset.iqty), it = Q.items[i];
+    it.qty = Math.max(0, num(inp.value));
+    if (!it.custom) { it.manual = true; markManualRow(i); }
+    renderTotals(); renderDoc(); autosave();
+  }));
+  t.querySelectorAll("[data-iprice]").forEach(inp => inp.addEventListener("input", () => {
+    const i = num(inp.dataset.iprice), it = Q.items[i];
+    it.price = Math.max(0, num(inp.value));
+    if (!it.custom) { it.manual = true; markManualRow(i); }
+    renderTotals(); renderDoc(); autosave();
+  }));
+  t.querySelectorAll("[data-ilabel]").forEach(inp => inp.addEventListener("input", () => {
+    Q.items[num(inp.dataset.ilabel)].label = inp.value; renderDoc(); autosave();
+  }));
+  t.querySelectorAll("[data-iunit]").forEach(inp => inp.addEventListener("input", () => {
+    Q.items[num(inp.dataset.iunit)].unit = inp.value; renderDoc(); autosave();
+  }));
+  t.querySelectorAll("[data-idel]").forEach(btn => btn.addEventListener("click", () => {
+    const it = Q.items[num(btn.dataset.idel)];
+    if (it && !it.custom && it.grp === "extra") delete Q.extras[it.key];
+    Q.items.splice(num(btn.dataset.idel), 1);
+    renderExtras(); renderItems(); renderTotals(); renderDoc(); autosave();
+  }));
+}
+
+function renderSplatky() {
+  const c = calc || recalc();
+  const t = $("splatkyTable");
+  const list = Q.splatky || [];
+  if (!list.length) {
+    t.innerHTML = `<tbody><tr><td class="empty"><b>Bez splátkového kalendáře</b>Přidej splátku nebo obnov výchozí rozvrh.</td></tr></tbody>`;
+  } else {
+    t.innerHTML = `<thead><tr><th>Splátka</th><th class="num">Podíl</th><th class="num">Částka s DPH</th><th></th></tr></thead>
+      <tbody>${list.map((s, i) => `<tr>
+        <td><input type="text" data-slabel="${i}" value="${esc(s.label)}"></td>
+        <td class="num"><input type="number" class="w-qty" data-spct="${i}" value="${s.pct}" min="0" max="100" step="1"></td>
+        <td class="money" data-ssum="${i}">${kc(c.total * num(s.pct) / 100)}</td>
+        <td style="width:34px;"><button class="icobtn" data-sdel="${i}" title="Odebrat" type="button">✕</button></td>
+      </tr>`).join("")}</tbody>`;
+    t.querySelectorAll("[data-slabel]").forEach(inp => inp.addEventListener("input", () => {
+      Q.splatky[num(inp.dataset.slabel)].label = inp.value; renderDoc(); autosave();
+    }));
+    // Částky se dopočítávají na místě — překreslení tabulky by uživateli sebralo kurzor.
+    t.querySelectorAll("[data-spct]").forEach(inp => inp.addEventListener("input", () => {
+      Q.splatky[num(inp.dataset.spct)].pct = num(inp.value);
+      updateSplatkyAmounts(); renderDoc(); autosave();
+    }));
+    t.querySelectorAll("[data-sdel]").forEach(btn => btn.addEventListener("click", () => {
+      Q.splatky.splice(num(btn.dataset.sdel), 1); renderSplatky(); renderDoc(); autosave();
+    }));
+  }
+  updateSplatkyAmounts();
+}
+
+function updateSplatkyAmounts() {
+  const c = calc || recalc();
+  const list = Q.splatky || [];
+  list.forEach((s, i) => {
+    const cell = document.querySelector('[data-ssum="' + i + '"]');
+    if (cell) cell.textContent = kc(c.total * num(s.pct) / 100);
+  });
+  const note = $("splatkyNote");
+  if (!note) return;
+  if (!list.length) { note.textContent = ""; return; }
+  const sum = list.reduce((s, x) => s + num(x.pct), 0);
+  const ok = Math.abs(sum - 100) < 0.01;
+  note.textContent = ok ? "Součet 100 % ✓" : "Součet " + fmt(sum) + " % — má být 100 %";
+  note.style.color = ok ? "var(--ok)" : "var(--err)";
+  note.style.fontWeight = "600";
+}
+
+// Doplní značku ✎ bez překreslení tabulky, aby uživateli nezmizel kurzor z pole.
+function markManualRow(i) {
+  const cell = document.querySelector('[data-ilbl="' + i + '"]');
+  if (!cell || cell.querySelector(".manmark")) return;
+  const s = document.createElement("span");
+  s.className = "manmark";
+  s.title = "ručně upravená hodnota";
+  s.style.cssText = "color:var(--blue);font-weight:700;";
+  s.textContent = " ✎";
+  cell.appendChild(s);
+}
+
+function updateItemAmounts() {
+  const c = calc || recalc();
+  c.rows.forEach((r, i) => {
+    const cell = document.querySelector('[data-isum="' + i + '"]');
+    if (cell) cell.textContent = kc(r.total);
+  });
+}
+
+function renderTotals() {
+  const c = recalc();
+  $("sumBase").textContent = kc(c.base);
+  $("sumDphLbl").textContent = "DPH " + fmt(c.dphRate) + " %";
+  $("sumDph").textContent = kc(c.dph);
+  $("sumTotal").textContent = kc(c.total);
+  $("sumPerM2").textContent = c.perM2 > 0 ? kc(c.perM2) : "—";
+  $("plochaNote").textContent = c.podlahova > 0
+    ? "Podlahová plocha " + fmt(c.podlahova) + " m²" : "";
+  updateItemAmounts();
+  updateSplatkyAmounts();
+}
+
+/* ---------------- dokument ---------------- */
+
+function docHTML() {
+  const c = recalc();
+  const s = DB.settings, sup = s.supplier, p = Q.params, cust = Q.customer;
+  const cislo = Q.number || nextNumberPreview();
+  const popis = [
+    LABELS.konstrukce[p.konstrukce],
+    fmt(p.plocha) + " m² zastavěné plochy",
+    num(p.podlazi) + " podlaží",
+    LABELS.strecha[p.strecha] + " střecha",
+    LABELS.standard[p.standard] + " provedení",
+  ].filter(Boolean).join(", ");
+
+  const supLines = [
+    sup.adresa,
+    sup.ico ? "IČO: " + sup.ico + (sup.dic ? " · DIČ: " + sup.dic : "") : (sup.dic ? "DIČ: " + sup.dic : ""),
+    sup.tel, sup.email, sup.web,
+  ].filter(Boolean).map(esc).join("<br>");
+
+  const custLines = [
+    cust.email, cust.tel,
+    cust.misto ? "Místo stavby: " + cust.misto : "",
+  ].filter(Boolean).map(esc).join("<br>");
+
+  const group = (title, list) => list.length ? `<tr class="grp"><td colspan="4">${title}</td></tr>` + list.map(r => `<tr>
+      <td>${esc(r.label)}</td>
+      <td class="dim">${fmt(r.qty)} ${esc(r.unit)} × ${kc(r.unitPrice)}</td>
+      <td></td>
+      <td class="r">${kc(r.total)}</td></tr>`).join("") : "";
+
+  const baseRows = c.rows.filter(r => r.grp === "base" && !r.custom);
+  const extraRows = c.rows.filter(r => r.grp === "extra" && !r.custom);
+  const ownRows = c.rows.filter(r => r.custom);
+  const manyGroups = [baseRows, extraRows, ownRows].filter(x => x.length).length > 1;
+
+  const itemsBody = manyGroups
+    ? group("Základní stavba", baseRows) + group("Volitelné položky a vybavení", extraRows) + group("Vlastní položky", ownRows)
+    : c.rows.map(r => `<tr>
+        <td>${esc(r.label)}</td>
+        <td class="dim">${fmt(r.qty)} ${esc(r.unit)} × ${kc(r.unitPrice)}</td>
+        <td></td>
+        <td class="r">${kc(r.total)}</td></tr>`).join("");
+
+  const splatky = (s.splatkyDoc && (Q.splatky || []).length) ? `
+    <div class="sect">Splátkový kalendář</div>
+    <table><tbody>${Q.splatky.map(x => `<tr>
+      <td>${esc(x.label)}</td><td class="dim r">${fmt(x.pct)} %</td>
+      <td class="r">${kc(c.total * num(x.pct) / 100)}</td></tr>`).join("")}</tbody></table>` : "";
+
+  const poznList = (Q.poznamky || "").split("\n").map(x => x.trim()).filter(Boolean);
+  const pozn = poznList.length ? `<div class="pozn">${poznList.map(x => "• " + esc(x)).join("<br>")}</div>` : "";
+
+  return `
+  <div class="dhead">
+    <div>
+      <img class="doc-logo" src="${esc(logoSrc())}" alt="${esc(sup.jmeno)}">
+      <h4>Cenová nabídka č. ${esc(cislo)}</h4>
+      <div class="meta">${esc(popis)}</div>
     </div>
-    ${uvodniText ? `<div class="uvod">${esc(uvodniText)}</div>` : ""}
-    <table>
-      <thead><tr><th>Položka</th><th>Výpočet</th><th>Cena bez DPH</th></tr></thead>
-      <tbody>
-        ${v.polozky.map(x => `<tr><td>${esc(x.label)}</td><td class="detail">${x.detail}</td><td>${fmtKc(x.castka)}</td></tr>`).join("")}
-      </tbody>
-    </table>
-    <div class="sums">
-      <div><span>Cena celkem bez DPH</span><strong>${fmtKc(v.zaklad)}</strong></div>
-      <div><span>DPH ${p.dph} %</span><strong>${fmtKc(v.dph)}</strong></div>
-      <div class="total"><span>Cena celkem s DPH</span><span>${fmtKc(v.celkem)}</span></div>
+    <div class="meta" style="text-align:right;">
+      Datum vystavení: <b>${czDate(Q.date)}</b><br>
+      Platnost do: <b>${addDays(Q.date, num(Q.validDays, 14))}</b>
+      ${cust.misto ? "<br>Místo stavby: " + esc(cust.misto) : ""}
     </div>
-    ${p.poznamky.length ? `<div class="pozn">${p.poznamky.map(x => "• " + esc(x)).join("\n")}</div>` : ""}
-    <footer>
-      <span>${esc(dod.jmeno)}${dod.ico ? " · IČO " + esc(dod.ico) : ""}</span>
-      <span>Orientační nabídka — není návrhem smlouvy.</span>
-    </footer>`;
+  </div>
 
-  document.getElementById("nabidka").classList.add("visible");
-  setStatus("vypocetStatus", `Hotovo — celkem ${fmtKc(v.celkem)} s DPH (${fmtNum(v.podlahova)} m² podlahové plochy).`, false);
-  document.getElementById("nabidka").scrollIntoView({behavior:"smooth"});
+  <div class="parties">
+    <div class="party"><div class="h">Dodavatel</div>
+      <div class="nm">${esc(sup.jmeno)}</div><div>${supLines}</div></div>
+    <div class="party"><div class="h">Zákazník</div>
+      <div class="nm">${esc(cust.jmeno) || "—"}</div><div>${custLines}</div></div>
+  </div>
+
+  ${Q.uvod ? `<div class="uvod">${esc(Q.uvod)}</div>` : ""}
+
+  <table>
+    <thead><tr><th>Položka</th><th>Výpočet</th><th></th><th class="r">Cena bez DPH</th></tr></thead>
+    <tbody>${itemsBody}</tbody>
+  </table>
+
+  <div class="totals"><div class="box">
+    <div class="l"><span>Součet položek bez DPH</span><span>${kc(c.subtotal)}</span></div>
+    ${c.sleva > 0 ? `<div class="l disc"><span>${esc(Q.sleva.popis || "Sleva")}</span><span>− ${kc(c.sleva)}</span></div>
+      <div class="l"><span>Cena po slevě bez DPH</span><span>${kc(c.base)}</span></div>` : ""}
+    <div class="l"><span>DPH ${fmt(c.dphRate)} %</span><span>${kc(c.dph)}</span></div>
+    <div class="l tot"><span>Celkem s DPH</span><span>${kc(c.total)}</span></div>
+  </div></div>
+
+  ${c.podlahova > 0 ? `<div class="perm2">
+    <span>Podlahová plocha <b>${fmt(c.podlahova)} m²</b></span>
+    <span>Cena za m² podlahové plochy <b>${kc(c.perM2)}</b> s DPH</span></div>` : ""}
+
+  ${splatky}
+  ${pozn}
+
+  ${s.podpisy ? `<div class="signs">
+    <div>${esc(sup.jmeno)} — dodavatel</div>
+    <div>${esc(cust.jmeno) || "Zákazník"} — odběratel</div></div>` : ""}
+
+  <div class="dfoot">
+    <span>${esc(sup.jmeno)}${sup.ico ? " · IČO " + esc(sup.ico) : ""}${sup.banka ? " · " + esc(sup.banka) : ""}</span>
+    <span>${esc(s.footer)}</span>
+  </div>`;
 }
 
-function esc(s){
-  return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-function setStatus(id, msg, isErr){
-  const el = document.getElementById(id);
-  el.textContent = msg;
-  el.className = "status " + (isErr ? "err" : "ok");
+function renderDoc() {
+  const html = docHTML();
+  $("docPreview").innerHTML = html;
+  $("docPrint").innerHTML = html;
 }
 
-document.getElementById("btnVypocet").addEventListener("click", sestavNabidku);
-document.getElementById("pGaraz").addEventListener("change", e => {
-  document.getElementById("garazPlochaWrap").style.display = e.target.checked ? "inline-flex" : "none";
-});
+/* ---------------- archiv ---------------- */
 
-/* ---------------- Claude API agent ---------------- */
-async function claudeRequest(body){
-  const key = localStorage.getItem(LS.apikey) || "";
-  if(!key) throw new Error("Chybí API klíč — vyplň ho v Nastavení (sekce C).");
+function statusChip(st) {
+  return `<span class="chip chip-${esc(st)}">${esc(LABELS.status[st] || st)}</span>`;
+}
+
+function quoteTotal(q) {
+  const keep = Q;
+  Q = q;
+  const c = recalc();
+  Q = keep;
+  recalc();
+  return c;
+}
+
+function renderArchive() {
+  const term = ($("archSearch").value || "").trim().toLowerCase();
+  const filter = $("archFilter").value;
+  const all = DB.quotes.slice().sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+  const list = all.filter(q => {
+    if (filter && q.status !== filter) return false;
+    if (!term) return true;
+    return [q.number, q.customer.jmeno, q.customer.misto, q.customer.email]
+      .filter(Boolean).join(" ").toLowerCase().includes(term);
+  });
+
+  $("cntQuotes").textContent = String(all.length);
+  $("archNote").textContent = list.length === all.length
+    ? all.length + (all.length === 1 ? " nabídka" : all.length < 5 ? " nabídky" : " nabídek")
+    : "zobrazeno " + list.length + " z " + all.length;
+
+  // statistiky
+  const totals = all.map(q => ({q, c: quoteTotal(q)}));
+  const sum = (pred) => totals.filter(x => pred(x.q)).reduce((s, x) => s + x.c.total, 0);
+  const cnt = (st) => all.filter(q => q.status === st).length;
+  $("statsBox").innerHTML = `
+    <div class="stat"><div class="lbl">Nabídek celkem</div><div class="val">${all.length}</div></div>
+    <div class="stat accent"><div class="lbl">Hodnota odeslaných</div><div class="val">${kc(sum(q => q.status === "odeslana"))}</div></div>
+    <div class="stat good"><div class="lbl">Přijaté zakázky</div><div class="val">${kc(sum(q => q.status === "prijata"))}</div></div>
+    <div class="stat"><div class="lbl">Úspěšnost</div><div class="val">${(() => {
+      const rozhodnute = cnt("prijata") + cnt("zamitnuta");
+      return rozhodnute ? Math.round(cnt("prijata") / rozhodnute * 100) + " %" : "—";
+    })()}</div></div>`;
+
+  const t = $("archTable");
+  if (!list.length) {
+    t.innerHTML = `<tbody><tr><td class="empty">
+      <b>${all.length ? "Nic nenalezeno" : "Zatím žádné nabídky"}</b>
+      ${all.length ? "Zkus jiný hledaný výraz nebo filtr." : "Vytvoř první nabídku tlačítkem níže."}</td></tr></tbody>`;
+    return;
+  }
+  t.innerHTML = `<thead><tr>
+      <th>Číslo</th><th>Zákazník</th><th>Stavba</th><th>Stav</th><th class="num">Celkem s DPH</th><th></th>
+    </tr></thead><tbody>${list.map(q => {
+      const c = quoteTotal(q);
+      const isDraft = Q && q.id === Q.id;
+      return `<tr class="clickrow" data-open="${esc(q.id)}">
+        <td><span class="archline">${esc(q.number || "—")}</span>
+          <div class="archsub">${czDate(q.date)}${isDraft ? " · rozpracovaná" : ""}</div></td>
+        <td>${esc(q.customer.jmeno) || "<span class='archsub'>bez jména</span>"}
+          <div class="archsub">${esc(q.customer.misto || q.customer.email || "")}</div></td>
+        <td class="archsub">${esc(LABELS.konstrukce[q.params.konstrukce] || "")}<br>
+          ${fmt(q.params.plocha)} m² · ${num(q.params.podlazi)} podl.</td>
+        <td>${statusChip(q.status)}</td>
+        <td class="money">${kc(c.total)}</td>
+        <td style="white-space:nowrap;width:1%;">
+          <button class="btn btn-ghost btn-sm" data-dup="${esc(q.id)}" type="button" title="Vytvořit kopii">⧉</button>
+          <button class="icobtn" data-del="${esc(q.id)}" type="button" title="Smazat">✕</button>
+        </td></tr>`;
+    }).join("")}</tbody>`;
+
+  t.querySelectorAll("[data-open]").forEach(tr => tr.addEventListener("click", e => {
+    if (e.target.closest("[data-dup],[data-del]")) return;
+    openQuote(tr.dataset.open);
+  }));
+  t.querySelectorAll("[data-dup]").forEach(b => b.addEventListener("click", e => {
+    e.stopPropagation(); duplicateQuote(b.dataset.dup);
+  }));
+  t.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", e => {
+    e.stopPropagation(); deleteQuote(b.dataset.del);
+  }));
+}
+
+function openQuote(id) {
+  const q = DB.quotes.find(x => x.id === id);
+  if (!q) return;
+  Q = deepCopy(q);
+  rebuildItems();
+  fillForm(); renderAll(); showView("nabidka");
+  toast("Nabídka " + (q.number || "") + " otevřena");
+}
+
+function duplicateQuote(id) {
+  const q = DB.quotes.find(x => x.id === id);
+  if (!q) return;
+  const copy = deepCopy(q);
+  copy.id = freshQuote().id;
+  copy.number = null;
+  copy.status = "koncept";
+  copy.date = todayISO();
+  copy.createdAt = copy.updatedAt = Date.now();
+  Q = copy;
+  rebuildItems(); fillForm(); renderAll(); showView("nabidka"); autosave();
+  toast("Kopie vytvořena — dostane nové číslo při uložení", "ok");
+}
+
+function deleteQuote(id) {
+  const q = DB.quotes.find(x => x.id === id);
+  if (!q) return;
+  const jmeno = q.customer.jmeno ? " (" + q.customer.jmeno + ")" : "";
+  if (!confirm("Smazat nabídku " + (q.number || "") + jmeno + "?\n\nTuto akci nelze vzít zpět.")) return;
+  DB.quotes = DB.quotes.filter(x => x.id !== id);
+  save(); renderArchive();
+  toast("Nabídka smazána");
+}
+
+/* ---------------- číslování a ukládání nabídky ---------------- */
+
+function nextNumberPreview() {
+  const year = new Date(Q.date + "T12:00:00").getFullYear() || new Date().getFullYear();
+  const n = (DB.counter.year === year ? DB.counter.n : 0) + 1;
+  return year + "-" + String(n).padStart(3, "0");
+}
+
+function assignNumber() {
+  const year = new Date(Q.date + "T12:00:00").getFullYear() || new Date().getFullYear();
+  if (DB.counter.year !== year) DB.counter = {year, n: 0};
+  DB.counter.n += 1;
+  Q.number = year + "-" + String(DB.counter.n).padStart(3, "0");
+}
+
+function saveQuote(silent) {
+  if (num(Q.params.plocha) <= 0) { toast("Zadej zastavěnou plochu.", "err"); return false; }
+  if (!Q.number) assignNumber();
+  Q.updatedAt = Date.now();
+  const idx = DB.quotes.findIndex(x => x.id === Q.id);
+  const snap = deepCopy(Q);
+  if (idx >= 0) DB.quotes[idx] = snap; else DB.quotes.push(snap);
+  save();
+  $("qNumber").value = Q.number;
+  renderArchive(); renderDoc();
+  if (!silent) toast("Nabídka " + Q.number + " uložena", "ok");
+  return true;
+}
+
+let autosaveTimer = null;
+function autosave() {
+  clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(() => { Q.updatedAt = Date.now(); save(); }, 700);
+}
+
+/* ---------------- ceník ---------------- */
+
+function renderCenik() {
+  const basisOpts = (v) => [["zastavena","dle zastavěné"],["podlahova","dle podlahové"],["fix","vlastní množství"]]
+    .map(([k, l]) => `<option value="${k}" ${v === k ? "selected" : ""}>${l}</option>`).join("");
+
+  const table = (grp, el) => {
+    const list = DB.cenik.map((it, i) => ({it, i})).filter(x => x.it.grp === grp);
+    if (!list.length) {
+      el.innerHTML = `<tbody><tr><td class="empty"><b>Prázdné</b>Přidej první položku.</td></tr></tbody>`;
+      return;
+    }
+    el.innerHTML = `<thead><tr>
+        <th>Položka</th><th class="num">Cena</th><th>Jedn.</th><th>Množství</th>
+        ${grp === "extra" ? '<th class="num">Výchozí ks</th>' : ""}
+        <th title="Násobit koeficienty konstrukce a standardu">K</th><th></th>
+      </tr></thead><tbody>${list.map(({it, i}) => `<tr>
+        <td><input type="text" data-clabel="${i}" value="${esc(it.label)}"></td>
+        <td class="num"><input type="number" class="w-price" data-cprice="${i}" value="${it.price}" min="0" step="100"></td>
+        <td><input type="text" class="w-unit" data-cunit="${i}" value="${esc(it.unit)}"></td>
+        <td><select data-cbasis="${i}" style="min-width:150px;">${basisOpts(it.basis)}</select></td>
+        ${grp === "extra" ? `<td class="num"><input type="number" class="w-qty" data-cqty="${i}" value="${num(it.qty, 1)}" min="0" step="1" ${it.basis === "fix" ? "" : "disabled"}></td>` : ""}
+        <td><input type="checkbox" data-ckoef="${i}" ${it.koef ? "checked" : ""} style="accent-color:var(--blue);width:16px;height:16px;"></td>
+        <td style="width:34px;"><button class="icobtn" data-cdel="${i}" title="Odebrat" type="button">✕</button></td>
+      </tr>`).join("")}</tbody>`;
+  };
+  table("base", $("cenikBase"));
+  table("extra", $("cenikExtra"));
+
+  const onCenikChange = () => { rebuildItems(); renderExtras(); renderItems(); renderTotals(); renderDoc(); save(); };
+  document.querySelectorAll("[data-clabel]").forEach(inp => inp.addEventListener("input", () => {
+    DB.cenik[num(inp.dataset.clabel)].label = inp.value; onCenikChange();
+  }));
+  document.querySelectorAll("[data-cprice]").forEach(inp => inp.addEventListener("input", () => {
+    DB.cenik[num(inp.dataset.cprice)].price = Math.max(0, num(inp.value)); onCenikChange();
+  }));
+  document.querySelectorAll("[data-cunit]").forEach(inp => inp.addEventListener("input", () => {
+    DB.cenik[num(inp.dataset.cunit)].unit = inp.value; onCenikChange();
+  }));
+  document.querySelectorAll("[data-cbasis]").forEach(sel => sel.addEventListener("change", () => {
+    DB.cenik[num(sel.dataset.cbasis)].basis = sel.value; renderCenik(); onCenikChange();
+  }));
+  document.querySelectorAll("[data-cqty]").forEach(inp => inp.addEventListener("input", () => {
+    DB.cenik[num(inp.dataset.cqty)].qty = Math.max(0, num(inp.value)); onCenikChange();
+  }));
+  document.querySelectorAll("[data-ckoef]").forEach(chk => chk.addEventListener("change", () => {
+    DB.cenik[num(chk.dataset.ckoef)].koef = chk.checked; onCenikChange();
+  }));
+  document.querySelectorAll("[data-cdel]").forEach(btn => btn.addEventListener("click", () => {
+    const i = num(btn.dataset.cdel);
+    const it = DB.cenik[i];
+    if (!confirm('Odebrat položku "' + it.label + '" z ceníku?')) return;
+    delete Q.extras[it.id];
+    DB.cenik.splice(i, 1);
+    renderCenik(); onCenikChange();
+    toast("Položka odebrána z ceníku");
+  }));
+
+  // koeficienty
+  const koefBox = (key, el, labels) => {
+    el.innerHTML = Object.keys(DB.koef[key]).map(k => `<div>
+      <label>${esc(labels[k] || k)}</label>
+      <input type="number" data-koef="${key}:${k}" value="${DB.koef[key][k]}" min="0" max="5" step="0.01">
+    </div>`).join("");
+  };
+  koefBox("konstrukce", $("koefKonstrukce"), LABELS.konstrukce);
+  koefBox("standard", $("koefStandard"), LABELS.standard);
+  koefBox("strecha", $("koefStrecha"), LABELS.strecha);
+  document.querySelectorAll("[data-koef]").forEach(inp => inp.addEventListener("input", () => {
+    const [key, k] = inp.dataset.koef.split(":");
+    DB.koef[key][k] = Math.max(0, num(inp.value, 1));
+    renderItems(); renderTotals(); renderDoc(); save();
+  }));
+}
+
+/* ---------------- nastavení ---------------- */
+
+function fillSettings() {
+  const s = DB.settings, sup = s.supplier;
+  $("sJmeno").value = sup.jmeno; $("sIco").value = sup.ico; $("sDic").value = sup.dic;
+  $("sTel").value = sup.tel; $("sEmail").value = sup.email; $("sWeb").value = sup.web;
+  $("sAdresa").value = sup.adresa; $("sBanka").value = sup.banka;
+  $("sValid").value = s.validDays; $("sDph").value = String(s.dph);
+  $("sPodpisy").checked = !!s.podpisy; $("sSplatkyDoc").checked = !!s.splatkyDoc;
+  $("sPoznamky").value = s.poznamky; $("sFooter").value = s.footer;
+  $("sApiKey").value = s.apiKey || "";
+  $("verInfo").textContent = APP_VERSION;
+  $("brandLogo").src = logoSrc();
+  $("brandSub").textContent = sup.jmeno;
+}
+
+function bindSettings() {
+  const sup = {sJmeno:"jmeno", sIco:"ico", sDic:"dic", sTel:"tel", sEmail:"email", sWeb:"web", sAdresa:"adresa", sBanka:"banka"};
+  Object.entries(sup).forEach(([el, key]) => $(el).addEventListener("input", () => {
+    DB.settings.supplier[key] = $(el).value.trim();
+    if (key === "jmeno") $("brandSub").textContent = $(el).value.trim();
+    renderDoc(); save();
+  }));
+  $("sValid").addEventListener("input", () => { DB.settings.validDays = Math.max(1, num($("sValid").value, 14)); save(); });
+  $("sDph").addEventListener("change", () => { DB.settings.dph = num($("sDph").value); save(); });
+  $("sPodpisy").addEventListener("change", () => { DB.settings.podpisy = $("sPodpisy").checked; renderDoc(); save(); });
+  $("sSplatkyDoc").addEventListener("change", () => { DB.settings.splatkyDoc = $("sSplatkyDoc").checked; renderDoc(); save(); });
+  $("sPoznamky").addEventListener("input", () => { DB.settings.poznamky = $("sPoznamky").value; save(); });
+  $("sFooter").addEventListener("input", () => { DB.settings.footer = $("sFooter").value; renderDoc(); save(); });
+  $("sApiKey").addEventListener("change", () => { DB.settings.apiKey = $("sApiKey").value.trim(); save(); });
+
+  $("logoFile").addEventListener("change", () => {
+    const file = $("logoFile").files[0];
+    if (!file) return;
+    if (file.size > 900 * 1024) { toast("Logo je moc velké — použij obrázek do 900 kB.", "err"); return; }
+    const fr = new FileReader();
+    fr.onload = () => {
+      DB.settings.logo = String(fr.result);
+      $("brandLogo").src = logoSrc(); renderDoc(); save();
+      toast("Logo nahráno", "ok");
+    };
+    fr.onerror = () => toast("Obrázek se nepodařilo načíst.", "err");
+    fr.readAsDataURL(file);
+  });
+  $("btnLogoReset").addEventListener("click", () => {
+    DB.settings.logo = null; $("logoFile").value = "";
+    $("brandLogo").src = logoSrc(); renderDoc(); save();
+    toast("Vráceno výchozí logo");
+  });
+}
+
+/* ---------------- export / import ---------------- */
+
+function download(name, content, mime) {
+  const blob = new Blob([content], {type: mime || "application/octet-stream"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+
+function exportBackup() {
+  const data = deepCopy(DB);
+  delete data.settings.apiKey;          // klíč se do zálohy nedává
+  data.exportedAt = new Date().toISOString();
+  data.appVersion = APP_VERSION;
+  download("isopaneels-nabidky-zaloha-" + todayISO() + ".json", JSON.stringify(data, null, 2), "application/json");
+  toast("Záloha uložena (API klíč do souboru nezapisujeme)", "ok");
+}
+
+function importBackup(file) {
+  const fr = new FileReader();
+  fr.onload = () => {
+    let data = null;
+    try { data = JSON.parse(String(fr.result)); } catch (e) { data = null; }
+    if (!data || !Array.isArray(data.quotes)) { toast("Tohle není platná záloha aplikace.", "err"); return; }
+    const pocet = data.quotes.length;
+    if (!confirm("Načíst zálohu?\n\nNabídek v souboru: " + pocet +
+                 "\nSoučasná data (" + DB.quotes.length + " nabídek) budou přepsána.")) return;
+    const apiKey = DB.settings.apiKey;    // klíč zůstává z tohoto zařízení, v záloze není
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(data));
+    } catch (e) {
+      toast("Zálohu se nepodařilo uložit — je příliš velká pro tento prohlížeč.", "err");
+      return;
+    }
+    load();                                // znovu načte a doplní případné chybějící klíče
+    DB.settings.apiKey = apiKey;
+    Q = (DB.draft && DB.draft.id) ? DB.draft : freshQuote();
+    if (!Array.isArray(Q.splatky) || !Q.splatky.length) Q.splatky = deepCopy(DB.splatkyTpl);
+    if (!Q.extras) Q.extras = {};
+    rebuildItems();
+    fillSettings(); fillForm(); renderCenik(); renderAll(); renderArchive();
+    save();
+    toast("Záloha načtena — " + pocet + " nabídek", "ok");
+  };
+  fr.onerror = () => toast("Soubor se nepodařilo přečíst.", "err");
+  fr.readAsText(file);
+}
+
+function exportCsv() {
+  const head = ["Číslo", "Datum", "Stav", "Zákazník", "E-mail", "Telefon", "Místo stavby",
+                "Konstrukce", "Zastavěná m²", "Podlaží", "Bez DPH", "DPH", "Celkem s DPH"];
+  const rows = DB.quotes.slice().sort((a, b) => (a.number || "").localeCompare(b.number || "")).map(q => {
+    const c = quoteTotal(q);
+    return [q.number || "", czDate(q.date), LABELS.status[q.status] || q.status,
+            q.customer.jmeno, q.customer.email, q.customer.tel, q.customer.misto,
+            LABELS.konstrukce[q.params.konstrukce] || "", q.params.plocha, q.params.podlazi,
+            Math.round(c.base), Math.round(c.dph), Math.round(c.total)];
+  });
+  const csv = [head].concat(rows)
+    .map(r => r.map(v => '"' + String(v ?? "").replace(/"/g, '""') + '"').join(";")).join("\r\n");
+  download("isopaneels-nabidky-" + todayISO() + ".csv", "\ufeff" + csv, "text/csv;charset=utf-8");
+  toast("Přehled uložen do CSV", "ok");
+}
+
+/* ---------------- AI agent ---------------- */
+
+async function claudeRequest(body) {
+  const key = (DB.settings.apiKey || "").trim();
+  if (!key) throw new Error("Chybí API klíč — vlož ho v Nastavení → AI agent.");
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
@@ -504,145 +1544,358 @@ async function claudeRequest(body){
     },
     body: JSON.stringify(body),
   });
-  const data = await res.json();
-  if(!res.ok){
-    throw new Error(`API chyba ${res.status}: ${data?.error?.message || JSON.stringify(data)}`);
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    const msg = (data && data.error && data.error.message) || ("HTTP " + res.status);
+    if (res.status === 401) throw new Error("API klíč není platný — zkontroluj ho v Nastavení.");
+    if (res.status === 400 && /credit|balance/i.test(msg)) throw new Error("Na účtu Anthropic není kredit.");
+    if (res.status === 429) throw new Error("Příliš mnoho požadavků — zkus to za chvíli.");
+    throw new Error("Chyba API: " + msg);
   }
-  if(data.stop_reason === "refusal"){
-    throw new Error("Model požadavek odmítl zpracovat.");
-  }
-  const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("");
-  if(!text) throw new Error("Prázdná odpověď modelu.");
+  if (!data) throw new Error("Neplatná odpověď serveru.");
+  if (data.stop_reason === "refusal") throw new Error("Model požadavek odmítl zpracovat.");
+  const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("").trim();
+  if (!text) throw new Error("Model nevrátil žádný text.");
   return text;
 }
 
 const nullable = (schema) => ({anyOf: [schema, {type: "null"}]});
-const PARSE_SCHEMA = {
-  type: "object",
-  properties: {
-    zakaznik: {
-      type: "object",
-      properties: {
-        jmeno: nullable({type:"string"}),
-        email: nullable({type:"string"}),
-        telefon: nullable({type:"string"}),
-        mistoStavby: nullable({type:"string"}),
-      },
-      required: ["jmeno","email","telefon","mistoStavby"],
-      additionalProperties: false,
-    },
-    stavba: {
-      type: "object",
-      properties: {
-        konstrukce: nullable({type:"string", enum:["zdena","drevostavba","montovana"]}),
-        zastavenaPlochaM2: nullable({type:"number"}),
-        pocetPodlazi: nullable({type:"integer"}),
-        strecha: nullable({type:"string", enum:["sedlova","plocha"]}),
-        standard: nullable({type:"string", enum:["ekonomicky","standardni","nadstandardni"]}),
-        sklep: nullable({type:"boolean"}),
-        garaz: nullable({type:"boolean"}),
-        garazPlochaM2: nullable({type:"number"}),
-      },
-      required: ["konstrukce","zastavenaPlochaM2","pocetPodlazi","strecha","standard","sklep","garaz","garazPlochaM2"],
-      additionalProperties: false,
-    },
-    shrnuti: {type:"string"},
-  },
-  required: ["zakaznik","stavba","shrnuti"],
-  additionalProperties: false,
-};
 
-document.getElementById("btnAgent").addEventListener("click", async () => {
-  const poptavka = document.getElementById("poptavka").value.trim();
-  if(!poptavka){ setStatus("agentStatus", "Nejdřív vlož text poptávky.", true); return; }
-  const btn = document.getElementById("btnAgent");
+function parseSchema() {
+  const extraIds = DB.cenik.filter(x => x.grp === "extra").map(x => x.id);
+  return {
+    type: "object",
+    properties: {
+      zakaznik: {
+        type: "object",
+        properties: {
+          jmeno: nullable({type: "string"}), email: nullable({type: "string"}),
+          telefon: nullable({type: "string"}), mistoStavby: nullable({type: "string"}),
+        },
+        required: ["jmeno", "email", "telefon", "mistoStavby"],
+        additionalProperties: false,
+      },
+      stavba: {
+        type: "object",
+        properties: {
+          konstrukce: nullable({type: "string", enum: ["clt", "sendvic", "drevostavba", "zdena"]}),
+          zastavenaPlochaM2: nullable({type: "number"}),
+          pocetPodlazi: nullable({type: "integer"}),
+          strecha: nullable({type: "string", enum: ["sedlova", "pultova", "plocha"]}),
+          standard: nullable({type: "string", enum: ["ekonomicky", "standardni", "nadstandardni"]}),
+        },
+        required: ["konstrukce", "zastavenaPlochaM2", "pocetPodlazi", "strecha", "standard"],
+        additionalProperties: false,
+      },
+      volitelnePolozky: {
+        type: "array",
+        items: {type: "string", enum: extraIds.length ? extraIds : ["zadne"]},
+      },
+      shrnuti: {type: "string"},
+      nejasnosti: {type: "array", items: {type: "string"}},
+    },
+    required: ["zakaznik", "stavba", "volitelnePolozky", "shrnuti", "nejasnosti"],
+    additionalProperties: false,
+  };
+}
+
+async function runAgent() {
+  const text = ($("poptavka").value || "").trim();
+  if (!text) { toast("Nejdřív vlož text poptávky.", "err"); return; }
+  const btn = $("btnAgent");
   btn.disabled = true;
-  setStatus("agentStatus", "Agent čte poptávku…", false);
-  try{
-    const text = await claudeRequest({
+  const orig = btn.textContent;
+  btn.textContent = "🤖 Agent čte poptávku…";
+  try {
+    const katalog = DB.cenik.filter(x => x.grp === "extra")
+      .map(x => "- " + x.id + ": " + x.label).join("\n");
+    const out = await claudeRequest({
       model: "claude-opus-4-8",
       max_tokens: 4096,
-      system: "Jsi asistent stavební firmy ISO.Paneels s.r.o. (stavby z CLT panelů, sendvičové panely, průmyslové haly i rodinné domy). Z textu poptávky zákazníka vytěžíš parametry pro cenovou nabídku na stavbu domu. Rozměry jako '10×12 m' převeď na zastavěnou plochu v m². 'Patrový' nebo 'dvoupodlažní' dům = 2 podlaží, 'bungalov' nebo 'přízemní' = 1 podlaží. Stavby z CLT nebo panelů spadají pod konstrukci 'drevostavba'. Pokud údaj v textu není, vrať null — nic si nevymýšlej.",
-      output_config: {format: {type: "json_schema", schema: PARSE_SCHEMA}},
-      messages: [{role: "user", content: "Poptávka zákazníka:\n\n" + poptavka}],
+      system:
+        "Jsi asistent stavební firmy ISO.Paneels s.r.o. (moderní budovy z CLT panelů, sendvičové panely, " +
+        "průmyslové haly i rodinné domy). Z poptávky zákazníka vytěžíš parametry pro cenovou nabídku.\n\n" +
+        "Pravidla:\n" +
+        "- Rozměry typu '10×12 m' převeď na zastavěnou plochu v m².\n" +
+        "- Pokud zákazník uvede celkovou/užitnou/podlahovou plochu a počet podlaží, vyděl ji počtem podlaží " +
+        "a vrať zastavěnou plochu; do 'nejasnosti' uveď, že jsi tak počítal.\n" +
+        "- 'Patrový', 'dvoupodlažní', 'dvě patra' = 2 podlaží; 'bungalov', 'přízemní' = 1 podlaží.\n" +
+        "- Zmínka o CLT nebo panelech = konstrukce 'clt'; sendvičové panely = 'sendvic'.\n" +
+        "- Náznak drahého vybavení (mramor, dubové podlahy, luxusní, nadstandard) = standard 'nadstandardni'; " +
+        "levně/úsporně/nejnižší cena = 'ekonomicky'.\n" +
+        "- Do 'volitelnePolozky' vyber ID položek z katalogu, které zákazník zmínil.\n" +
+        "- Co v textu není, vrať jako null. Nic si nedomýšlej.\n" +
+        "- Do 'nejasnosti' napiš krátké body, co je potřeba se zákazníkem doladit.\n\n" +
+        "Katalog volitelných položek:\n" + katalog,
+      output_config: {format: {type: "json_schema", schema: parseSchema()}},
+      messages: [{role: "user", content: "Poptávka zákazníka:\n\n" + text}],
     });
-    const r = JSON.parse(text);
-    const setVal = (id, val) => { if(val !== null && val !== undefined && val !== "") document.getElementById(id).value = val; };
-    setVal("zJmeno", r.zakaznik.jmeno);
-    setVal("zEmail", r.zakaznik.email);
-    setVal("zTel",   r.zakaznik.telefon);
-    setVal("zMisto", r.zakaznik.mistoStavby);
-    setVal("pKonstrukce", r.stavba.konstrukce);
-    setVal("pPlocha", r.stavba.zastavenaPlochaM2);
-    setVal("pPodlazi", r.stavba.pocetPodlazi);
-    setVal("pStrecha", r.stavba.strecha);
-    setVal("pStandard", r.stavba.standard);
-    if(r.stavba.sklep !== null) document.getElementById("pSklep").checked = r.stavba.sklep;
-    if(r.stavba.garaz !== null){
-      document.getElementById("pGaraz").checked = r.stavba.garaz;
-      document.getElementById("garazPlochaWrap").style.display = r.stavba.garaz ? "inline-flex" : "none";
-    }
-    setVal("pGarazPlocha", r.stavba.garazPlochaM2);
-    setStatus("agentStatus", "Vyplněno: " + r.shrnuti + " — zkontroluj hodnoty a spočítej nabídku.", false);
-  }catch(e){
-    setStatus("agentStatus", e.message, true);
-  }finally{
-    btn.disabled = false;
-  }
-});
+    const r = JSON.parse(out);
 
-document.getElementById("btnUvodAI").addEventListener("click", async () => {
-  const btn = document.getElementById("btnUvodAI");
+    if (r.zakaznik.jmeno) Q.customer.jmeno = r.zakaznik.jmeno;
+    if (r.zakaznik.email) Q.customer.email = r.zakaznik.email;
+    if (r.zakaznik.telefon) Q.customer.tel = r.zakaznik.telefon;
+    if (r.zakaznik.mistoStavby) Q.customer.misto = r.zakaznik.mistoStavby;
+    const st = r.stavba;
+    if (st.konstrukce) Q.params.konstrukce = st.konstrukce;
+    if (st.zastavenaPlochaM2 > 0) Q.params.plocha = Math.round(st.zastavenaPlochaM2);
+    if (st.pocetPodlazi > 0) Q.params.podlazi = st.pocetPodlazi;
+    if (st.strecha) Q.params.strecha = st.strecha;
+    if (st.standard) Q.params.standard = st.standard;
+    (r.volitelnePolozky || []).forEach(id => {
+      const it = DB.cenik.find(x => x.id === id && x.grp === "extra");
+      if (it) Q.extras[id] = num(it.qty, 1);
+    });
+    Q.poptavka = text;
+
+    rebuildItems(); fillForm(); renderAll(); autosave();
+    toast("Vyplněno: " + r.shrnuti, "ok");
+    if ((r.nejasnosti || []).length) {
+      toast("Doladit se zákazníkem: " + r.nejasnosti.join(" · "));
+    }
+  } catch (e) {
+    toast(e.message, "err");
+  } finally {
+    btn.disabled = false; btn.textContent = orig;
+  }
+}
+
+function quoteSummaryForAI() {
+  const c = recalc();
+  const p = Q.params;
+  const polozky = c.rows.map(r => "- " + r.label + ": " + fmt(r.qty) + " " + r.unit + " → " + kc(r.total)).join("\n");
+  return [
+    "Konstrukce: " + LABELS.konstrukce[p.konstrukce],
+    "Zastavěná plocha: " + fmt(p.plocha) + " m², podlaží: " + num(p.podlazi) +
+      " (podlahová plocha " + fmt(c.podlahova) + " m²)",
+    "Střecha: " + LABELS.strecha[p.strecha] + ", provedení: " + LABELS.standard[p.standard],
+    "Položky nabídky:\n" + polozky,
+    c.sleva > 0 ? "Sleva: " + kc(c.sleva) : "",
+    "Cena celkem: " + kc(c.total) + " s DPH (" + kc(c.perM2) + " za m² podlahové plochy)",
+    "Platnost nabídky do: " + addDays(Q.date, num(Q.validDays, 14)),
+  ].filter(Boolean).join("\n");
+}
+
+async function runIntro() {
+  const btn = $("btnUvodAI");
   btn.disabled = true;
-  setStatus("vypocetStatus", "Agent píše průvodní text…", false);
-  try{
-    const p = getParams();
-    const v = spocitat(p);
-    const dod = loadDod();
-    const popis = `Konstrukce: ${KONSTRUKCE_LABEL[p.konstrukce]}, zastavěná plocha ${p.zastavenaPlocha} m², `
-      + `${p.podlazi} podlaží, střecha ${STRECHA_LABEL[p.strecha]}, standard ${STANDARD_LABEL[p.standard]}`
-      + `${p.sklep ? ", se sklepem" : ""}${p.garaz ? ", s garáží " + p.garazPlocha + " m²" : ""}. `
-      + `Celková cena ${fmtKc(v.celkem)} s DPH.`;
-    uvodniText = (await claudeRequest({
+  const orig = btn.textContent;
+  btn.textContent = "🤖 Píšu…";
+  try {
+    const sup = DB.settings.supplier;
+    const out = await claudeRequest({
+      model: "claude-opus-4-8",
+      max_tokens: 1024,
+      system: "Píšeš za firmu " + sup.jmeno + " (moderní budovy z CLT a sendvičových panelů). " +
+        "Napiš úvodní odstavec cenové nabídky: oslovení zákazníka, poděkování za poptávku a jednou větou, " +
+        "co nabídka pokrývá. Česky, profesionálně, srdečně, 2 až 4 věty. Vrať POUZE text odstavce — " +
+        "žádný nadpis, podpis, odrážky ani konkrétní ceny.",
+      messages: [{role: "user", content:
+        "Zákazník: " + (Q.customer.jmeno || "(jméno neuvedeno)") + "\n\n" + quoteSummaryForAI() +
+        (Q.poptavka ? "\n\nPůvodní poptávka:\n" + Q.poptavka : "")}],
+    });
+    Q.uvod = out;
+    $("uvod").value = out;
+    renderDoc(); autosave();
+    toast("Průvodní text vložen", "ok");
+  } catch (e) {
+    toast(e.message, "err");
+  } finally {
+    btn.disabled = false; btn.textContent = orig;
+  }
+}
+
+async function runMail() {
+  const btn = $("btnMailAI");
+  btn.disabled = true;
+  const orig = btn.textContent;
+  btn.textContent = "✉️ Připravuji…";
+  try {
+    const sup = DB.settings.supplier;
+    const out = await claudeRequest({
       model: "claude-opus-4-8",
       max_tokens: 2048,
-      system: `Píšeš za firmu ${dod.jmeno} (moderní stavby z CLT panelů, sendvičové panely). Piš česky, profesionálně, srdečně a stručně — 2 až 4 věty. Vrať pouze samotný text úvodního odstavce cenové nabídky (oslovení zákazníka, poděkování za poptávku, krátké shrnutí co nabídka pokrývá). Žádné nadpisy, žádný podpis, žádné ceny v textu.`,
+      system: "Píšeš e-mail za firmu " + sup.jmeno + ". Napiš zprávu, kterou dodavatel pošle zákazníkovi " +
+        "spolu s přiloženou cenovou nabídkou v PDF. Struktura: první řádek 'Předmět: …', pak prázdný řádek " +
+        "a text e-mailu. Zmiň klíčové parametry stavby, celkovou cenu, platnost nabídky a vyzvi k nezávazné " +
+        "schůzce. Česky, profesionálně, srdečně, maximálně 200 slov. Podpis: " +
+        [sup.jmeno, sup.tel, sup.email].filter(Boolean).join(", ") + ". Vrať pouze e-mail.",
       messages: [{role: "user", content:
-        `Napiš úvodní odstavec nabídky pro zákazníka ${p.zakaznik.jmeno || "(jméno neuvedeno)"}. Parametry stavby: ${popis}`
-        + (document.getElementById("poptavka").value.trim() ? `\n\nPůvodní poptávka zákazníka:\n${document.getElementById("poptavka").value.trim()}` : "")}],
-    })).trim();
-    sestavNabidku();
-  }catch(e){
-    setStatus("vypocetStatus", e.message, true);
-  }finally{
-    btn.disabled = false;
+        "Zákazník: " + (Q.customer.jmeno || "(jméno neuvedeno)") +
+        "\nČíslo nabídky: " + (Q.number || nextNumberPreview()) + "\n\n" + quoteSummaryForAI()}],
+    });
+    try {
+      await navigator.clipboard.writeText(out);
+      toast("E-mail zkopírován do schránky — vlož ho do pošty (Ctrl+V)", "ok");
+    } catch (e) {
+      toast("E-mail připraven níže v poli průvodního textu (schránka není dostupná)");
+      $("uvod").value = out; Q.uvod = out; renderDoc();
+    }
+  } catch (e) {
+    toast(e.message, "err");
+  } finally {
+    btn.disabled = false; btn.textContent = orig;
   }
-});
+}
 
-/* ---------------- init ---------------- */
-renderCenik();
-bindSettings();
+/* ---------------- navigace a vykreslení ---------------- */
+
+function showView(name) {
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === "view-" + name));
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.view === name));
+  $("stickyBar").classList.toggle("show", name === "nabidka");
+  if (name === "archiv") renderArchive();
+  if (name === "cenik") renderCenik();
+  window.scrollTo({top: 0, behavior: "instant"});
+}
+
+function renderAll() {
+  renderExtras(); renderItems(); renderSplatky(); renderTotals(); renderDoc();
+  $("qNumber").value = Q.number || "(přidělí se při uložení)";
+}
+
+/* ---------------- obsluha formuláře ---------------- */
+
+function bindQuoteForm() {
+  const cust = {zJmeno:"jmeno", zEmail:"email", zTel:"tel", zMisto:"misto"};
+  Object.entries(cust).forEach(([el, key]) => $(el).addEventListener("input", () => {
+    Q.customer[key] = $(el).value; renderDoc(); autosave();
+  }));
+
+  const params = {pKonstrukce:"konstrukce", pStrecha:"strecha", pStandard:"standard"};
+  Object.entries(params).forEach(([el, key]) => $(el).addEventListener("change", () => {
+    Q.params[key] = $(el).value;
+    rebuildItems(); renderItems(); renderTotals(); renderDoc(); autosave();
+  }));
+  $("pDph").addEventListener("change", () => {
+    Q.params.dph = num($("pDph").value); renderTotals(); renderDoc(); autosave();
+  });
+  ["pPlocha", "pPodlazi"].forEach(el => $(el).addEventListener("input", () => {
+    Q.params[el === "pPlocha" ? "plocha" : "podlazi"] = Math.max(0, num($(el).value));
+    rebuildItems(); renderExtras(); renderItems(); renderTotals(); renderDoc(); autosave();
+  }));
+
+  $("slevaVal").addEventListener("input", () => { Q.sleva.val = Math.max(0, num($("slevaVal").value)); renderTotals(); renderDoc(); autosave(); });
+  $("slevaTyp").addEventListener("change", () => { Q.sleva.typ = $("slevaTyp").value; renderTotals(); renderDoc(); autosave(); });
+  $("slevaPopis").addEventListener("input", () => { Q.sleva.popis = $("slevaPopis").value; renderDoc(); autosave(); });
+
+  $("uvod").addEventListener("input", () => { Q.uvod = $("uvod").value; renderDoc(); autosave(); });
+  $("poznamky").addEventListener("input", () => { Q.poznamky = $("poznamky").value; renderDoc(); autosave(); });
+  $("qStatus").addEventListener("change", () => { Q.status = $("qStatus").value; autosave(); if (Q.number) saveQuote(true); });
+  $("qDate").addEventListener("change", () => { Q.date = $("qDate").value || todayISO(); renderDoc(); autosave(); });
+  $("qValid").addEventListener("input", () => { Q.validDays = Math.max(1, num($("qValid").value, 14)); renderDoc(); autosave(); });
+
+  $("btnAddItem").addEventListener("click", () => {
+    Q.items.push({key: "own" + Date.now().toString(36), label: "", qty: 1, unit: "ks",
+                  price: 0, koef: false, manual: true, custom: true, grp: "own"});
+    renderItems(); renderTotals(); renderDoc(); autosave();
+    const inputs = $("itemsTable").querySelectorAll("[data-ilabel]");
+    if (inputs.length) inputs[inputs.length - 1].focus();
+  });
+  $("btnResetItems").addEventListener("click", () => {
+    Q.items = Q.items.filter(it => it.custom);
+    rebuildItems(); renderItems(); renderTotals(); renderDoc(); autosave();
+    toast("Položky přepočítány podle ceníku");
+  });
+  $("btnAddSplatka").addEventListener("click", () => {
+    Q.splatky.push({label: "Nová splátka", pct: 0}); renderSplatky(); renderDoc(); autosave();
+  });
+  $("btnResetSplatky").addEventListener("click", () => {
+    Q.splatky = deepCopy(DB.splatkyTpl); renderSplatky(); renderDoc(); autosave();
+    toast("Výchozí rozvrh splátek obnoven");
+  });
+
+  $("btnAgent").addEventListener("click", runAgent);
+  $("btnUvodAI").addEventListener("click", runIntro);
+  $("btnMailAI").addEventListener("click", runMail);
+  $("poptavka").addEventListener("input", () => { Q.poptavka = $("poptavka").value; autosave(); });
+
+  $("btnSave").addEventListener("click", () => saveQuote(false));
+  $("btnPrint").addEventListener("click", () => {
+    if (!Q.number) { if (!saveQuote(true)) return; toast("Nabídka uložena jako " + Q.number, "ok"); }
+    renderDoc();
+    setTimeout(() => window.print(), 80);
+  });
+}
+
+function bindGlobal() {
+  document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => showView(t.dataset.view)));
+  $("btnNew").addEventListener("click", () => {
+    Q = freshQuote(); rebuildItems(); fillForm(); renderAll(); showView("nabidka"); autosave();
+    toast("Nová nabídka připravena");
+  });
+  $("archSearch").addEventListener("input", renderArchive);
+  $("archFilter").addEventListener("change", renderArchive);
+  $("btnExportCsv").addEventListener("click", exportCsv);
+  $("btnExport").addEventListener("click", exportBackup);
+  $("btnImport").addEventListener("click", () => $("importFile").click());
+  $("importFile").addEventListener("change", () => {
+    const f = $("importFile").files[0];
+    if (f) importBackup(f);
+    $("importFile").value = "";
+  });
+  document.querySelectorAll("[data-addcenik]").forEach(btn => btn.addEventListener("click", () => {
+    const grp = btn.dataset.addcenik;
+    DB.cenik.push({
+      id: "c" + Date.now().toString(36), grp, label: "Nová položka", price: 0,
+      unit: grp === "extra" ? "ks" : "m²", basis: grp === "extra" ? "fix" : "podlahova",
+      koef: grp === "base", qty: 1,
+    });
+    renderCenik(); rebuildItems(); renderExtras(); renderItems(); renderTotals(); renderDoc(); save();
+  }));
+  $("btnResetCenik").addEventListener("click", () => {
+    if (!confirm("Obnovit výchozí ceník i koeficienty?\n\nVlastní ceny a položky budou přepsány.")) return;
+    DB.cenik = deepCopy(DEFAULT_CENIK);
+    DB.koef = deepCopy(DEFAULT_KOEF);
+    renderCenik(); rebuildItems(); renderExtras(); renderItems(); renderTotals(); renderDoc(); save();
+    toast("Výchozí ceník obnoven");
+  });
+
+  document.addEventListener("keydown", e => {
+    if (!(e.ctrlKey || e.metaKey)) return;
+    const k = e.key.toLowerCase();
+    if (k === "s") { e.preventDefault(); saveQuote(false); }
+    if (k === "p") { e.preventDefault(); $("btnPrint").click(); }
+  });
+}
 
 /* ---------------- PWA ---------------- */
-if("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")){
-  navigator.serviceWorker.register("sw.js").catch(() => {});
+
+function initPWA() {
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  }
+  let prompt = null;
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault(); prompt = e; $("btnInstall").style.display = "inline-flex";
+  });
+  $("btnInstall").addEventListener("click", async () => {
+    if (!prompt) return;
+    prompt.prompt();
+    await prompt.userChoice;
+    prompt = null; $("btnInstall").style.display = "none";
+  });
+  window.addEventListener("appinstalled", () => { $("btnInstall").style.display = "none"; });
 }
-let installPrompt = null;
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  installPrompt = e;
-  document.getElementById("btnInstall").style.display = "inline-block";
-});
-document.getElementById("btnInstall").addEventListener("click", async () => {
-  if(!installPrompt) return;
-  installPrompt.prompt();
-  await installPrompt.userChoice;
-  installPrompt = null;
-  document.getElementById("btnInstall").style.display = "none";
-});
-window.addEventListener("appinstalled", () => {
-  document.getElementById("btnInstall").style.display = "none";
-});
+
+/* ---------------- start ---------------- */
+
+function init() {
+  load();
+  Q = (DB.draft && DB.draft.id) ? DB.draft : freshQuote();
+  if (!Array.isArray(Q.splatky) || !Q.splatky.length) Q.splatky = deepCopy(DB.splatkyTpl);
+  if (!Q.customer) Q.customer = {jmeno:"", email:"", tel:"", misto:""};
+  if (!Q.extras) Q.extras = {};
+  rebuildItems();
+
+  fillSettings(); fillForm();
+  bindSettings(); bindQuoteForm(); bindGlobal();
+  renderAll(); renderArchive();
+  showView(DB.quotes.length ? "archiv" : "nabidka");
+  initPWA();
+}
+
+init();
 </script>
 
 </body>
