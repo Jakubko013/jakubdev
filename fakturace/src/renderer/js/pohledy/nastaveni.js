@@ -98,21 +98,29 @@
             <input type="checkbox" data-n="firma.plateceDph" ${n.firma.plateceDph ? "checked" : ""}>
             Jsem plátce DPH
           </label>
-          <div class="mrizka" style="margin-top:14px">
-            <div class="pole"><label>Zdaňovací období</label>
-              <select data-n="dph.obdobi">${ui.moznosti(
-                [
-                  { hodnota: "mesic", nazev: "Měsíční" },
-                  { hodnota: "ctvrtleti", nazev: "Čtvrtletní" },
-                ],
-                n.dph.obdobi
-              )}</select></div>
-            <div class="pole"><label>Výchozí sazba na nových položkách</label>
-              <select data-n="faktura.vychoziSazba">${ui.moznosti(
-                Fx.model.SAZBY_DPH.map((s) => ({ hodnota: s.hodnota, nazev: s.nazev })),
-                n.faktura.vychoziSazba
-              )}</select></div>
-          </div>
+          ${
+            n.firma.plateceDph
+              ? `<div class="mrizka" style="margin-top:14px">
+                   <div class="pole"><label>Zdaňovací období</label>
+                     <select data-n="dph.obdobi">${ui.moznosti(
+                       [
+                         { hodnota: "mesic", nazev: "Měsíční" },
+                         { hodnota: "ctvrtleti", nazev: "Čtvrtletní" },
+                       ],
+                       n.dph.obdobi
+                     )}</select></div>
+                   <div class="pole"><label>Výchozí sazba na nových položkách</label>
+                     <select data-n="faktura.vychoziSazba">${ui.moznosti(
+                       Fx.model.SAZBY_DPH.map((s) => ({ hodnota: s.hodnota, nazev: s.nazev })),
+                       n.faktura.vychoziSazba
+                     )}</select></div>
+                 </div>`
+              : `<div class="napoveda" style="margin-top:12px">
+                   Na fakturách se neuvádí daň a tiskne se na nich poznámka
+                   „Nejsem plátcem DPH“. Až se plátcem stanete, zaškrtněte políčko výše —
+                   dosavadní doklady zůstanou beze změny.
+                 </div>`
+          }
         </div>
       </div>
 
@@ -143,12 +151,16 @@
               }>
               Zaokrouhlovat celkovou částku na celé koruny
             </label>
-            <label class="zaskrtavaci">
-              <input type="checkbox" data-n="faktura.cenyVcetneDph" ${
-                n.faktura.cenyVcetneDph ? "checked" : ""
-              }>
-              Ceny na nových fakturách zadávám včetně DPH
-            </label>
+            ${
+              n.firma.plateceDph
+                ? `<label class="zaskrtavaci">
+                     <input type="checkbox" data-n="faktura.cenyVcetneDph" ${
+                       n.faktura.cenyVcetneDph ? "checked" : ""
+                     }>
+                     Ceny na nových fakturách zadávám včetně DPH
+                   </label>`
+                : ""
+            }
           </div>
 
           <div class="podnadpis">Číselné řady</div>

@@ -14,7 +14,7 @@
       jmeno: "",
       ico: "",
       dic: "",
-      plateceDph: true,
+      plateceDph: false,
       ulice: "",
       mesto: "",
       psc: "",
@@ -82,11 +82,20 @@
     { id: "vzdelavani", nazev: "Vzdělávání a literatura", danovy: true },
     { id: "pojisteni", nazev: "Pojištění", danovy: true },
     { id: "poplatky", nazev: "Bankovní a správní poplatky", danovy: true },
-    { id: "socialni", nazev: "Sociální a zdravotní pojištění OSVČ", danovy: false },
-    { id: "dane", nazev: "Daně a odvody", danovy: false },
+    { id: "dane", nazev: "Daně a odvody (vč. pojistného OSVČ)", danovy: false },
+    /* Zálohy na pojistné mívá jen OSVČ na hlavní činnost, proto se u nových
+       výdajů nenabízejí. Kategorie tu zůstává, aby se starší doklady pořád
+       správně počítaly jako nedaňové. */
+    { id: "socialni", nazev: "Sociální a zdravotní pojištění OSVČ", danovy: false, skryta: true },
     { id: "osobni", nazev: "Osobní spotřeba / výběr", danovy: false },
     { id: "ostatni", nazev: "Ostatní", danovy: true },
   ];
+
+  /** Kategorie nabízené u nových výdajů — bez těch, které se už nepoužívají. */
+  function nabizeneKategorie(pouzite) {
+    const pouzitych = new Set(pouzite || []);
+    return KATEGORIE_VYDAJU.filter((k) => !k.skryta || pouzitych.has(k.id));
+  }
 
   /* ---------------- prázdná databáze ---------------- */
 
@@ -209,7 +218,7 @@
       duzp: dnes,
       datumSplatnosti: util.pridejDny(dnes, splatnostDni),
       formaUhrady: nastaveni.faktura.formaUhrady,
-      rezim: nastaveni.firma.plateceDph ? "bezny" : "osvobozeno",
+      rezim: "bezny",
       cenyVcetneDph: !!nastaveni.faktura.cenyVcetneDph,
       zaokrouhlit: nastaveni.faktura.zaokrouhlit !== false,
       slevaProc: 0,
@@ -337,6 +346,18 @@
     dobropis: "Opravný daňový doklad (dobropis)",
   };
 
+  /* Neplátce nevystavuje daňový doklad, tak se ani takhle nesmí jmenovat. */
+  const NAZVY_TYPU_NEPLATCE = {
+    faktura: "Faktura",
+    zaloha: "Zálohová faktura",
+    dobropis: "Opravný doklad (dobropis)",
+  };
+
+  function nazevDokladu(typ, plateceDph) {
+    const nazvy = plateceDph ? NAZVY_TYPU : NAZVY_TYPU_NEPLATCE;
+    return nazvy[typ] || nazvy.faktura;
+  }
+
   const NAZVY_TYPU_KRATCE = {
     faktura: "Faktura",
     zaloha: "Záloha",
@@ -350,9 +371,12 @@
     JEDNOTKY,
     FORMY_UHRADY,
     KATEGORIE_VYDAJU,
+    nabizeneKategorie,
     INTERVALY,
     NAZVY_TYPU,
+    NAZVY_TYPU_NEPLATCE,
     NAZVY_TYPU_KRATCE,
+    nazevDokladu,
     prazdnaData,
     sjednotData,
     prazdnyKlient,

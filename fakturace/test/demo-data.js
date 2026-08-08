@@ -8,15 +8,21 @@
 
 const util = require("../src/renderer/js/core/util.js");
 const model = require("../src/renderer/js/core/model.js");
+const vypocet = require("../src/renderer/js/core/vypocet.js");
 
-function demoData() {
+/**
+ * @param {{plateceDph?: boolean}} volby Ukázka se staví v obou režimech,
+ *   aby průchod ověřil i podobu aplikace pro neplátce DPH.
+ */
+function demoData(volby) {
+  const plateceDph = !!(volby && volby.plateceDph);
   const data = model.prazdnaData();
 
   Object.assign(data.nastaveni.firma, {
     jmeno: "Jan Novák",
     ico: "12345679",
-    dic: "CZ12345679",
-    plateceDph: true,
+    dic: plateceDph ? "CZ12345679" : "",
+    plateceDph,
     ulice: "Dlouhá 128/14",
     mesto: "Brno",
     psc: "602 00",
@@ -86,9 +92,18 @@ function demoData() {
     f.odberatel = util.kopie(nastaveniFaktury.klient);
     f.polozky = nastaveniFaktury.polozky;
     f.stav = nastaveniFaktury.stav || "vystavena";
-    if (nastaveniFaktury.rezim) f.rezim = nastaveniFaktury.rezim;
+    if (nastaveniFaktury.rezim && plateceDph) f.rezim = nastaveniFaktury.rezim;
     if (nastaveniFaktury.poznamka) f.poznamka = nastaveniFaktury.poznamka;
-    if (nastaveniFaktury.uhrady) f.uhrady = nastaveniFaktury.uhrady;
+    if (nastaveniFaktury.uhrady) {
+      /* Ukázkové úhrady jsou zadané jako podíl z celkové částky, aby seděly
+         v obou režimech — u neplátce je faktura nižší o daň. */
+      const celkem = vypocet.vypocetDokladu(f, data.nastaveni).kUhrade;
+      f.uhrady = nastaveniFaktury.uhrady.map((u) => ({
+        datum: u.datum,
+        zpusob: u.zpusob,
+        castka: u.podil ? util.naKoruny(celkem * u.podil) : u.castka,
+      }));
+    }
     if (f.stav !== "koncept") {
       f.cislo = model.dalsiCislo(data, f.typ, f.datumVystaveni);
       f.vs = f.cislo.replace(/\D/g, "").slice(-10);
@@ -105,7 +120,7 @@ function demoData() {
       polozka("Vývoj interní aplikace — analýza a návrh", 62, "hod", 1250),
       polozka("Konzultace k datové migraci", 8, "hod", 1500),
     ],
-    uhrady: [{ datum: util.pridejDny(dnes, -70), castka: 106722, zpusob: "prevodem" }],
+    uhrady: [{ datum: util.pridejDny(dnes, -70), podil: 0.985, zpusob: "prevodem" }],
   });
 
   faktura({
@@ -115,7 +130,7 @@ function demoData() {
       polozka("Zpracování projektové dokumentace haly", 1, "soubor", 148000),
       polozka("Zaměření stavby vč. dopravy", 2, "den", 9800),
     ],
-    uhrady: [{ datum: util.pridejDny(dnes, -52), castka: 203434, zpusob: "prevodem" }],
+    uhrady: [{ datum: util.pridejDny(dnes, -52), podil: 1, zpusob: "prevodem" }],
   });
 
   // Faktura po splatnosti — kvůli obrazovce upomínek.
@@ -140,7 +155,7 @@ function demoData() {
       polozka("Programátorské práce — sprint 14", 74, "hod", 1250),
       polozka("Provoz a dohled nad aplikací", 1, "měsíc", 8500),
     ],
-    uhrady: [{ datum: util.pridejDny(dnes, -6), castka: 60000, zpusob: "prevodem" }],
+    uhrady: [{ datum: util.pridejDny(dnes, -6), podil: 0.49, zpusob: "prevodem" }],
   });
 
   // Přenesená daňová povinnost — stavební práce mezi plátci.
@@ -158,7 +173,7 @@ function demoData() {
       polozka("Oprava a seřízení oken", 4, "hod", 750),
       polozka("Těsnění a kování", 1, "soubor", 2340, 12),
     ],
-    uhrady: [{ datum: util.pridejDny(dnes, -7), castka: 6408, zpusob: "hotove" }],
+    uhrady: [{ datum: util.pridejDny(dnes, -7), podil: 1, zpusob: "hotove" }],
   });
 
   // Zálohová faktura a koncept.
@@ -182,6 +197,17 @@ function demoData() {
     const v = model.novyVydaj();
     Object.assign(v, uprava);
     v.duzp = v.datumVystaveni;
+    if (!plateceDph) {
+      // Neplátce si daň nenárokuje, celá zaplacená částka je jeho výdaj.
+      v.zaklady = v.zaklady.map((r) => ({
+        sazba: 0,
+        zaklad: util.zaokrouhli(util.cislo(r.zaklad) + util.cislo(r.dph), 2),
+        dph: 0,
+      }));
+      v.rezim = "bezDph";
+      v.odpocetDph = false;
+      v.pomerOdpoctu = 0;
+    }
     data.vydaje.push(v);
     return v;
   };
@@ -228,18 +254,19 @@ function demoData() {
     zaklady: [{ sazba: 21, zaklad: 24000, dph: 5040 }],
   });
 
+  // Nedaňový pohyb — peníze z podnikání odešly, základ daně nesnižují.
   vydaj({
     typ: "interni",
-    cisloDokladu: "OSSZ 03/2026",
-    dodavatel: { jmeno: "ČSSZ", ico: "", dic: "" },
-    popis: "Zálohy na sociální a zdravotní pojištění",
-    kategorie: "socialni",
+    cisloDokladu: "VBU 03/2026",
+    dodavatel: { jmeno: "", ico: "", dic: "" },
+    popis: "Převod na soukromý účet",
+    kategorie: "osobni",
     datumVystaveni: util.pridejDny(dnes, -12),
     datumUhrady: util.pridejDny(dnes, -12),
     danovyVydaj: false,
     odpocetDph: false,
     rezim: "bezDph",
-    zaklady: [{ sazba: 0, zaklad: 11244, dph: 0 }],
+    zaklady: [{ sazba: 0, zaklad: 25000, dph: 0 }],
   });
 
   // Nezaplacený závazek.

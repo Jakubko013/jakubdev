@@ -24,7 +24,9 @@
         <select id="filtr-kategorie">${ui.moznosti(
           [
             { hodnota: "vse", nazev: "Všechny kategorie" },
-            ...Fx.model.KATEGORIE_VYDAJU.map((k) => ({ hodnota: k.id, nazev: k.nazev })),
+            ...Fx.model
+              .nabizeneKategorie(Fx.stav.dej().vydaje.map((v) => v.kategorie))
+              .map((k) => ({ hodnota: k.id, nazev: k.nazev })),
           ],
           filtr.kategorie
         )}</select>
@@ -118,6 +120,7 @@
     const cil = ui.$("#seznam");
     if (!cil) return;
     const seznam = vyfiltrovane();
+    const plateceDph = Fx.stav.dej().nastaveni.firma.plateceDph;
 
     if (!seznam.length) {
       cil.innerHTML = ui.prazdno(
@@ -153,8 +156,12 @@
               ? ui.odznak("Zaplaceno", "zelena")
               : ui.odznak("Nezaplaceno", vydaj.datumSplatnosti && util.dnuOd(vydaj.datumSplatnosti) > 0 ? "cervena" : "zluta")
           }</td>
-          <td class="cislo">${util.formatCislo(rozpis.zakladCelkem)}</td>
-          <td class="cislo">${util.formatCislo(rozpis.odpocetCelkem)}</td>
+          ${
+            plateceDph
+              ? `<td class="cislo">${util.formatCislo(rozpis.zakladCelkem)}</td>
+                 <td class="cislo">${util.formatCislo(rozpis.odpocetCelkem)}</td>`
+              : ""
+          }
           <td class="cislo tucne">${util.formatCislo(rozpis.celkem)}</td>
           <td class="akce">
             ${
@@ -171,7 +178,8 @@
     cil.innerHTML = `<table class="seznam">
       <thead><tr>
         <th>Doklad</th><th>Dodavatel</th><th>Kategorie</th><th>Vystaveno</th><th>Stav</th>
-        <th class="cislo">Základ</th><th class="cislo">Odpočet DPH</th><th class="cislo">Celkem</th><th></th>
+        ${plateceDph ? '<th class="cislo">Základ</th><th class="cislo">Odpočet DPH</th>' : ""}
+        <th class="cislo">${plateceDph ? "Celkem" : "Částka"}</th><th></th>
       </tr></thead>
       <tbody>${radky}</tbody>
       <tfoot><tr>
@@ -181,8 +189,11 @@
       "doklady",
       "dokladů"
     )} · daňové výdaje ${util.kc(celkemNaklad, 0)}</td>
-        <td class="cislo"></td>
-        <td class="cislo">${util.formatCislo(celkemOdpocet)}</td>
+        ${
+          plateceDph
+            ? `<td class="cislo"></td><td class="cislo">${util.formatCislo(celkemOdpocet)}</td>`
+            : ""
+        }
         <td class="cislo">${util.formatCislo(celkem)}</td>
         <td></td>
       </tr></tfoot>
@@ -231,7 +242,9 @@
           <input type="text" id="v-cislo" value="${util.esc(vydaj.cisloDokladu)}"></div>
         <div class="pole"><label>Kategorie</label>
           <select id="v-kategorie">${ui.moznosti(
-            Fx.model.KATEGORIE_VYDAJU.map((k) => ({ hodnota: k.id, nazev: k.nazev })),
+            Fx.model
+              .nabizeneKategorie([vydaj.kategorie])
+              .map((k) => ({ hodnota: k.id, nazev: k.nazev })),
             vydaj.kategorie
           )}</select></div>
       </div>
@@ -267,7 +280,7 @@
         Doklad je zaplacený (teprve pak vstupuje do peněžního deníku)
       </label>
 
-      <div class="podnadpis">Částky${plateceDph ? " a DPH" : ""}</div>
+      <div class="podnadpis">Částka${plateceDph ? " a DPH" : ""}</div>
       ${
         plateceDph
           ? `<div class="mrizka" style="margin-bottom:10px">
@@ -286,16 +299,29 @@
              </div>`
           : ""
       }
-      <table class="polozky" id="v-sazby">
-        <thead><tr>
-          <th>Sazba</th><th>Základ</th><th>DPH</th><th>Celkem s DPH</th><th></th>
-        </tr></thead>
-        <tbody>${vydaj.zaklady.map(radekSazbyHtml).join("")}</tbody>
-      </table>
-      <div class="pruh-tlacitek" style="margin-top:8px">
-        <button type="button" id="v-pridat-sazbu">Přidat sazbu</button>
-        <span class="napoveda">Stačí vyplnit jedno pole — zbývající se dopočítají.</span>
-      </div>
+      ${
+        plateceDph
+          ? `<table class="polozky" id="v-sazby">
+               <thead><tr>
+                 <th>Sazba</th><th>Základ</th><th>DPH</th><th>Celkem s DPH</th><th></th>
+               </tr></thead>
+               <tbody>${vydaj.zaklady.map(radekSazbyHtml).join("")}</tbody>
+             </table>
+             <div class="pruh-tlacitek" style="margin-top:8px">
+               <button type="button" id="v-pridat-sazbu">Přidat sazbu</button>
+               <span class="napoveda">Stačí vyplnit jedno pole — zbývající se dopočítají.</span>
+             </div>`
+          : `<div class="mrizka">
+               <div class="pole"><label>Zaplacená částka</label>
+                 <input type="number" step="0.01" id="v-castka" value="${util.zaokrouhli(
+                   (vydaj.zaklady || []).reduce(
+                     (soucet, r) => soucet + util.cislo(r.zaklad) + util.cislo(r.dph),
+                     0
+                   ),
+                   2
+                 )}"></div>
+             </div>`
+      }
 
       <label class="zaskrtavaci" style="margin-top:12px">
         <input type="checkbox" id="v-danovy" ${vydaj.danovyVydaj !== false ? "checked" : ""}>
@@ -325,7 +351,12 @@
 
   function navazUdalostiFormulare(dialog) {
     const tabulka = ui.$("#v-sazby", dialog);
+    // Neplátce zadává jen jednu částku, rozpis sazeb ve formuláři není.
+    if (tabulka) navazRozpisSazeb(dialog, tabulka);
+    navazSpolecneUdalosti(dialog);
+  }
 
+  function navazRozpisSazeb(dialog, tabulka) {
     /* Dopočet mezi základem, daní a celkovou částkou. Uživatel opisuje
        z dokladu to, co tam vidí — často jen celkovou částku. */
     const prepocitejRadek = (radek, zdroj) => {
@@ -370,7 +401,9 @@
       if (telo.children.length <= 1) return;
       tlacitko.closest("tr").remove();
     });
+  }
 
+  function navazSpolecneUdalosti(dialog) {
     // Zaškrtnutí úhrady doplní dnešní datum, když uživatel žádné nezadal.
     const poleZaplaceno = ui.$("#v-zaplaceno", dialog);
     poleZaplaceno.addEventListener("change", () => {
@@ -391,17 +424,23 @@
   }
 
   function sesbirejFormular(dialog, vydaj, plateceDph) {
-    const zaklady = ui
-      .$$("#v-sazby tbody tr", dialog)
-      .map((radek) => ({
-        sazba: util.cislo(radek.querySelector("[data-sazba='sazba']").value),
-        zaklad: util.cislo(radek.querySelector("[data-sazba='zaklad']").value),
-        dph: util.cislo(radek.querySelector("[data-sazba='dph']").value),
-      }))
-      .filter((r) => r.zaklad !== 0 || r.dph !== 0);
+    /* Neplátce nerozepisuje sazby — jeho částka se uloží jako jediný řádek
+       s nulovou daní, aby s ní zbytek aplikace uměl počítat stejně. */
+    const zaklady = plateceDph
+      ? ui
+          .$$("#v-sazby tbody tr", dialog)
+          .map((radek) => ({
+            sazba: util.cislo(radek.querySelector("[data-sazba='sazba']").value),
+            zaklad: util.cislo(radek.querySelector("[data-sazba='zaklad']").value),
+            dph: util.cislo(radek.querySelector("[data-sazba='dph']").value),
+          }))
+          .filter((r) => r.zaklad !== 0 || r.dph !== 0)
+      : [{ sazba: 0, zaklad: util.cislo(ui.$("#v-castka", dialog).value), dph: 0 }].filter(
+          (r) => r.zaklad !== 0
+        );
 
     if (!zaklady.length) {
-      ui.hlaska("Vyplňte alespoň jednu částku.", "chyba");
+      ui.hlaska("Vyplňte částku výdaje.", "chyba");
       return false;
     }
 

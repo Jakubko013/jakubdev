@@ -69,14 +69,18 @@
 
       <div class="panel">
         <h2>Položky
-          <span class="vpravo">
-            <label class="zaskrtavaci">
-              <input type="checkbox" data-prepinac="cenyVcetneDph" ${
-                doklad.cenyVcetneDph ? "checked" : ""
-              }>
-              Ceny zadávám včetně DPH
-            </label>
-          </span>
+          ${
+            data.nastaveni.firma.plateceDph
+              ? `<span class="vpravo">
+                   <label class="zaskrtavaci">
+                     <input type="checkbox" data-prepinac="cenyVcetneDph" ${
+                       doklad.cenyVcetneDph ? "checked" : ""
+                     }>
+                     Ceny zadávám včetně DPH
+                   </label>
+                 </span>`
+              : ""
+          }
         </h2>
         <div class="telo">
           ${polozkyHtml(data)}
@@ -206,7 +210,7 @@
           <input type="date" data-pole="datumVystaveni" value="${util.esc(doklad.datumVystaveni)}">
         </div>
         ${
-          doklad.typ !== "zaloha"
+          doklad.typ !== "zaloha" && plateceDph
             ? `<div class="pole">
                  <label>Datum zdanitelného plnění</label>
                  <input type="date" data-pole="duzp" value="${util.esc(doklad.duzp || "")}">

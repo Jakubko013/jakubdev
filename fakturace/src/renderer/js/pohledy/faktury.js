@@ -144,6 +144,7 @@
     const seznam = vyfiltrovane();
     const cil = ui.$("#seznam");
     if (!cil) return;
+    const plateceDph = Fx.stav.dej().nastaveni.firma.plateceDph;
 
     if (!seznam.length) {
       cil.innerHTML = ui.prazdno(
@@ -188,7 +189,7 @@
             }
           </td>
           <td>${ui.odznakStavu(stav)}</td>
-          <td class="cislo">${util.formatCislo(vypocet.zakladCelkem)}</td>
+          ${plateceDph ? `<td class="cislo">${util.formatCislo(vypocet.zakladCelkem)}</td>` : ""}
           <td class="cislo tucne">${util.formatCislo(vypocet.kUhrade)}</td>
           <td class="akce">
             <button class="drobne" data-pdf="${util.esc(faktura.id)}" title="Uložit PDF">PDF</button>
@@ -206,7 +207,7 @@
     cil.innerHTML = `<table class="seznam">
       <thead><tr>
         <th>Číslo</th><th>Odběratel</th><th>Vystaveno</th><th>Splatnost</th><th>Stav</th>
-        <th class="cislo">Bez DPH</th><th class="cislo">Celkem</th><th></th>
+        ${plateceDph ? '<th class="cislo">Bez DPH</th>' : ""}<th class="cislo">Celkem</th><th></th>
       </tr></thead>
       <tbody>${radky}</tbody>
       <tfoot><tr>
@@ -216,7 +217,7 @@
       "doklady",
       "dokladů"
     )}${celkemZbyva > 0 ? ` · neuhrazeno ${util.kc(celkemZbyva)}` : ""}</td>
-        <td class="cislo">${util.formatCislo(celkemBezDph)}</td>
+        ${plateceDph ? `<td class="cislo">${util.formatCislo(celkemBezDph)}</td>` : ""}
         <td class="cislo">${util.formatCislo(celkemSDph)}</td>
         <td></td>
       </tr></tfoot>
@@ -303,6 +304,7 @@
 
   async function exportCsv() {
     const seznam = vyfiltrovane();
+    const plateceDph = Fx.stav.dej().nastaveni.firma.plateceDph;
     const hlavicka = [
       "Číslo",
       "Typ",
@@ -313,8 +315,7 @@
       "DUZP",
       "Splatnost",
       "Stav",
-      "Základ",
-      "DPH",
+      ...(plateceDph ? ["Základ", "DPH"] : []),
       "Celkem",
       "Uhrazeno",
       "Zbývá",
@@ -332,8 +333,7 @@
         util.datumCz(faktura.duzp),
         util.datumCz(faktura.datumSplatnosti),
         Fx.vypocet.STAVY[Fx.stav.stav(faktura)].nazev,
-        vypocet.zakladCelkem,
-        vypocet.dphCelkem,
+        ...(plateceDph ? [vypocet.zakladCelkem, vypocet.dphCelkem] : []),
         vypocet.kUhrade,
         vypocet.zaplaceno,
         vypocet.zbyvaUhradit,

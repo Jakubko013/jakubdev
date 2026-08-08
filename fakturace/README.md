@@ -1,15 +1,18 @@
 # Fakturace
 
-Desktopová aplikace pro fakturaci a vedení daňové evidence OSVČ (plátce DPH).
-Běží ve Windows, Linuxu i na macOS, data zůstávají v počítači.
+Desktopová aplikace pro fakturaci a vedení daňové evidence OSVČ.
+Ve výchozím stavu počítá s **neplátcem DPH**; kdo se plátcem stane, zapne
+si daň jedním přepínačem v nastavení. Běží ve Windows, Linuxu i na macOS,
+data zůstávají v počítači.
 
 ![Přehled](docs/prehled.png)
 
 ## Co aplikace umí
 
 **Faktury**
-- Faktury, zálohové faktury a dobropisy (opravné daňové doklady)
-- Sazby DPH 21 %, 12 % a 0 %, ceny lze zadávat s daní i bez daně
+- Faktury, zálohové faktury a dobropisy
+- U neplátce doklad neuvádí daň a nese poznámku „Nejsem plátcem DPH“
+- Po registraci k DPH: sazby 21 %, 12 % a 0 %, ceny s daní i bez daně
 - Přenesená daňová povinnost, dodání do EU, vývoz, osvobozená plnění
 - Slevy na řádek i na celý doklad, zaokrouhlení na celé koruny
 - Odpočet zaplacených záloh na konečné faktuře
@@ -21,11 +24,11 @@ Běží ve Windows, Linuxu i na macOS, data zůstávají v počítači.
 **Daňová evidence**
 - Peněžní deník podle skutečných plateb (příjmy až v okamžiku úhrady)
 - Evidence přijatých faktur, paragonů a interních dokladů
-- Rozlišení daňových a nedaňových výdajů (odvody pojistného, osobní spotřeba)
-- Krácený odpočet DPH u výdajů používaných i soukromě
+- Rozlišení daňových a nedaňových výdajů (osobní spotřeba, odvody)
+- Krácený odpočet DPH u výdajů používaných i soukromě (jen u plátce)
 - Průběžný základ daně z příjmů, přehled podle kategorií
 
-**DPH**
+**DPH** (zobrazí se, až když se označíte za plátce)
 - Podklady pro přiznání k DPH s čísly řádků tiskopisu
 - Kontrolní hlášení rozdělené do oddílů A.1, A.4, A.5, B.1, B.2, B.3
 - Měsíční i čtvrtletní zdaňovací období
@@ -85,6 +88,9 @@ Konkrétně:
   na konečné faktuře, ale daňový doklad k přijaté platbě nevytváří.
 - Jde o **daňovou evidenci**, ne podvojné účetnictví. Pro s.r.o. s účtovým
   rozvrhem a rozvahou se nehodí.
+- Aplikace nehlídá obrat pro povinnou registraci k DPH ani rozhodnou částku,
+  od které se u vedlejší činnosti platí pojistné. Na obojí si musíte dohlédnout
+  sami — v peněžním deníku k tomu najdete průběžné součty.
 - Sazby DPH ani limity kontrolního hlášení nejsou napojené na žádný číselník
   — při změně zákona je potřeba upravit `src/renderer/js/core/model.js`.
 
@@ -124,6 +130,8 @@ npm run snimek  # projde všechny obrazovky a uloží z nich snímky
 ```
 
 Test `npm run snimek` spustí aplikaci nad dočasnými ukázkovými daty,
-projde všechny obrazovky, uloží snímky a PDF faktury a skončí chybou,
-pokud se některá obrazovka nevykreslí. Na Linuxu bez obrazovky ho spusťte
+projde všechny obrazovky ve **dvou variantách — jako neplátce i jako plátce
+DPH** — uloží z nich snímky a PDF faktury a skončí chybou, pokud se některá
+obrazovka nevykreslí nebo se doklad zachová jinak, než má (třeba když by
+faktura neplátce vyčíslovala daň). Na Linuxu bez obrazovky ho spusťte
 přes `xvfb-run`.

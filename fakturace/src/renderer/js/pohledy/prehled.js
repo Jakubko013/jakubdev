@@ -45,12 +45,16 @@
         <div class="karta">
           <div class="titulek">Vyfakturováno ${rok}</div>
           <div class="hodnota">${util.kc(vyfakturovano, 0)}</div>
-          <div class="doplnek">bez DPH, podle data vystavení</div>
+          <div class="doplnek">${
+            data.nastaveni.firma.plateceDph ? "bez DPH, " : ""
+          }podle data vystavení</div>
         </div>
         <div class="karta">
           <div class="titulek">Přijaté platby</div>
           <div class="hodnota">${util.kc(souhrn.prijmyCelkem, 0)}</div>
-          <div class="doplnek">včetně DPH, podle data úhrady</div>
+          <div class="doplnek">${
+            data.nastaveni.firma.plateceDph ? "včetně DPH, " : ""
+          }podle data úhrady</div>
         </div>
         <div class="karta${nezaplaceno > 0 ? "" : " zvyrazneni-zelena"}">
           <div class="titulek">Neuhrazené faktury</div>

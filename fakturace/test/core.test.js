@@ -497,3 +497,72 @@ test("CSV uzavře hodnotu se středníkem do uvozovek", () => {
   const text = csv.sestav(["Popis"], [['Práce; oprava "stroje"']]);
   assert.ok(text.includes('"Práce; oprava ""stroje"""'));
 });
+
+/* ---------------- neplátce DPH ---------------- */
+
+test("aplikace startuje jako neplátce DPH", () => {
+  const data = model.prazdnaData();
+  assert.equal(data.nastaveni.firma.plateceDph, false);
+  // Nová faktura nemá zvláštní režim, o dani rozhoduje plátcovství.
+  assert.equal(model.novaFaktura(data, "faktura").rezim, "bezny");
+});
+
+test("neplátce nevystavuje daňový doklad ani podle názvu", () => {
+  assert.equal(model.nazevDokladu("faktura", false), "Faktura");
+  assert.equal(model.nazevDokladu("dobropis", false), "Opravný doklad (dobropis)");
+  assert.equal(model.nazevDokladu("faktura", true), "Faktura — daňový doklad");
+});
+
+test("faktura neplátce je bez daně a celá jde do základu daně z příjmů", () => {
+  const data = model.prazdnaData();
+  data.nastaveni.firma.jmeno = "Jan Novák";
+  const f = model.novaFaktura(data, "faktura");
+  f.cislo = "2026001";
+  f.stav = "vystavena";
+  f.polozky = [model.novaPolozka(data.nastaveni, { mnozstvi: 10, cenaZaMj: 1000, sazba: 21 })];
+  f.uhrady = [{ datum: "2026-04-10", castka: 10000 }];
+  data.faktury.push(f);
+
+  const v = vypocet.vypocetDokladu(f, data.nastaveni);
+  assert.equal(v.dphCelkem, 0);
+  assert.equal(v.kUhrade, 10000);
+
+  const polozky = denik.polozkyDeniku(data, "2026-01-01", "2026-12-31");
+  assert.equal(polozky[0].dph, 0);
+  assert.equal(polozky[0].doZakladuDane, 10000);
+});
+
+test("výdaj neplátce se do základu daně počítá celý včetně daně", () => {
+  const v = model.novyVydaj();
+  v.rezim = "bezDph";
+  v.odpocetDph = false;
+  v.zaklady = [{ sazba: 0, zaklad: 12100, dph: 0 }];
+  const rozpis = dph.rozpisVydaje(v);
+  assert.equal(rozpis.odpocetCelkem, 0);
+  assert.equal(rozpis.danovyNaklad, 12100);
+});
+
+test("zálohy OSVČ na pojistné se u nových výdajů nenabízejí", () => {
+  const nabizene = model.nabizeneKategorie().map((k) => k.id);
+  assert.equal(nabizene.includes("socialni"), false);
+  // Starší doklad kategorii pořád najde a zůstane nedaňový.
+  assert.equal(model.nabizeneKategorie(["socialni"]).some((k) => k.id === "socialni"), true);
+  assert.equal(denik.kategorieVydaje("socialni").danovy, false);
+});
+
+test("nedaňový výdaj ubere peníze, ale nesníží základ daně", () => {
+  const data = model.prazdnaData();
+  const vyber = model.novyVydaj();
+  vyber.kategorie = "osobni";
+  vyber.danovyVydaj = false;
+  vyber.odpocetDph = false;
+  vyber.rezim = "bezDph";
+  vyber.datumUhrady = "2026-05-05";
+  vyber.zaklady = [{ sazba: 0, zaklad: 25000, dph: 0 }];
+  data.vydaje.push(vyber);
+
+  const souhrn = denik.souhrn(denik.polozkyDeniku(data, "2026-01-01", "2026-12-31"));
+  assert.equal(souhrn.vydajeCelkem, 25000);
+  assert.equal(souhrn.vydajeDoZakladu, 0);
+  assert.equal(souhrn.zakladDane, 0);
+});

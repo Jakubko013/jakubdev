@@ -8,6 +8,8 @@
 
   const vyber = { rok: String(new Date().getFullYear()), obdobi: "rok", druh: "vse" };
 
+  const plateceDph = () => Fx.stav.dej().nastaveni.firma.plateceDph;
+
   function meze() {
     const rok = Number(vyber.rok);
     if (vyber.obdobi === "rok") return { od: `${rok}-01-01`, do: `${rok}-12-31` };
@@ -115,7 +117,11 @@
         <div class="karta">
           <div class="titulek">Příjmy</div>
           <div class="hodnota">${util.kc(souhrn.prijmyCelkem, 0)}</div>
-          <div class="doplnek">do základu daně ${util.kc(souhrn.prijmyDoZakladu, 0)}</div>
+          <div class="doplnek">${
+            plateceDph()
+              ? "do základu daně " + util.kc(souhrn.prijmyDoZakladu, 0)
+              : "vše vstupuje do základu daně"
+          }</div>
         </div>
         <div class="karta">
           <div class="titulek">Výdaje</div>
@@ -142,6 +148,7 @@
   }
 
   function tabulka(polozky) {
+    const sDani = plateceDph();
     let zustatek = 0;
     const radky = polozky
       .map((p) => {
@@ -157,7 +164,7 @@
         }</td>
           <td class="cislo zelene">${p.druh === "prijem" ? util.formatCislo(p.castka) : ""}</td>
           <td class="cislo cervene">${p.druh === "vydaj" ? util.formatCislo(p.castka) : ""}</td>
-          <td class="cislo slaby">${util.formatCislo(p.dph)}</td>
+          ${sDani ? `<td class="cislo slaby">${util.formatCislo(p.dph)}</td>` : ""}
           <td class="cislo">${util.formatCislo(p.doZakladuDane)}</td>
           <td class="cislo tucne">${util.formatCislo(zustatek)}</td>
         </tr>`;
@@ -168,7 +175,8 @@
       <thead><tr>
         <th>Datum</th><th>Doklad</th><th>Popis</th><th>Kategorie</th>
         <th class="cislo">Příjem</th><th class="cislo">Výdaj</th>
-        <th class="cislo">z toho DPH</th><th class="cislo">Do základu daně</th><th class="cislo">Zůstatek</th>
+        ${sDani ? '<th class="cislo">z toho DPH</th>' : ""}
+        <th class="cislo">Do základu daně</th><th class="cislo">Zůstatek</th>
       </tr></thead>
       <tbody>${radky}</tbody>
     </table>`;

@@ -16,7 +16,7 @@
     { cesta: "upominky", nazev: "Upomínky", ikona: "!", odznacek: "poSplatnosti" },
     { skupina: "Účetnictví" },
     { cesta: "denik", nazev: "Peněžní deník", ikona: "≡" },
-    { cesta: "dph", nazev: "DPH", ikona: "%" },
+    { cesta: "dph", nazev: "DPH", ikona: "%", jenPlatceDph: true },
     { skupina: "" },
     { cesta: "nastaveni", nazev: "Nastavení", ikona: "⚙" },
   ];
@@ -37,10 +37,14 @@
     const poSplatnosti = Fx.stav.poSplatnosti().length;
     const cekajiciSablony = Fx.stav.sablonyKVystaveni().length;
 
+    const plateceDph = Fx.stav.dej().nastaveni.firma.plateceDph;
+
     ui.$("#nabidka").innerHTML = NABIDKA.map((polozka) => {
       if (polozka.skupina !== undefined) {
         return polozka.skupina ? `<div class="skupina">${util.esc(polozka.skupina)}</div>` : "";
       }
+      // Neplátci DPH se přehled daně nenabízí.
+      if (polozka.jenPlatceDph && !plateceDph) return "";
       let odznacek = "";
       if (polozka.odznacek === "poSplatnosti" && poSplatnosti) {
         odznacek = `<span class="odznacek">${poSplatnosti}</span>`;
@@ -55,9 +59,9 @@
 
     const data = Fx.stav.dej();
     ui.$("#znacka-jmeno").textContent = data.nastaveni.firma.jmeno || "Fakturace";
-    ui.$("#znacka-popis").textContent = data.nastaveni.firma.plateceDph
+    ui.$("#znacka-popis").textContent = plateceDph
       ? "daňová evidence · plátce DPH"
-      : "daňová evidence";
+      : "daňová evidence · neplátce";
     ui.$("#patka-panelu").textContent = `${data.faktury.length} ${util.sklonuj(
       data.faktury.length,
       "doklad",

@@ -126,7 +126,8 @@
     const bunky = [
       { stitek: "Datum vystavení", hodnota: util.datumCz(faktura.datumVystaveni) },
     ];
-    if (faktura.typ !== "zaloha") {
+    // Zdanitelné plnění se uvádí jen na daňovém dokladu.
+    if (faktura.typ !== "zaloha" && nastaveni.firma.plateceDph) {
       bunky.push({ stitek: "Datum zdanitelného plnění", hodnota: util.datumCz(faktura.duzp) });
     }
     bunky.push({
@@ -350,7 +351,7 @@
       ? `<img src="${firma.logo}" alt="">`
       : `<div class="jmeno">${esc(firma.jmeno || "")}</div>`;
 
-    const nazevTypu = Fx.model.NAZVY_TYPU[faktura.typ] || "Faktura";
+    const nazevTypu = Fx.model.nazevDokladu(faktura.typ, firma.plateceDph);
 
     return `<!DOCTYPE html>
 <html lang="cs">
