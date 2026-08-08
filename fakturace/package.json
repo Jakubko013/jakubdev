@@ -3,7 +3,7 @@
   "productName": "Fakturace",
   "version": "1.0.0",
   "private": true,
-  "description": "Fakturace a daňová evidence pro OSVČ — plátce DPH",
+  "description": "Fakturace a daňová evidence pro OSVČ",
   "license": "UNLICENSED",
   "main": "src/main/main.js",
   "scripts": {
@@ -35,25 +35,31 @@
         "nsis",
         "portable"
       ],
-      "artifactName": "Fakturace-${version}-${arch}.${ext}"
+      "artifactName": "Fakturace-${version}-${arch}.${ext}",
+      "icon": "build/icon.png"
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "shortcutName": "Fakturace"
+      "shortcutName": "Fakturace",
+      "installerIcon": "build/icon.png",
+      "uninstallerIcon": "build/icon.png",
+      "installerHeaderIcon": "build/icon.png"
     },
     "linux": {
       "target": [
         "AppImage"
       ],
-      "category": "Office"
+      "category": "Office",
+      "icon": "build/icon.png"
     },
     "mac": {
       "target": [
         "dmg"
       ],
-      "category": "public.app-category.business"
+      "category": "public.app-category.business",
+      "icon": "build/icon.png"
     }
   }
 }

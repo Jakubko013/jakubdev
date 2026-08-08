@@ -50,15 +50,32 @@ npm install
 npm start
 ```
 
-### Vytvoření instalátoru pro Windows
+## Instalace na Windows
+
+Hotový instalátor sestavuje GitHub Actions při každé změně ve složce
+`fakturace/`. Stáhnete ho takhle:
+
+1. V repozitáři otevřete záložku **Actions**
+2. Vyberte poslední běh **„Fakturace — instalátor pro Windows“**
+3. Dole v části **Artifacts** stáhněte **Fakturace-Windows**
+4. V rozbaleném archivu jsou dva soubory:
+   - `Fakturace-1.0.0-x64.exe` — instalátor (nabídne složku, vytvoří zástupce)
+   - `Fakturace-1.0.0-x64-portable.exe` — spustí se bez instalace
+
+Windows u nepodepsaného programu ukáže modré okno SmartScreenu. Klikněte
+na **Další informace → Přesto spustit**. Podpis by vyžadoval placený
+certifikát vydavatele.
+
+### Sestavení instalátoru vlastními silami
 
 ```bash
 npm run dist            # instalátor .exe a přenosná verze
 npm run dist:portable   # jen přenosná verze bez instalace
 ```
 
-Hotové soubory najdete ve složce `dist/`. Instalátor je potřeba sestavit
-na Windows, jinak vzniknou jen balíčky pro daný systém.
+Hotové soubory najdete ve složce `dist/`. Musí se to spustit **na Windows** —
+na Linuxu ani macOS instalátor NSIS vytvořit nejde, tam vznikne jen balíček
+pro daný systém.
 
 ## Kde jsou data
 
