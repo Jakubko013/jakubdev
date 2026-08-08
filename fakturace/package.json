@@ -42,10 +42,7 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "shortcutName": "Fakturace",
-      "installerIcon": "build/icon.png",
-      "uninstallerIcon": "build/icon.png",
-      "installerHeaderIcon": "build/icon.png"
+      "shortcutName": "Fakturace"
     },
     "linux": {
       "target": [
@@ -60,6 +57,9 @@
       ],
       "category": "public.app-category.business",
       "icon": "build/icon.png"
+    },
+    "portable": {
+      "artifactName": "Fakturace-${version}-${arch}-portable.${ext}"
     }
   }
 }
