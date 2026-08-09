@@ -301,12 +301,14 @@
       }
       ${
         plateceDph
-          ? `<table class="polozky" id="v-sazby">
-               <thead><tr>
-                 <th>Sazba</th><th>Základ</th><th>DPH</th><th>Celkem s DPH</th><th></th>
-               </tr></thead>
-               <tbody>${vydaj.zaklady.map(radekSazbyHtml).join("")}</tbody>
-             </table>
+          ? `<div class="tabulka-x">
+               <table class="polozky" id="v-sazby">
+                 <thead><tr>
+                   <th>Sazba</th><th>Základ</th><th>DPH</th><th>Celkem s DPH</th><th></th>
+                 </tr></thead>
+                 <tbody>${vydaj.zaklady.map(radekSazbyHtml).join("")}</tbody>
+               </table>
+             </div>
              <div class="pruh-tlacitek" style="margin-top:8px">
                <button type="button" id="v-pridat-sazbu">Přidat sazbu</button>
                <span class="napoveda">Stačí vyplnit jedno pole — zbývající se dopočítají.</span>

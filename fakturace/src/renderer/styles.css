@@ -1,5 +1,7 @@
 /* Vzhled aplikace. Písma jsou systémová, aplikace nic nestahuje ze sítě. */
 
+/* Barvy jsou v tokenech, aby šly přeznačit pro tmavý režim beze změny
+   zbytku souboru — světlý motiv je výchozí, tmavý ho níže jen přepisuje. */
 :root {
   --pozadi: #f4f6fa;
   --panel: #ffffff;
@@ -19,8 +21,72 @@
   --zluta: #b7791f;
   --zluta-svetla: #fdf3e0;
   --seda-svetla: #eef1f6;
+  --zluta-text: #7a5312;
+  --zluta-okraj: #f0d9a8;
+  --info-okraj: #c5d8ff;
+  --cervena-okraj: #f0c2c2;
+  --vydaj-barva: #f0a8ae;
   --stin: 0 1px 2px rgba(22, 34, 58, 0.05), 0 6px 20px -10px rgba(22, 34, 58, 0.18);
   --radius: 12px;
+}
+
+/* Tmavý režim podle systému — pokud uživatel motiv výslovně nezvolil. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pozadi: #0c1220;
+    --panel: #141c2e;
+    --panel-tlumeny: #182035;
+    --linka: #263252;
+    --linka-silna: #384a72;
+    --text: #e8ecf7;
+    --text-stredni: #aab6cf;
+    --text-slaby: #7c89a8;
+    --hlavni: #5b8cff;
+    --hlavni-tmava: #7fa3ff;
+    --hlavni-svetla: #1c2c4d;
+    --zelena: #34c98a;
+    --zelena-svetla: #103524;
+    --cervena: #f2596b;
+    --cervena-svetla: #3b1620;
+    --zluta: #e2ab4b;
+    --zluta-svetla: #3a2a0e;
+    --seda-svetla: #1c2540;
+    --zluta-text: #f0c675;
+    --zluta-okraj: #6b4f1c;
+    --info-okraj: #35508a;
+    --cervena-okraj: #6b2732;
+    --vydaj-barva: #e0798a;
+    --stin: 0 1px 2px rgba(0, 0, 0, 0.35), 0 6px 24px -10px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Ruční přepnutí motivu (např. přepínačem v hostitelské stránce) vyhraje
+   nad systémovým nastavením v obou směrech. */
+:root[data-theme="dark"] {
+  --pozadi: #0c1220;
+  --panel: #141c2e;
+  --panel-tlumeny: #182035;
+  --linka: #263252;
+  --linka-silna: #384a72;
+  --text: #e8ecf7;
+  --text-stredni: #aab6cf;
+  --text-slaby: #7c89a8;
+  --hlavni: #5b8cff;
+  --hlavni-tmava: #7fa3ff;
+  --hlavni-svetla: #1c2c4d;
+  --zelena: #34c98a;
+  --zelena-svetla: #103524;
+  --cervena: #f2596b;
+  --cervena-svetla: #3b1620;
+  --zluta: #e2ab4b;
+  --zluta-svetla: #3a2a0e;
+  --seda-svetla: #1c2540;
+  --zluta-text: #f0c675;
+  --zluta-okraj: #6b4f1c;
+  --info-okraj: #35508a;
+  --cervena-okraj: #6b2732;
+  --vydaj-barva: #e0798a;
+  --stin: 0 1px 2px rgba(0, 0, 0, 0.35), 0 6px 24px -10px rgba(0, 0, 0, 0.6);
 }
 
 * {
@@ -353,7 +419,7 @@ input[type="tel"],
 select,
 textarea {
   width: 100%;
-  background: #fff;
+  background: var(--panel);
   border: 1px solid var(--linka-silna);
   border-radius: 8px;
   padding: 8px 10px;
@@ -442,7 +508,7 @@ button,
   font-size: 0.86rem;
   font-weight: 600;
   border: 1px solid var(--linka-silna);
-  background: #fff;
+  background: var(--panel);
   color: var(--text-stredni);
   border-radius: 8px;
   padding: 8px 14px;
@@ -472,7 +538,7 @@ button.hlavni:hover {
 }
 button.nebezpecna {
   color: var(--cervena);
-  border-color: #f0c2c2;
+  border-color: var(--cervena-okraj);
 }
 button.nebezpecna:hover {
   background: var(--cervena-svetla);
@@ -503,8 +569,15 @@ button:disabled {
 
 /* ---------------- položky faktury ---------------- */
 
+/* Editor položek je nejširší formulář v appce — na užším okně nebo telefonu
+   raději roluje stranou, než aby se rozbil zalamováním sloupců. */
+.tabulka-x {
+  overflow-x: auto;
+}
+
 table.polozky {
   width: 100%;
+  min-width: 560px;
   border-collapse: collapse;
   font-size: 0.86rem;
 }
@@ -613,8 +686,8 @@ table.polozky .soucet {
 
 .upozorneni {
   background: var(--zluta-svetla);
-  border: 1px solid #f0d9a8;
-  color: #7a5312;
+  border: 1px solid var(--zluta-okraj);
+  color: var(--zluta-text);
   border-radius: 10px;
   padding: 12px 16px;
   font-size: 0.86rem;
@@ -629,8 +702,8 @@ table.polozky .soucet {
 }
 .upozorneni.info {
   background: var(--hlavni-svetla);
-  border-color: #c5d8ff;
-  color: #1c3f8f;
+  border-color: var(--info-okraj);
+  color: var(--hlavni-tmava);
 }
 
 /* ---------------- dialog ---------------- */
@@ -708,7 +781,7 @@ table.polozky .soucet {
   background: var(--hlavni);
 }
 .graf .vydaj {
-  background: #f0a8ae;
+  background: var(--vydaj-barva);
 }
 .graf .popis {
   font-size: 0.68rem;

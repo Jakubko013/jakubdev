@@ -254,15 +254,17 @@
         </div>
 
         <div class="podnadpis">Položky faktury</div>
-        <table class="polozky" id="s-polozky">
-          <thead><tr>
-            <th>Popis</th><th>Množství</th><th>MJ</th><th>Cena za MJ</th>
-            ${plateceDph ? "<th>DPH</th>" : ""}<th></th>
-          </tr></thead>
-          <tbody>${predloha.polozky
-            .map((p, i) => polozkaHtml(p, i, plateceDph))
-            .join("")}</tbody>
-        </table>
+        <div class="tabulka-x">
+          <table class="polozky" id="s-polozky">
+            <thead><tr>
+              <th>Popis</th><th>Množství</th><th>MJ</th><th>Cena za MJ</th>
+              ${plateceDph ? "<th>DPH</th>" : ""}<th></th>
+            </tr></thead>
+            <tbody>${predloha.polozky
+              .map((p, i) => polozkaHtml(p, i, plateceDph))
+              .join("")}</tbody>
+          </table>
+        </div>
         <div class="pruh-tlacitek" style="margin-top:8px">
           <button type="button" id="s-pridat">Přidat položku</button>
         </div>

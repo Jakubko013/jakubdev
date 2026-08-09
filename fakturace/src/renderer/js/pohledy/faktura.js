@@ -299,13 +299,15 @@
       <datalist id="ceniknapovda">
         ${data.cenik.map((c) => `<option value="${util.esc(c.popis)}"></option>`).join("")}
       </datalist>
-      <table class="polozky">
-        <thead><tr>
-          <th>Popis</th><th>Množství</th><th>MJ</th><th>Cena za MJ</th><th>Sleva %</th>
-          ${plateceDph ? "<th>DPH</th>" : ""}<th style="text-align:right">Celkem</th><th></th>
-        </tr></thead>
-        <tbody>${radky}</tbody>
-      </table>`;
+      <div class="tabulka-x">
+        <table class="polozky">
+          <thead><tr>
+            <th>Popis</th><th>Množství</th><th>MJ</th><th>Cena za MJ</th><th>Sleva %</th>
+            ${plateceDph ? "<th>DPH</th>" : ""}<th style="text-align:right">Celkem</th><th></th>
+          </tr></thead>
+          <tbody>${radky}</tbody>
+        </table>
+      </div>`;
   }
 
   function uhradyHtml() {

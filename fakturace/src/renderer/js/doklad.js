@@ -24,6 +24,12 @@
   }
   @media print { body { background:#fff; } .list { margin:0; box-shadow:none; } }
   @media screen { .list { box-shadow: 0 4px 24px rgba(0,0,0,.18); margin: 12px auto; } }
+  /* Náhled na telefonu: dokument musí zůstat přesně A4 kvůli tisku, tak se
+     na obrazovce jen zmenší, ať se do širokého displeje vejde celý. "zoom"
+     na rozdíl od transform:scale přepočítá i výšku, takže pod dokladem
+     nezbyde prázdné místo — v Chromu a Safari (iOS/Android) funguje. */
+  @media screen and (max-width: 480px) { body { overflow-x: hidden; } .list { zoom: 0.42; margin: 8px auto; } }
+  @media screen and (min-width: 481px) and (max-width: 820px) { body { overflow-x: hidden; } .list { zoom: 0.62; margin: 8px auto; } }
 
   .zahlavi { display:flex; align-items:flex-start; gap:16mm; border-bottom:2px solid #16223a; padding-bottom:6mm; }
   .zahlavi .logo img { max-height:22mm; max-width:60mm; display:block; }
@@ -440,8 +446,16 @@
         }`
       ) + ".pdf";
     const odpoved = await root.api.pdf.uloz(html, nazev);
-    if (odpoved.ok) Fx.ui.hlaska("PDF uloženo do " + odpoved.cesta, "uspech");
-    else if (!odpoved.zruseno) Fx.ui.hlaska("PDF se nepodařilo uložit: " + odpoved.chyba, "chyba");
+    if (odpoved.ok) {
+      Fx.ui.hlaska(
+        root.api.platforma === "web"
+          ? "Otevřel se tiskový dialog — zvolte Uložit jako PDF."
+          : "PDF uloženo do " + odpoved.cesta,
+        "uspech"
+      );
+    } else if (!odpoved.zruseno) {
+      Fx.ui.hlaska("PDF se nepodařilo uložit: " + odpoved.chyba, "chyba");
+    }
     return odpoved;
   }
 

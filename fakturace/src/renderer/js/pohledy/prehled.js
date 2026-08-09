@@ -196,7 +196,7 @@
       </div>
       <div class="legenda">
         <span><i style="background:var(--hlavni)"></i>Příjmy</span>
-        <span><i style="background:#f0a8ae"></i>Výdaje</span>
+        <span><i style="background:var(--vydaj-barva)"></i>Výdaje</span>
       </div>`;
   }
 

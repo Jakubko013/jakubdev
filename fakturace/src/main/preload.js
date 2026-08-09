@@ -8,6 +8,7 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("api", {
+  platforma: "desktop",
   data: {
     nacti: () => ipcRenderer.invoke("data:nacti"),
     uloz: (data) => ipcRenderer.invoke("data:uloz", data),

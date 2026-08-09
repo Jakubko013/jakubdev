@@ -77,6 +77,28 @@ Hotové soubory najdete ve složce `dist/`. Musí se to spustit **na Windows** �
 na Linuxu ani macOS instalátor NSIS vytvořit nejde, tam vznikne jen balíček
 pro daný systém.
 
+## Mobilní verze (iOS, Android)
+
+Ve složce `mobile/` je verze aplikace pro telefon — stejné jádro (výpočty
+DPH, faktury, deník) jako desktopová appka, jen jinak zabalené: místo
+souboru na disku se data ukládají do úložiště prohlížeče (`localStorage`)
+a tisk/PDF jde přes tiskový dialog prohlížeče místo přes Electron.
+
+**Vlastní hosting** — nasaďte celou složku `fakturace/` (potřebuje `mobile/`
+i `src/renderer/`) na libovolný statický web (GitHub Pages, Netlify, vlastní
+doména…) a otevřete `mobile/index.html`. Přidá se přes „Přidat na plochu“
+na iOS i Androidu, funguje pak i offline (service worker v `mobile/sw.js`).
+
+**Jeden HTML soubor** — `node mobile/build-artifact.js vystup.html` slepí
+appku i se vším JS/CSS do jednoho samostatného souboru bez závislostí na
+zbytku repozitáře. Hodí se všude tam, kde jde nahrát jen jeden soubor.
+Spouští se znovu pokaždé, když se změní zdrojové soubory appky.
+
+DPH a ARES fungují stejně jako na desktopu; načtení firmy z ARESu ale
+záleží na tom, jestli prohlížeč/hosting dovolí volání na `ares.gov.cz`
+(u jednosouborové verze to typicky nejde — appka to sama pozná a nabídne
+ruční vyplnění).
+
 ## Kde jsou data
 
 Všechno je v jednom souboru `data.json`:
