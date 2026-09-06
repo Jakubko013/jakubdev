@@ -500,9 +500,9 @@ test("CSV uzavře hodnotu se středníkem do uvozovek", () => {
 
 /* ---------------- neplátce DPH ---------------- */
 
-test("aplikace startuje jako neplátce DPH", () => {
+test("aplikace startuje jako plátce DPH", () => {
   const data = model.prazdnaData();
-  assert.equal(data.nastaveni.firma.plateceDph, false);
+  assert.equal(data.nastaveni.firma.plateceDph, true);
   // Nová faktura nemá zvláštní režim, o dani rozhoduje plátcovství.
   assert.equal(model.novaFaktura(data, "faktura").rezim, "bezny");
 });
@@ -516,6 +516,7 @@ test("neplátce nevystavuje daňový doklad ani podle názvu", () => {
 test("faktura neplátce je bez daně a celá jde do základu daně z příjmů", () => {
   const data = model.prazdnaData();
   data.nastaveni.firma.jmeno = "Jan Novák";
+  data.nastaveni.firma.plateceDph = false;
   const f = model.novaFaktura(data, "faktura");
   f.cislo = "2026001";
   f.stav = "vystavena";

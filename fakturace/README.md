@@ -1,9 +1,9 @@
 # Fakturace
 
 Desktopová aplikace pro fakturaci a vedení daňové evidence OSVČ.
-Ve výchozím stavu počítá s **neplátcem DPH**; kdo se plátcem stane, zapne
-si daň jedním přepínačem v nastavení. Běží ve Windows, Linuxu i na macOS,
-data zůstávají v počítači.
+Ve výchozím stavu počítá s **plátcem DPH**; kdo plátcem není, přepínač
+v nastavení daň naopak vypne. Běží ve Windows, Linuxu i na macOS, data
+zůstávají v počítači.
 
 ![Přehled](docs/prehled.png)
 
@@ -11,8 +11,9 @@ data zůstávají v počítači.
 
 **Faktury**
 - Faktury, zálohové faktury a dobropisy
-- U neplátce doklad neuvádí daň a nese poznámku „Nejsem plátcem DPH“
-- Po registraci k DPH: sazby 21 %, 12 % a 0 %, ceny s daní i bez daně
+- Sazby DPH 21 %, 12 % a 0 %, ceny lze zadávat s daní i bez daně
+- U neplátce (přepínač v nastavení) doklad daň neuvádí a nese poznámku
+  „Nejsem plátcem DPH“
 - Přenesená daňová povinnost, dodání do EU, vývoz, osvobozená plnění
 - Slevy na řádek i na celý doklad, zaokrouhlení na celé koruny
 - Odpočet zaplacených záloh na konečné faktuře
@@ -28,7 +29,7 @@ data zůstávají v počítači.
 - Krácený odpočet DPH u výdajů používaných i soukromě (jen u plátce)
 - Průběžný základ daně z příjmů, přehled podle kategorií
 
-**DPH** (zobrazí se, až když se označíte za plátce)
+**DPH** (schová se, pokud v nastavení vypnete plátcovství)
 - Podklady pro přiznání k DPH s čísly řádků tiskopisu
 - Kontrolní hlášení rozdělené do oddílů A.1, A.4, A.5, B.1, B.2, B.3
 - Měsíční i čtvrtletní zdaňovací období
