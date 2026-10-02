@@ -21,6 +21,8 @@ const CSS_SOUBORY = ["src/renderer/styles.css", "mobile/styles-mobile.css"];
 
 const JS_SOUBORY = [
   "mobile/js/vendor/qrcode.min.js",
+  "mobile/js/vendor/html2canvas.min.js",
+  "mobile/js/vendor/jspdf.min.js",
   "src/renderer/js/core/util.js",
   "src/renderer/js/core/validace.js",
   "src/renderer/js/core/platba.js",
@@ -68,12 +70,6 @@ const jsBloky = JS_SOUBORY.map((souborRel) => {
 }).join("\n\n");
 
 const html = `<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<script>
-  /* Jednosouborová appka nemá vedle sebe žádnou tisk.html, na kterou by
-     šlo navigovat (viz mobile/js/api-web.js) — tenhle příznak jí řekne,
-     ať rovnou použije záložní tisk přes skrytý rámec v appce samotné. */
-  window.FX_BEZ_TISK_STRANKY = true;
-</script>
 <script>
   /* Artifact stránky nemají vlastní <head>, který bych mohl napsat sám —
      tenhle skript proto meta tagy pro mobilní zobrazení a instalaci na
