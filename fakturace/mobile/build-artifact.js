@@ -69,6 +69,12 @@ const jsBloky = JS_SOUBORY.map((souborRel) => {
 
 const html = `<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <script>
+  /* Jednosouborová appka nemá vedle sebe žádnou tisk.html, na kterou by
+     šlo navigovat (viz mobile/js/api-web.js) — tenhle příznak jí řekne,
+     ať rovnou použije záložní tisk přes skrytý rámec v appce samotné. */
+  window.FX_BEZ_TISK_STRANKY = true;
+</script>
+<script>
   /* Artifact stránky nemají vlastní <head>, který bych mohl napsat sám —
      tenhle skript proto meta tagy pro mobilní zobrazení a instalaci na
      plochu dopíše přímo do document.head za běhu, spolehlivě bez ohledu
