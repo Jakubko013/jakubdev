@@ -25,6 +25,7 @@ if (!CIL) {
 /* Zdrojová cesta -> cílová cesta v ploché struktuře. */
 const SOUBORY = [
   ["mobile/index.html", "index.html"],
+  ["mobile/tisk.html", "tisk.html"],
   ["mobile/styles-mobile.css", "styles-mobile.css"],
   ["mobile/manifest.webmanifest", "manifest.webmanifest"],
   ["mobile/sw.js", "sw.js"],
@@ -32,6 +33,7 @@ const SOUBORY = [
   ["mobile/icon-512.png", "icon-512.png"],
   ["mobile/apple-touch-icon.png", "apple-touch-icon.png"],
   ["mobile/js/api-web.js", "js/api-web.js"],
+  ["mobile/js/tisk-stranka.js", "js/tisk-stranka.js"],
   ["mobile/js/mobile-nav.js", "js/mobile-nav.js"],
   ["mobile/js/registrace-sw.js", "js/registrace-sw.js"],
   ["mobile/js/vendor/qrcode.min.js", "js/vendor/qrcode.min.js"],
