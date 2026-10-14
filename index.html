@@ -4,23 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jakub Kočvara — volejbal × kód</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230a0b0d%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2214%22%20r%3D%227%22%20fill%3D%22%23e6304a%22/%3E%3Ctext%20x%3D%2231%22%20y%3D%2246%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2232%22%20fill%3D%22%23f2f1ed%22%20text-anchor%3D%22middle%22%3EJK%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230a0b0d%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2214%22%20r%3D%227%22%20fill%3D%22%23D6523A%22/%3E%3Ctext%20x%3D%2231%22%20y%3D%2246%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2232%22%20fill%3D%22%23f2f1ed%22%20text-anchor%3D%22middle%22%3EJK%3C/text%3E%3C/svg%3E">
 <link rel="alternate icon" type="image/png" href="data:image/png;base64,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">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0a0b0d;
     --bg-soft:#101317;
     --card:#15181d;
     --line: rgba(255,255,255,0.08);
-    --ink:#f2f1ed;
+    --ink:#F7F5EF;
+    --cream:#F7F5EF;
+    --white:#F9F9F9;
     --ink-dim:#9aa0a8;
-    --red:#e6304a;
+    --red:#D6523A;
     --red-deep:#8a1a2c;
-    --teal:#5eead4;
+    --teal:#cdbfa6;
     --amber:#ffb703;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -34,7 +36,7 @@
   ::selection{background:var(--red); color:#fff;}
 
   .mono{font-family:'JetBrains Mono', monospace;}
-  .display{font-family:'Space Grotesk', sans-serif;}
+  .display{font-family:'Oswald', sans-serif;}
 
   a{color:inherit; text-decoration:none;}
 
@@ -47,7 +49,7 @@
     background:linear-gradient(to bottom, rgba(10,11,13,0.85), rgba(10,11,13,0));
   }
   .logo{
-    font-family:'Space Grotesk', sans-serif;
+    font-family:'Oswald', sans-serif;
     font-weight:700; font-size:1.05rem; letter-spacing:0.02em;
     display:flex; align-items:center; gap:8px;
   }
@@ -76,65 +78,150 @@
   header.nav-open .nav-toggle span:nth-child(2){opacity:0;}
   header.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-  /* ---------- HERO ---------- */
+  /* ---------- HERO ----------
+     Court seen from above: the net is the vertical axis. Type and the two
+     feature blocks are composed on it and mirrored across it. Desktop uses a
+     1280x800 stage measured in --u (one stage px), so it scales without
+     transform; portrait tablet and phone reflow into a grid. */
   .hero{
-    min-height:100svh;
-    display:grid;
-    grid-template-columns:1fr 1.15fr;
-    align-items:stretch;
-    position:relative;
-    padding-top:84px;
+    --hdr:76px;
+    --u:min(calc((100svh - var(--hdr)) / 800), calc(100vw / 860));
+    position:relative; height:100svh; min-height:520px; overflow:hidden;
+    padding:0; background:var(--bg);
+  }
+  .hero-court{position:absolute; inset:0; width:100%; height:100%; pointer-events:none;}
+  .hero-tint{
+    position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(to bottom, rgba(10,11,13,.6) 0%, rgba(10,11,13,.12) 24%, rgba(10,11,13,0) 46%, rgba(10,11,13,.18) 74%, rgba(10,11,13,.92) 100%);
+  }
+  .hero-stage{
+    position:absolute; left:50%;
+    width:calc(1280 * var(--u)); height:calc(800 * var(--u));
+    margin-left:calc(-640 * var(--u));
+    top:calc(var(--hdr) + (100% - var(--hdr) - 800 * var(--u)) / 2);
   }
   .hero-photo{
-    position:relative;
-    overflow:hidden;
-    background:#000;
+    position:absolute; left:calc(473 * var(--u)); top:calc(300 * var(--u));
+    width:calc(334 * var(--u)); height:calc(500 * var(--u));
+    object-fit:cover; object-position:50% 14%;
+    filter:grayscale(.2) brightness(.74) contrast(1.08);
+    -webkit-mask-image:radial-gradient(closest-side at 50% 45%, #000 55%, transparent 100%);
+    mask-image:radial-gradient(closest-side at 50% 45%, #000 55%, transparent 100%);
   }
-  .hero-photo img{
-    width:100%; height:100%; object-fit:cover; object-position:50% 18%;
-    filter:grayscale(0.15) contrast(1.05);
-    opacity:0;
-    animation:fadeImg 1.4s ease forwards .2s;
+  .h-eyebrow{
+    position:absolute; left:0; top:calc(36 * var(--u)); width:100%; margin:0;
+    font:600 calc(11.5 * var(--u))/1 'Barlow Condensed', system-ui, sans-serif;
+    letter-spacing:.3em; text-indent:.3em; text-transform:uppercase; text-align:center;
+    color:var(--cream); text-shadow:0 1px 3px rgba(0,0,0,.45);
   }
-  @keyframes fadeImg{to{opacity:1;}}
-  .hero-photo::after{
-    content:'';
-    position:absolute; inset:0;
-    background:linear-gradient(100deg, rgba(10,11,13,0.95) 0%, rgba(10,11,13,0.15) 35%, rgba(10,11,13,0) 60%),
-               linear-gradient(to top, rgba(10,11,13,0.9), rgba(10,11,13,0) 30%);
+  .h-headline{
+    position:absolute; left:0; top:calc(62 * var(--u)); width:100%; margin:0;
+    font:700 calc(64 * var(--u))/.92 'Oswald', system-ui, sans-serif;
+    letter-spacing:-.005em; text-transform:uppercase; text-align:center;
+    color:var(--cream); text-shadow:0 calc(14 * var(--u)) calc(34 * var(--u)) rgba(0,0,0,.5);
   }
-  .court-lines{
-    position:absolute; inset:0; pointer-events:none; opacity:0.35;
+  .h-headline span{display:block; white-space:nowrap;}
+  .h-mark{
+    position:absolute; left:calc(618 * var(--u)); top:calc(726 * var(--u));
+    width:calc(44 * var(--u)); height:calc(44 * var(--u)); overflow:visible;
   }
-  .hero-right{
-    display:flex; flex-direction:column; justify-content:center;
-    padding:6vh 5vw 6vh 4vw;
-    position:relative;
+  .feature{position:absolute; top:calc(560 * var(--u)); width:calc(300 * var(--u)); margin:0;}
+  .f-left{right:calc(790 * var(--u)); text-align:right;}
+  .f-right{left:calc(790 * var(--u)); text-align:left;}
+  .feature .icon{display:block; width:calc(36 * var(--u)); height:calc(37 * var(--u)); margin-bottom:calc(14 * var(--u));}
+  .f-left .icon{margin-left:auto;}
+  .feature h2{
+    margin:0 0 calc(10 * var(--u));
+    font:600 calc(20 * var(--u))/1.05 'Barlow Condensed', system-ui, sans-serif;
+    letter-spacing:.03em; text-transform:uppercase;
+    color:var(--white); text-shadow:0 1px 4px rgba(0,0,0,.4);
   }
+  .feature p{
+    margin:0;
+    font:400 calc(14.5 * var(--u))/1.38 'Barlow Condensed', system-ui, sans-serif;
+    color:rgba(255,255,255,.84); text-shadow:0 1px 3px rgba(0,0,0,.35);
+  }
+  .feature h2 span, .feature p span{display:block; white-space:nowrap;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .h-eyebrow{animation:riseIn .55s cubic-bezier(.33,.9,.35,1) .15s both;}
+    .h-headline span{animation:lineIn .9s cubic-bezier(.16,1,.3,1) both;}
+    .h-headline .hl1{animation-delay:.28s;}
+    .h-headline .hl2{animation-delay:.37s;}
+    .h-headline .hl3{animation-delay:.46s;}
+    .h-headline .hl4{animation-delay:.55s;}
+    .hero-photo{animation:photoIn 1.3s cubic-bezier(.2,.8,.2,1) .05s both;}
+    .h-mark{transform-origin:50% 50%; animation:markIn .7s cubic-bezier(.2,.9,.25,1) .72s both;}
+    .f-left{animation:blockInL .75s cubic-bezier(.16,1,.3,1) .82s both;}
+    .f-right{animation:blockInR .75s cubic-bezier(.16,1,.3,1) .9s both;}
+  }
+  @keyframes riseIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  @keyframes lineIn{
+    0%{opacity:0; transform:translateY(.3em); clip-path:inset(0 -20% 100% -20%);}
+    35%{opacity:1;}
+    100%{opacity:1; transform:none; clip-path:inset(-60% -20% -60% -20%);}
+  }
+  @keyframes photoIn{from{opacity:0; transform:scale(1.03);} to{opacity:1; transform:none;}}
+  @keyframes markIn{from{opacity:0; transform:scale(.88);} to{opacity:1; transform:none;}}
+  @keyframes blockInL{from{opacity:0; transform:translate(-12px,8px);} to{opacity:1; transform:none;}}
+  @keyframes blockInR{from{opacity:0; transform:translate(12px,8px);} to{opacity:1; transform:none;}}
+
+  /* portrait tablet: grid, features stay mirrored across the axis */
+  @media (min-width:610px) and (max-aspect-ratio:1/1){
+    .hero{--u:min(calc(100vw / 768), calc(100svh / 1024)); height:auto; min-height:100svh;}
+    .hero-stage{
+      position:relative; left:auto; top:auto; width:auto; height:auto; margin:0; min-height:100svh;
+      display:grid; grid-template-columns:1fr minmax(120px, 24vw) 1fr;
+      grid-template-rows:auto auto 1fr auto auto;
+      padding:calc(var(--hdr) + 40 * var(--u)) clamp(24px, 5.2vw, 72px) calc(48 * var(--u));
+    }
+    .h-eyebrow,.h-headline,.hero-photo,.h-mark,.feature{position:static; width:auto;}
+    .h-eyebrow{grid-area:1/1/2/-1; font-size:calc(13 * var(--u)); margin-bottom:calc(18 * var(--u));}
+    .h-headline{grid-area:2/1/3/-1; font-size:calc(80 * var(--u));}
+    .hero-photo{grid-area:3/1/4/-1; justify-self:center; align-self:center; height:calc(360 * var(--u)); width:auto; aspect-ratio:525/785; margin-top:calc(-24 * var(--u));}
+    .h-mark{grid-area:4/1/5/-1; justify-self:center; width:calc(52 * var(--u)); height:calc(52 * var(--u)); margin:calc(8 * var(--u)) 0 calc(20 * var(--u));}
+    .f-left{grid-area:5/1/6/2;}
+    .f-right{grid-area:5/3/6/4;}
+    .feature .icon{width:calc(40 * var(--u)); height:calc(41 * var(--u));}
+    .feature h2{font-size:calc(22 * var(--u));}
+    .feature p{font-size:calc(16 * var(--u)); max-width:calc(300 * var(--u));}
+    .f-left p{margin-left:auto;}
+    .feature h2 span, .feature p span{display:inline; white-space:normal;}
+  }
+  /* phone (and short landscape screens): single column, still mirrored */
+  @media (max-width:609px), (max-height:520px) and (min-aspect-ratio:1/1){
+    .hero{--u:min(calc(100vw / 390), 1.2px); height:auto; min-height:100svh;}
+    .hero-stage{
+      position:relative; left:auto; top:auto; width:auto; max-width:560px; height:auto; margin:0 auto; min-height:100svh;
+      display:grid; grid-template-columns:100%; grid-template-rows:auto auto 1fr auto auto auto;
+      padding:calc(var(--hdr) + 24px) max(22px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+    }
+    .h-eyebrow,.h-headline,.hero-photo,.h-mark,.feature{position:static; width:auto;}
+    .h-eyebrow{grid-row:1; font-size:clamp(9.5px, calc(10.5 * var(--u)), 12px); margin-bottom:14px;}
+    .h-headline{grid-row:2; font-size:clamp(32px, 11vw, 58px);}
+    .h-headline span{white-space:normal;}
+    .hero-photo{grid-row:3; justify-self:center; align-self:center; height:clamp(240px, calc(320 * var(--u)), 400px); width:auto; aspect-ratio:525/785; margin-top:-12px;}
+    .h-mark{grid-row:4; justify-self:center; width:clamp(36px, calc(42 * var(--u)), 48px); height:clamp(36px, calc(42 * var(--u)), 48px); margin:6px 0 20px;}
+    .f-left{grid-row:5; margin-bottom:26px;}
+    .f-right{grid-row:6;}
+    .feature .icon{width:clamp(28px, calc(34 * var(--u)), 40px); height:clamp(29px, calc(35 * var(--u)), 41px); margin-bottom:12px;}
+    .feature h2{font-size:clamp(17px, calc(19 * var(--u)), 21px);}
+    .feature p{font-size:clamp(14px, calc(15 * var(--u)), 16px); max-width:300px;}
+    .f-left p{margin-left:auto;}
+    .feature h2 span, .feature p span{display:inline; white-space:normal;}
+  }
+
+  /* ---------- EYEBROW LABEL (contact section) ---------- */
   .eyebrow{
-    font-size:0.78rem; color:var(--teal); letter-spacing:0.12em; text-transform:uppercase;
+    font-family:'Barlow Condensed', sans-serif; font-weight:600;
+    font-size:0.86rem; color:var(--teal); letter-spacing:0.12em; text-transform:uppercase;
     margin-bottom:18px; display:flex; align-items:center; gap:10px;
   }
   .eyebrow .bar{width:28px; height:1px; background:var(--teal);}
-  h1.name{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:700;
-    font-size:clamp(2.6rem, 5.2vw, 4.6rem);
-    line-height:0.98;
-    letter-spacing:-0.01em;
-  }
-  h1.name .last{color:var(--red);}
-  .role-line{
-    margin-top:18px;
-    font-size:clamp(1rem, 1.4vw, 1.2rem);
-    color:var(--ink-dim);
-    max-width:520px;
-    line-height:1.55;
-  }
-  .role-line b{color:var(--ink); font-weight:600;}
 
+  /* ---------- TERMINAL (in the stack section) ---------- */
+  .stack-terminal{margin-top:72px;}
   .terminal{
-    margin-top:38px;
     background:var(--card);
     border:1px solid var(--line);
     border-radius:10px;
@@ -171,14 +258,6 @@
   }
   @keyframes blink{50%{opacity:0;}}
 
-  .scroll-cue{
-    position:absolute; bottom:34px; left:4vw;
-    display:flex; align-items:center; gap:10px;
-    font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--ink-dim);
-  }
-  .scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--ink-dim), transparent); animation:scrollMove 1.8s ease-in-out infinite;}
-  @keyframes scrollMove{0%{transform:translateY(0); opacity:1;}100%{transform:translateY(10px); opacity:0;}}
-
   /* ---------- SECTION GENERIC ---------- */
   section{padding:130px 6vw;}
   .section-head{
@@ -189,7 +268,7 @@
     font-family:'JetBrains Mono', monospace; color:var(--red); font-size:0.85rem;
   }
   .section-title{
-    font-family:'Space Grotesk', sans-serif; font-weight:600;
+    font-family:'Oswald', sans-serif; font-weight:600;
     font-size:clamp(1.8rem, 3vw, 2.6rem);
   }
   .section-sub{
@@ -212,7 +291,7 @@
   }
   .stat:last-child{border-right:none;}
   .stat .num{
-    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-family:'Oswald', sans-serif; font-weight:700;
     font-size:clamp(2.2rem,3.4vw,3.2rem);
     color:var(--ink);
   }
@@ -238,12 +317,12 @@
     width:9px; height:9px; border-radius:50%;
     background:var(--bg); border:2px solid var(--red);
   }
-  .t-item.is-now::before{background:var(--red); box-shadow:0 0 0 4px rgba(230,48,74,0.18);}
+  .t-item.is-now::before{background:var(--red); box-shadow:0 0 0 4px rgba(214,82,58,0.2);}
   .t-year{
     font-family:'JetBrains Mono', monospace; color:var(--red); font-size:0.8rem; letter-spacing:0.04em;
   }
   .t-title{
-    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.3rem; margin-top:6px;
+    font-family:'Oswald', sans-serif; font-weight:600; font-size:1.3rem; margin-top:6px;
   }
   .t-desc{color:var(--ink-dim); margin-top:8px; max-width:560px; line-height:1.65; font-size:0.95rem;}
   .t-tags{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;}
@@ -260,7 +339,7 @@
   .stack-row{
     display:flex; justify-content:space-between; align-items:center;
     padding:20px 0; border-bottom:1px solid var(--line);
-    font-family:'Space Grotesk', sans-serif; font-size:1.15rem; font-weight:500;
+    font-family:'Oswald', sans-serif; font-size:1.15rem; font-weight:500;
   }
   .stack-row:first-child{padding-top:0;}
   .stack-row .bar-wrap{
@@ -272,7 +351,7 @@
   .principles{display:flex; flex-direction:column; gap:30px;}
   .principle{padding:24px 0; border-bottom:1px solid var(--line);}
   .principle:first-child{padding-top:0;}
-  .principle .pt{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.05rem; display:flex; gap:12px; align-items:baseline;}
+  .principle .pt{font-family:'Oswald', sans-serif; font-weight:600; font-size:1.05rem; display:flex; gap:12px; align-items:baseline;}
   .principle .pt .pmono{font-family:'JetBrains Mono', monospace; color:var(--teal); font-size:0.8rem;}
   .principle p{color:var(--ink-dim); margin-top:8px; font-size:0.92rem; line-height:1.6;}
 
@@ -287,7 +366,7 @@
   }
   .service:hover{border-color:var(--red); transform:translateY(-4px);}
   .service .s-num{font-family:'JetBrains Mono', monospace; color:var(--red); font-size:0.8rem; letter-spacing:0.06em;}
-  .service h3{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.22rem; line-height:1.25;}
+  .service h3{font-family:'Oswald', sans-serif; font-weight:600; font-size:1.22rem; line-height:1.25;}
   .service p{color:var(--ink-dim); font-size:0.93rem; line-height:1.65;}
   .services-note{
     margin-top:36px; max-width:760px;
@@ -306,7 +385,7 @@
     display:flex; flex-direction:column; align-items:flex-start; gap:28px;
   }
   .contact h2{
-    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-family:'Oswald', sans-serif; font-weight:700;
     font-size:clamp(2.2rem, 5vw, 4rem); line-height:1.05; max-width:780px;
   }
   .contact h2 .accent{color:var(--red);}
@@ -317,7 +396,7 @@
     transition:transform .2s, background .2s, border-color .2s;
   }
   .btn-primary{background:var(--red); color:#0a0b0d; font-weight:600;}
-  .btn-primary:hover{transform:translateY(-2px); background:#ff4a63;}
+  .btn-primary:hover{transform:translateY(-2px); background:#e4684f;}
   .btn-ghost{border:1px solid var(--line); color:var(--ink);}
   .btn-ghost:hover{border-color:var(--ink-dim); transform:translateY(-2px);}
 
@@ -339,10 +418,6 @@
   .lang-toggle:hover{color:var(--ink); border-color:var(--red);}
 
   @media (max-width:880px){
-    .hero{grid-template-columns:1fr; padding-top:78px;}
-    .hero-photo{height:46vh;}
-    .hero-photo::after{background:linear-gradient(to top, rgba(10,11,13,1) 5%, rgba(10,11,13,0.2) 60%, rgba(10,11,13,0) 100%);}
-    .hero-right{padding:5vh 6vw 6vh;}
     .nav-toggle{display:flex;}
     nav ul{display:none;}
     header.nav-open nav ul{
@@ -357,11 +432,9 @@
     .stack-grid{grid-template-columns:1fr; gap:40px;}
     .services-grid{grid-template-columns:1fr;}
     section{padding:90px 6vw;}
-    .scroll-cue{display:none;}
   }
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important; transition:none !important;}
-    .hero-photo img{opacity:1;}
   }
 </style>
 </head>
@@ -382,24 +455,64 @@
   <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </header>
 
-<section class="hero" style="padding-bottom:0;">
-  <div class="hero-photo">
-    <img src="hero.webp" width="525" height="785" alt="Jakub Kočvara">
-  </div>
-  <div class="hero-right">
-    <div class="eyebrow"><span class="bar"></span><span data-i18n="hero_eyebrow">volejbalista // vývojář</span></div>
-    <h1 class="name">JAKUB<br><span class="last">KOČVARA</span></h1>
-    <p class="role-line" data-i18n="hero_role">24 let. <b>6 sezón</b> na profesionálních hřištích ve třech zemích, teď stejnou disciplínu a tah na branku přenáším do <b>kódu</b>. Tahle stránka je toho důkaz.</p>
-
-    <div class="terminal">
-      <div class="terminal-bar">
-        <span></span><span></span><span></span>
-        <small>player.js</small>
-      </div>
-      <div class="terminal-body" id="typeTarget"></div>
+<section class="hero" id="top">
+  <svg class="hero-court" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect x="260" y="230" width="1080" height="540" fill="rgba(247,245,239,0.014)" stroke="rgba(247,245,239,0.075)" stroke-width="2"/>
+    <path d="M620 230V770M980 230V770" stroke="rgba(247,245,239,0.06)" stroke-width="2"/>
+    <path d="M620 190V230M620 770V810M980 190V230M980 770V810" stroke="rgba(247,245,239,0.05)" stroke-width="2" stroke-dasharray="8 8"/>
+    <path d="M800 150V850" stroke="rgba(247,245,239,0.14)" stroke-width="2.5"/>
+    <circle cx="800" cy="150" r="6" fill="rgba(247,245,239,0.14)"/>
+    <circle cx="800" cy="850" r="6" fill="rgba(247,245,239,0.14)"/>
+  </svg>
+  <div class="hero-tint"></div>
+  <div class="hero-stage">
+    <img class="hero-photo" src="hero.webp" width="525" height="785" alt="Jakub Kočvara">
+    <p class="h-eyebrow"><span data-i18n="hero_eyebrow">Jakub Kočvara · volejbalista // vývojář</span></p>
+    <h1 class="h-headline">
+      <span class="hl1" data-i18n="hl1">Disciplína</span>
+      <span class="hl2" data-i18n="hl2">z hřiště,</span>
+      <span class="hl3" data-i18n="hl3">teď psaná</span>
+      <span class="hl4" data-i18n="hl4">v kódu.</span>
+    </h1>
+    <svg class="h-mark" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+      <circle cx="22" cy="22" r="19.5" stroke="#D6523A" stroke-width="1.6" stroke-dasharray="88 34.5" transform="rotate(-38 22 22)"/>
+      <circle cx="33.6" cy="10.6" r="3" stroke="#D6523A" stroke-width="1.6"/>
+      <path d="M22 26.5V17.5M17.5 22H26.5" stroke="#D6523A" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <div class="feature f-left">
+      <svg class="icon" viewBox="0 0 36 37" fill="none" aria-hidden="true">
+        <defs><clipPath id="ballClip"><circle cx="18" cy="18.5" r="10.5"/></clipPath></defs>
+        <circle cx="18" cy="18.5" r="16.5" stroke="#F9F9F9" stroke-width="1.8" stroke-dasharray="3.4 2.8"/>
+        <circle cx="18" cy="18.5" r="10.5" fill="#F9F9F9"/>
+        <g clip-path="url(#ballClip)" stroke="#101215" stroke-width="1" fill="none">
+          <path d="M18 18.5C18.6 13.7 16.6 10.2 13.3 9.1"/>
+          <path d="M18 18.5C22.3 20.4 24.6 23.9 24.4 27.1"/>
+          <path d="M18 18.5C13.6 20.3 9.9 19.9 7.8 17.8"/>
+          <path d="M21.6 8.6C23.5 12.4 22.9 16.6 19.9 19.4"/>
+          <path d="M28.4 18.9C24.6 16.8 20.6 17.3 17.5 19.8"/>
+        </g>
+      </svg>
+      <h2 data-i18n="f1_t"><span>6 sezón </span><span>ve 3 zemích</span></h2>
+      <p data-i18n="f1_p"><span>Česká extraliga, rakouská Bundesliga </span><span>a španělská Superliga 2 — pokaždé </span><span>mezi nejlepšími bodujícími hráči.</span></p>
+    </div>
+    <div class="feature f-right">
+      <svg class="icon" viewBox="0 0 36 37" fill="none" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="20" height="11.2" rx="1" fill="#F9F9F9"/>
+        <rect x="8" y="13" width="20" height="11.2" rx="1" fill="#F9F9F9"/>
+        <rect x="15.5" y="25.5" width="20" height="11" rx="1" fill="#F9F9F9"/>
+        <g fill="#101215">
+          <circle cx="3" cy="3.2" r=".9"/><circle cx="5.7" cy="3.2" r=".9"/><circle cx="8.4" cy="3.2" r=".9"/>
+          <rect x="3" y="6.6" width="11" height="1.4" rx=".4"/>
+          <circle cx="10.5" cy="15.7" r=".9"/><circle cx="13.2" cy="15.7" r=".9"/><circle cx="15.9" cy="15.7" r=".9"/>
+          <rect x="10.5" y="19.1" width="8" height="1.4" rx=".4"/>
+          <circle cx="18" cy="28.2" r=".9"/><circle cx="20.7" cy="28.2" r=".9"/><circle cx="23.4" cy="28.2" r=".9"/>
+          <rect x="18" y="31.6" width="13" height="1.4" rx=".4"/>
+        </g>
+      </svg>
+      <h2 data-i18n="f2_t"><span>Weby na míru, </span><span>bez šablon</span></h2>
+      <p data-i18n="f2_p"><span>Rychlé, responzivní stránky </span><span>pro sportovce, kluby i firmy. </span><span>Tahle stránka je důkaz.</span></p>
     </div>
   </div>
-  <div class="scroll-cue"><div class="line"></div><span data-i18n="scroll_cue">scroll</span></div>
 </section>
 
 <section id="o-mne" style="padding-top:56px; padding-bottom:56px;">
@@ -491,6 +604,14 @@
       </div>
     </div>
   </div>
+
+  <div class="terminal stack-terminal reveal">
+    <div class="terminal-bar">
+      <span></span><span></span><span></span>
+      <small>player.js</small>
+    </div>
+    <div class="terminal-body" id="typeTarget"></div>
+  </div>
 </section>
 
 <section id="sluzby">
@@ -543,8 +664,12 @@
     cs: {
       _title: 'Jakub Kočvara — volejbal × kód',
       nav_about: 'O mně', nav_career: 'Kariéra', nav_services: 'Služby', nav_contact: 'Kontakt',
-      hero_eyebrow: 'volejbalista // vývojář',
-      hero_role: '24 let. <b>6 sezón</b> na profesionálních hřištích ve třech zemích, teď stejnou disciplínu a tah na branku přenáším do <b>kódu</b>. Tahle stránka je toho důkaz.',
+      hero_eyebrow: 'Jakub Kočvara · volejbalista // vývojář',
+      hl1: 'Disciplína', hl2: 'z hřiště,', hl3: 'teď psaná', hl4: 'v kódu.',
+      f1_t: '<span>6 sezón </span><span>ve 3 zemích</span>',
+      f1_p: '<span>Česká extraliga, rakouská Bundesliga </span><span>a španělská Superliga 2 — pokaždé </span><span>mezi nejlepšími bodujícími hráči.</span>',
+      f2_t: '<span>Weby na míru, </span><span>bez šablon</span>',
+      f2_p: '<span>Rychlé, responzivní stránky </span><span>pro sportovce, kluby i firmy. </span><span>Tahle stránka je důkaz.</span>',
       stat1_num: '<span>2.</span> &amp; <span>3.</span>',
       stat1_label: 'Místo na MČR juniorů ve volejbale',
       stat2_label: 'Bodující hráč — Španělsko Superliga 2',
@@ -588,14 +713,17 @@
       sv_note: 'Weby jsem dělal už dřív — ale jen pro radost. Nikdy jsem v tom nepodnikal ani nenabízel služby. Teď přišel ten pravý čas. Pro tebe to znamená <b>férovou startovní cenu</b> a to, že tvému projektu dám maximum — potřebuju, aby moje první reference stály za to. Tahle stránka je moje vizitka, posuď sám, jestli ti styl sedí.',
       c_eyebrow: 'pojďme na to',
       c_title: 'Hledáš web, který <span class="accent">vyhraje set</span>? <br>Napiš mi.',
-      f_note: 'postaveno ručně, řádek po řádku',
-      scroll_cue: 'scroll'
+      f_note: 'postaveno ručně, řádek po řádku'
     },
     en: {
       _title: 'Jakub Kočvara — volleyball × code',
       nav_about: 'About', nav_career: 'Career', nav_services: 'Services', nav_contact: 'Contact',
-      hero_eyebrow: 'volleyball player // developer',
-      hero_role: '24 years old. <b>6 seasons</b> on professional courts in three countries — now I bring the same discipline and drive into <b>code</b>. This page is the proof.',
+      hero_eyebrow: 'Jakub Kočvara · volleyball player // developer',
+      hl1: 'Discipline', hl2: 'from the court,', hl3: 'now written', hl4: 'in code.',
+      f1_t: '<span>6 seasons </span><span>in 3 countries</span>',
+      f1_p: '<span>Czech Extraliga, Austrian Bundesliga </span><span>and Spain\'s Superliga 2 — every season </span><span>among the top scorers.</span>',
+      f2_t: '<span>Custom websites, </span><span>no templates</span>',
+      f2_p: '<span>Fast, responsive websites </span><span>for athletes, clubs and businesses. </span><span>This page is the proof.</span>',
       stat1_num: '<span>2nd</span> &amp; <span>3rd</span>',
       stat1_label: 'Place at the Czech Junior Volleyball Championship',
       stat2_label: 'Top scoring player — Spanish Superliga 2',
@@ -639,8 +767,7 @@
       sv_note: 'I\'ve been building websites for a while — but purely for the fun of it. I never ran it as a business or offered my services. Now the time is right. For you that means a <b>fair starter price</b> and my full effort on your project — I need my first references to be worth showing. This page is my calling card; judge for yourself whether the style fits.',
       c_eyebrow: 'let\'s do this',
       c_title: 'Looking for a website that <span class="accent">wins the set</span>? <br>Drop me a line.',
-      f_note: 'built by hand, line by line',
-      scroll_cue: 'scroll'
+      f_note: 'built by hand, line by line'
     }
   };
 
@@ -732,7 +859,13 @@
   });
 
   // don't restart typing if a language toggle already kicked it off
-  setTimeout(()=>{ if(typingGen === 0) startTyping(codeByLang[lang]); }, 500);
+  const termIO = new IntersectionObserver((entries)=>{
+    if(entries.some(e=>e.isIntersecting)){
+      termIO.disconnect();
+      if(typingGen === 0) startTyping(codeByLang[lang]);
+    }
+  }, {threshold:0.4});
+  termIO.observe(target);
 
   // mobile nav
   const headerEl = document.querySelector('header');
