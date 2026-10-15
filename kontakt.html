@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt — Jakub Kočvara</title>
+<meta name="description" content="Napiš mi pár vět o tom, jaký web potřebuješ. E-mail, Instagram nebo formulář.">
+<meta name="theme-color" content="#0a0b0d">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kontakt — Jakub Kočvara">
+<meta property="og:description" content="Hledáš web, který vyhraje set? Napiš mi.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="main.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main" data-i18n="skip">Přeskočit na obsah</a>
+
+<header class="site-header" id="siteHeader">
+  <a class="logo" href="index.html" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+  <nav class="site-nav" id="siteNav" aria-label="Hlavní navigace" data-i18n-aria="aria_nav">
+    <ul>
+      <li><a href="o-mne.html" data-i18n="nav_about">O mně</a></li>
+      <li><a href="sluzby.html" data-i18n="nav_services">Služby</a></li>
+      <li><a class="nav-cta" href="kontakt.html" aria-current="page" data-i18n="nav_contact">Kontakt</a></li>
+    </ul>
+  </nav>
+  <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English">EN</button>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span></button>
+</header>
+
+<main id="main" data-page="contact">
+
+  <section class="page-hero">
+    <svg class="court" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect class="fade" x="260" y="230" width="1080" height="540" fill="rgba(247,245,239,.014)"/>
+      <rect class="draw" pathLength="1" x="260" y="230" width="1080" height="540" fill="none" stroke="rgba(247,245,239,.075)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M620 230V770M980 230V770" stroke="rgba(247,245,239,.06)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M800 150V850" stroke="rgba(247,245,239,.14)" stroke-width="2.5"/>
+    </svg>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="page-hero-inner">
+      <p class="ph-eyebrow" data-i18n="ct_eyebrow">Kontakt</p>
+      <h1 class="ph-title">
+        <span data-i18n="ct_t1">Napiš</span>
+        <span data-i18n="ct_t2">mi<span class="accent">.</span></span>
+      </h1>
+      <p class="ph-lead" data-i18n="ct_lead">Hledáš web, který vyhraje set? Napiš mi pár vět o tom, co potřebuješ, a ozvu se co nejdřív.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="contact-split reveal">
+      <div class="contact-direct">
+        <p class="eyebrow" data-i18n="ct_direct">Napřímo</p>
+        <a class="c-mail" href="mailto:JakubDev@outlook.com">JakubDev@outlook.com</a>
+        <ul class="c-lines">
+          <li><a href="https://www.instagram.com/jakub_kocvara/" target="_blank" rel="noopener">Instagram · @jakub_kocvara</a></li>
+          <li data-i18n="ct_ico">IČO: 24611581</li>
+        </ul>
+      </div>
+      <div class="axis-rule" aria-hidden="true"></div>
+      <div class="contact-form-wrap">
+        <p class="eyebrow" data-i18n="ct_form">Nebo přes formulář</p>
+        <form class="form" id="contactForm" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="kontakt">
+          <p class="hp"><label><span data-i18n="f_hp">Tohle pole nevyplňuj:</span> <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="field">
+            <label for="f-name" data-i18n="f_name">Jméno</label>
+            <input id="f-name" name="jmeno" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-email" data-i18n="f_email">E-mail</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="f-msg" data-i18n="f_msg">Co potřebuješ?</label>
+            <textarea id="f-msg" name="zprava" required></textarea>
+          </div>
+          <div class="form-foot">
+            <button class="btn btn-primary" type="submit" data-i18n="f_send">Odeslat zprávu</button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="foot-grid">
+    <a class="logo" href="index.html" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+    <nav class="foot-nav" aria-label="Odkazy v patičce" data-i18n-aria="aria_foot">
+      <a href="index.html" data-i18n="nav_home">Domů</a>
+      <a href="o-mne.html" data-i18n="nav_about">O mně</a>
+      <a href="sluzby.html" data-i18n="nav_services">Služby</a>
+      <a href="kontakt.html" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+    <a class="foot-mail" href="mailto:JakubDev@outlook.com">JakubDev@outlook.com</a>
+  </div>
+  <div class="foot-meta">
+    <span>© 2026 Jakub Kočvara · IČO: 24611581</span>
+    <span data-i18n="f_note">postaveno ručně, řádek po řádku</span>
+  </div>
+</footer>
+
+</body>
+</html>

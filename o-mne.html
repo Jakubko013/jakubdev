@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O mně — Jakub Kočvara</title>
+<meta name="description" content="Jakub Kočvara — diagonální útočník se šesti sezónami ve třech zemích a webový vývojář. Kariéra, technologie a přístup k práci.">
+<meta name="theme-color" content="#0a0b0d">
+<meta property="og:type" content="website">
+<meta property="og:title" content="O mně — Jakub Kočvara">
+<meta property="og:description" content="Z palubovky k editoru. Šest sezón ve třech zemích, teď weby na míru.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="main.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main" data-i18n="skip">Přeskočit na obsah</a>
+
+<header class="site-header" id="siteHeader">
+  <a class="logo" href="index.html" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+  <nav class="site-nav" id="siteNav" aria-label="Hlavní navigace" data-i18n-aria="aria_nav">
+    <ul>
+      <li><a href="o-mne.html" aria-current="page" data-i18n="nav_about">O mně</a></li>
+      <li><a href="sluzby.html" data-i18n="nav_services">Služby</a></li>
+      <li><a class="nav-cta" href="kontakt.html" data-i18n="nav_contact">Kontakt</a></li>
+    </ul>
+  </nav>
+  <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English">EN</button>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span></button>
+</header>
+
+<main id="main" data-page="about">
+
+  <section class="page-hero">
+    <svg class="court" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect class="fade" x="260" y="230" width="1080" height="540" fill="rgba(247,245,239,.014)"/>
+      <rect class="draw" pathLength="1" x="260" y="230" width="1080" height="540" fill="none" stroke="rgba(247,245,239,.075)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M620 230V770M980 230V770" stroke="rgba(247,245,239,.06)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M800 150V850" stroke="rgba(247,245,239,.14)" stroke-width="2.5"/>
+    </svg>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="page-hero-inner">
+      <p class="ph-eyebrow" data-i18n="ab_eyebrow">O mně</p>
+      <h1 class="ph-title">
+        <span data-i18n="ab_t1">Z palubovky</span>
+        <span data-i18n="ab_t2">k editoru<span class="accent">.</span></span>
+      </h1>
+      <p class="ph-lead" data-i18n="ab_lead">Je mi 24 a na hřišti hraju jako diagonální útočník. Šest sezón jsem odehrál v ligách tří zemí — a mezitím jsem pro radost stavěl weby. Teď z toho dělám práci a beru do ní všechno, co mě naučila palubovka.</p>
+    </div>
+  </section>
+
+  <section class="section" id="kariera">
+    <div class="s-head reveal">
+      <p class="s-label" data-i18n="car_label">Kariéra</p>
+      <h2 class="s-title" data-i18n="s1_title">Kariéra na hřišti</h2>
+      <p class="s-sub" data-i18n="s1_sub">Chronologicky — odkud jsem vyrazil a kam mě to zatím zavedlo.</p>
+    </div>
+    <ol class="axis-list reveal">
+      <li class="axis-item">
+        <div class="axis-card">
+          <p class="axis-kicker" data-i18n="t1_year">Juniorská kategorie</p>
+          <h3 data-i18n="t1_title">2. a 3. místo na MČR juniorů</h3>
+          <p data-i18n="t1_desc">Dvakrát na stupních vítězů na mistrovství České republiky juniorů ve volejbale — jednou stříbro, jednou bronz.</p>
+          <div class="t-tags" data-i18n="t1_tags"><span>ČR</span><span>junioři</span><span>volejbal</span></div>
+        </div>
+      </li>
+      <li class="axis-item">
+        <div class="axis-card">
+          <p class="axis-kicker" data-i18n="t2_year">3 sezóny</p>
+          <h3 data-i18n="t2_title">Volejbal Brno — česká extraliga</h3>
+          <p data-i18n="t2_desc">Tři roky v nejvyšší české soutěži. Hřiště, na kterém se z nadějného juniora stává hráč, na kterého se dá spolehnout.</p>
+          <div class="t-tags" data-i18n="t2_tags"><span>Extraliga ČR</span><span>3 sezóny</span></div>
+        </div>
+      </li>
+      <li class="axis-item">
+        <div class="axis-card">
+          <p class="axis-kicker" data-i18n="t3_year">2 sezóny</p>
+          <h3 data-i18n="t3_title">TJ Sokol Wien — rakouská Bundesliga</h3>
+          <p data-i18n="t3_desc">Přesun do Rakouska a obě sezóny v top 5 bodujících hráčů ligy. Důkaz, že forma nebyla náhoda.</p>
+          <div class="t-tags" data-i18n="t3_tags"><span>Bundesliga</span><span>Top 5 — obě sezóny</span></div>
+        </div>
+      </li>
+      <li class="axis-item is-now">
+        <div class="axis-card">
+          <p class="axis-kicker" data-i18n="t4_year">1 sezóna</p>
+          <h3 data-i18n="t4_title">Španělsko — Superliga 2</h3>
+          <p data-i18n="t4_desc">Poslední zastávka zatím: španělská Superliga 2, kde jsem skončil mezi top 3 bodujícími hráči soutěže.</p>
+          <div class="t-tags"><span>Superliga 2</span><span>Top 3</span></div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section section--tight" id="stack">
+    <div class="s-head reveal">
+      <p class="s-label" data-i18n="st_label">Stack</p>
+      <h2 class="s-title" data-i18n="s2_title">Co umím mimo hřiště</h2>
+      <p class="s-sub" data-i18n="st_sub">Technologie, se kterými pracuju — a malá ukázka, jak o sobě přemýšlím v kódu.</p>
+    </div>
+    <div class="stack-grid reveal">
+      <div class="stack-list">
+        <div class="stack-row" style="--w:92%"><span>JavaScript / TypeScript</span><div class="bar-wrap"><div class="bar"></div></div></div>
+        <div class="stack-row" style="--w:88%"><span>React / Next.js</span><div class="bar-wrap"><div class="bar"></div></div></div>
+        <div class="stack-row" style="--w:80%"><span>Node.js</span><div class="bar-wrap"><div class="bar"></div></div></div>
+        <div class="stack-row" style="--w:75%"><span>Python</span><div class="bar-wrap"><div class="bar"></div></div></div>
+        <div class="stack-row" style="--w:84%"><span>HTML / CSS</span><div class="bar-wrap"><div class="bar"></div></div></div>
+        <div class="stack-row" style="--w:70%"><span data-i18n="stack_git">Git / nasazování</span><div class="bar-wrap"><div class="bar"></div></div></div>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar" aria-hidden="true">
+          <span></span><span></span><span></span>
+          <small>player.js</small>
+        </div>
+        <div class="terminal-body" id="typeTarget"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="reveal">
+      <p class="eyebrow" data-i18n="cta_eyebrow">pojďme na to</p>
+      <h2 class="cta-title" data-i18n="cta_title">Hledáš web, který <span class="accent">vyhraje set</span>?</h2>
+      <p class="cta-text" data-i18n="cta_text">Napiš mi pár vět o tom, co potřebuješ. Ozvu se a domluvíme se, jak na to.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="kontakt.html"><span data-i18n="cta_btn">Napsat zprávu</span> <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost btn-mail" href="mailto:JakubDev@outlook.com">JakubDev@outlook.com</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="foot-grid">
+    <a class="logo" href="index.html" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+    <nav class="foot-nav" aria-label="Odkazy v patičce" data-i18n-aria="aria_foot">
+      <a href="index.html" data-i18n="nav_home">Domů</a>
+      <a href="o-mne.html" data-i18n="nav_about">O mně</a>
+      <a href="sluzby.html" data-i18n="nav_services">Služby</a>
+      <a href="kontakt.html" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+    <a class="foot-mail" href="mailto:JakubDev@outlook.com">JakubDev@outlook.com</a>
+  </div>
+  <div class="foot-meta">
+    <span>© 2026 Jakub Kočvara · IČO: 24611581</span>
+    <span data-i18n="f_note">postaveno ručně, řádek po řádku</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -295,6 +295,11 @@ button, input, textarea{ font:inherit; color:inherit; }
   content:''; position:absolute; inset:auto 0 0 0; height:45%; pointer-events:none;
   background:linear-gradient(to bottom, transparent, var(--bg));
 }
+/* keep the court lines out from behind the title and lead */
+.page-hero .court{
+  -webkit-mask-image:radial-gradient(ellipse 58% 62% at 50% 50%, transparent 64%, #000 100%);
+  mask-image:radial-gradient(ellipse 58% 62% at 50% 50%, transparent 64%, #000 100%);
+}
 .page-hero-inner{ position:relative; z-index:1; max-width:900px; margin:0 auto; }
 .ph-eyebrow{
   font:600 .9rem/1 var(--ui); letter-spacing:.3em; text-indent:.3em; text-transform:uppercase;
@@ -302,7 +307,7 @@ button, input, textarea{ font:inherit; color:inherit; }
 }
 .ph-title{
   margin-top:22px;
-  font:700 clamp(3rem, 8vw, 6.4rem)/1.04 var(--display); text-transform:uppercase;
+  font:700 clamp(3rem, 8vw, 6.4rem)/1.2 var(--display); text-transform:uppercase;
   text-shadow:0 14px 34px rgba(0,0,0,.5);
 }
 .ph-title > span{ display:block; }
@@ -407,8 +412,8 @@ button, input, textarea{ font:inherit; color:inherit; }
 .axis-item:nth-child(even) .axis-card{ grid-column:3; text-align:left; }
 .axis-kicker{ font:600 .85rem/1 var(--ui); letter-spacing:.2em; text-transform:uppercase; color:var(--red); }
 .axis-card h3{ margin-top:10px; font:600 1.6rem/1.1 var(--display); text-wrap:balance; }
-.axis-card p{ margin-top:10px; max-width:46ch; color:var(--ink-dim); font-size:.98rem; }
-.axis-item:nth-child(odd) .axis-card p{ margin-left:auto; }
+.axis-card p:not(.axis-kicker){ margin-top:10px; max-width:46ch; color:var(--ink-dim); font-size:.98rem; }
+.axis-item:nth-child(odd) .axis-card p:not(.axis-kicker){ margin-left:auto; }
 .t-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
 .axis-item:nth-child(odd) .t-tags{ justify-content:flex-end; }
 .t-tags span{
@@ -421,7 +426,7 @@ button, input, textarea{ font:inherit; color:inherit; }
   .axis-item{ grid-template-columns:minmax(0,1fr); padding-left:34px; }
   .axis-item::before{ left:6px; }
   .axis-card, .axis-item:nth-child(even) .axis-card{ grid-column:1; text-align:left; }
-  .axis-item:nth-child(odd) .axis-card p{ margin-left:0; }
+  .axis-item:nth-child(odd) .axis-card p:not(.axis-kicker){ margin-left:0; }
   .axis-item:nth-child(odd) .t-tags{ justify-content:flex-start; }
 }
 
@@ -508,7 +513,7 @@ button, input, textarea{ font:inherit; color:inherit; }
 .axis-rule{ align-self:stretch; background:linear-gradient(var(--line-strong) 85%, transparent); }
 .contact-direct{ text-align:right; }
 .contact-direct .eyebrow, .contact-form-wrap .eyebrow{ margin-bottom:22px; }
-.contact-direct .eyebrow{ justify-content:flex-end; flex-direction:row-reverse; }
+.contact-direct .eyebrow{ justify-content:flex-start; flex-direction:row-reverse; }
 .c-mail{
   display:inline-block; font:600 clamp(1.5rem, 2.8vw, 2.3rem)/1.1 var(--display);
   overflow-wrap:anywhere; transition:color .2s;

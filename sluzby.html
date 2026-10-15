@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Služby — Jakub Kočvara</title>
+<meta name="description" content="Prezentační weby, weby pro sportovce a kluby, úpravy a údržba. Ručně psané, rychlé a responzivní, bez šablon.">
+<meta name="theme-color" content="#0a0b0d">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Služby — Jakub Kočvara">
+<meta property="og:description" content="Co pro tebe můžu udělat: prezentační web, web pro sportovce a kluby, úpravy a údržba.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="main.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main" data-i18n="skip">Přeskočit na obsah</a>
+
+<header class="site-header" id="siteHeader">
+  <a class="logo" href="index.html" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+  <nav class="site-nav" id="siteNav" aria-label="Hlavní navigace" data-i18n-aria="aria_nav">
+    <ul>
+      <li><a href="o-mne.html" data-i18n="nav_about">O mně</a></li>
+      <li><a href="sluzby.html" aria-current="page" data-i18n="nav_services">Služby</a></li>
+      <li><a class="nav-cta" href="kontakt.html" data-i18n="nav_contact">Kontakt</a></li>
+    </ul>
+  </nav>
+  <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English">EN</button>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span></button>
+</header>
+
+<main id="main" data-page="services">
+
+  <section class="page-hero">
+    <svg class="court" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect class="fade" x="260" y="230" width="1080" height="540" fill="rgba(247,245,239,.014)"/>
+      <rect class="draw" pathLength="1" x="260" y="230" width="1080" height="540" fill="none" stroke="rgba(247,245,239,.075)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M620 230V770M980 230V770" stroke="rgba(247,245,239,.06)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M800 150V850" stroke="rgba(247,245,239,.14)" stroke-width="2.5"/>
+    </svg>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="page-hero-inner">
+      <p class="ph-eyebrow" data-i18n="sv_eyebrow">Služby</p>
+      <h1 class="ph-title">
+        <span data-i18n="sv_t1">Co pro tebe</span>
+        <span data-i18n="sv_t2">můžu udělat<span class="accent">.</span></span>
+      </h1>
+      <p class="ph-lead" data-i18n="sv_lead">Jasná nabídka bez keců — tři věci, se kterými za mnou můžeš přijít.</p>
+      <div class="ph-actions">
+        <a class="btn btn-primary" href="kontakt.html"><span data-i18n="sv_btn">Nezávazně se ozvi</span> <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="services-grid reveal">
+      <article class="service" id="weby">
+        <svg class="s-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <rect x="4" y="7" width="32" height="26" rx="2"/>
+          <path d="M4 13.5h32"/>
+          <path d="M10 20.5h14M10 26h9" stroke="#D6523A" stroke-linecap="round"/>
+          <circle cx="8" cy="10.3" r=".9" fill="currentColor" stroke="none"/>
+          <circle cx="11" cy="10.3" r=".9" fill="currentColor" stroke="none"/>
+          <circle cx="14" cy="10.3" r=".9" fill="currentColor" stroke="none"/>
+        </svg>
+        <h3 data-i18n="sv1_title">Prezentační web</h3>
+        <p data-i18n="sv1_desc">Moderní web pro tebe, tvou firmu nebo projekt — od jedné stránky po několik podstránek. Rychlý, responzivní, žádné šablony.</p>
+      </article>
+      <article class="service" id="sport">
+        <svg class="s-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <defs><clipPath id="svBall"><circle cx="20" cy="20" r="15"/></clipPath></defs>
+          <circle cx="20" cy="20" r="15" stroke="currentColor" stroke-width="1.6"/>
+          <g clip-path="url(#svBall)" stroke="#D6523A" stroke-width="1.4">
+            <path d="M20 20C20.9 13.1 18 8.1 13.3 6.6"/>
+            <path d="M20 20C26.1 22.7 29.4 27.7 29.2 32.3"/>
+            <path d="M20 20C13.7 22.6 8.4 22 5.4 19"/>
+            <path d="M25.1 5.8C27.9 11.3 27 17.3 22.7 21.3"/>
+            <path d="M34.9 20.6C29.4 17.6 23.7 18.3 19.3 21.9"/>
+          </g>
+        </svg>
+        <h3 data-i18n="sv2_title">Weby pro sportovce a kluby</h3>
+        <p data-i18n="sv2_desc">Profil hráče, trenéra nebo oddílu. Z první ruky vím, co sportovec potřebuje ukázat — výsledky, video, kontakt pro agenty a sponzory.</p>
+      </article>
+      <article class="service" id="udrzba">
+        <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+          <path d="M21 3v5h-5" stroke="#D6523A"/>
+          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+          <path d="M8 16H3v5" stroke="#D6523A"/>
+        </svg>
+        <h3 data-i18n="sv3_title">Úpravy a údržba webu</h3>
+        <p data-i18n="sv3_desc">Máš web, který potřebuje oživit, zrychlit nebo jen pravidelně udržovat? Postarám se o něj.</p>
+      </article>
+    </div>
+
+    <div class="note reveal">
+      <svg viewBox="0 0 44 44" fill="none" aria-hidden="true">
+        <circle cx="22" cy="22" r="19.5" stroke="#D6523A" stroke-width="1.6" stroke-dasharray="88 34.5" transform="rotate(-38 22 22)"/>
+        <circle cx="33.6" cy="10.6" r="3" stroke="#D6523A" stroke-width="1.6"/>
+        <path d="M22 26.5V17.5M17.5 22H26.5" stroke="#D6523A" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <p data-i18n="sv_note">Weby jsem dělal už dřív — ale jen pro radost. Nikdy jsem v tom nepodnikal ani nenabízel služby. Teď přišel ten pravý čas. Pro tebe to znamená <b>férovou startovní cenu</b> a to, že tvému projektu dám maximum — potřebuju, aby moje první reference stály za to. Tahle stránka je moje vizitka, posuď sám, jestli ti styl sedí.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="postup">
+    <div class="s-head reveal">
+      <p class="s-label" data-i18n="proc_label">Postup</p>
+      <h2 class="s-title" data-i18n="proc_title">Jak to probíhá</h2>
+      <p class="s-sub" data-i18n="proc_sub">Čtyři kroky od první zprávy po spuštěný web.</p>
+    </div>
+    <ol class="axis-list reveal">
+      <li class="axis-item">
+        <div class="axis-card">
+          <p class="axis-kicker" data-i18n="pc1_k">Krok 01</p>
+          <h3 data-i18n="pc1_t">Ozveš se</h3>
+          <p data-i18n="pc1_p">Napíšeš mi, co potřebuješ — stačí pár vět. Doptám se na cíl webu, obsah a termín.</p>
+        </div>
+      </li>
+      <li class="axis-item">
+        <div class="axis-card">
+          <p class="axis-kicker" data-i18n="pc2_k">Krok 02</p>
+          <h3 data-i18n="pc2_t">Návrh</h3>
+          <p data-i18n="pc2_p">Připravím strukturu a vizuální směr. Než napíšu první řádek kódu, víš, jak bude web vypadat.</p>
+        </div>
+      </li>
+      <li class="axis-item">
+        <div class="axis-card">
+          <p class="axis-kicker" data-i18n="pc3_k">Krok 03</p>
+          <h3 data-i18n="pc3_t">Stavba</h3>
+          <p data-i18n="pc3_p">Web stavím ručně, bez šablon. Průběžně ti posílám náhledy, abys měl přehled a mohl do toho mluvit.</p>
+        </div>
+      </li>
+      <li class="axis-item">
+        <div class="axis-card">
+          <p class="axis-kicker" data-i18n="pc4_k">Krok 04</p>
+          <h3 data-i18n="pc4_t">Spuštění</h3>
+          <p data-i18n="pc4_p">Web nasadím, otestuju na mobilu i počítači a předám. Když bude potřeba, postarám se i o další úpravy.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="cta-band">
+    <div class="reveal">
+      <p class="eyebrow" data-i18n="cta_eyebrow">pojďme na to</p>
+      <h2 class="cta-title" data-i18n="cta_title">Hledáš web, který <span class="accent">vyhraje set</span>?</h2>
+      <p class="cta-text" data-i18n="cta_text">Napiš mi pár vět o tom, co potřebuješ. Ozvu se a domluvíme se, jak na to.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="kontakt.html"><span data-i18n="cta_btn">Napsat zprávu</span> <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost btn-mail" href="mailto:JakubDev@outlook.com">JakubDev@outlook.com</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="foot-grid">
+    <a class="logo" href="index.html" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+    <nav class="foot-nav" aria-label="Odkazy v patičce" data-i18n-aria="aria_foot">
+      <a href="index.html" data-i18n="nav_home">Domů</a>
+      <a href="o-mne.html" data-i18n="nav_about">O mně</a>
+      <a href="sluzby.html" data-i18n="nav_services">Služby</a>
+      <a href="kontakt.html" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+    <a class="foot-mail" href="mailto:JakubDev@outlook.com">JakubDev@outlook.com</a>
+  </div>
+  <div class="foot-meta">
+    <span>© 2026 Jakub Kočvara · IČO: 24611581</span>
+    <span data-i18n="f_note">postaveno ručně, řádek po řádku</span>
+  </div>
+</footer>
+
+</body>
+</html>

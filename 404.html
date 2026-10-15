@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stránka nenalezena — Jakub Kočvara</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0b0d">
+<!-- served by Netlify at any missing path, so every URL here is root-absolute -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" href="/icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="/main.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main" data-i18n="skip">Přeskočit na obsah</a>
+
+<header class="site-header" id="siteHeader">
+  <a class="logo" href="/" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+  <nav class="site-nav" id="siteNav" aria-label="Hlavní navigace" data-i18n-aria="aria_nav">
+    <ul>
+      <li><a href="/o-mne.html" data-i18n="nav_about">O mně</a></li>
+      <li><a href="/sluzby.html" data-i18n="nav_services">Služby</a></li>
+      <li><a class="nav-cta" href="/kontakt.html" data-i18n="nav_contact">Kontakt</a></li>
+    </ul>
+  </nav>
+  <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English">EN</button>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span></button>
+</header>
+
+<main id="main" data-page="404">
+
+  <section class="page-hero page-hero--full">
+    <svg class="court" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect class="fade" x="260" y="230" width="1080" height="540" fill="rgba(247,245,239,.014)"/>
+      <rect class="draw" pathLength="1" x="260" y="230" width="1080" height="540" fill="none" stroke="rgba(247,245,239,.075)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M620 230V770M980 230V770" stroke="rgba(247,245,239,.06)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M800 150V850" stroke="rgba(247,245,239,.14)" stroke-width="2.5"/>
+    </svg>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="page-hero-inner">
+      <p class="ph-eyebrow" data-i18n="nf_eyebrow">Chyba 404</p>
+      <h1 class="ph-title"><span data-i18n="nf_t1">Aut<span class="accent">.</span></span></h1>
+      <p class="ph-lead" data-i18n="nf_lead">Tahle stránka skončila mimo hřiště. Zkus to znovu z domovské stránky.</p>
+      <div class="ph-actions">
+        <a class="btn btn-primary" href="/"><span data-i18n="nf_btn">Zpět na hřiště</span> <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="foot-grid">
+    <a class="logo" href="/" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+    <nav class="foot-nav" aria-label="Odkazy v patičce" data-i18n-aria="aria_foot">
+      <a href="/" data-i18n="nav_home">Domů</a>
+      <a href="/o-mne.html" data-i18n="nav_about">O mně</a>
+      <a href="/sluzby.html" data-i18n="nav_services">Služby</a>
+      <a href="/kontakt.html" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+    <a class="foot-mail" href="mailto:JakubDev@outlook.com">JakubDev@outlook.com</a>
+  </div>
+  <div class="foot-meta">
+    <span>© 2026 Jakub Kočvara · IČO: 24611581</span>
+    <span data-i18n="f_note">postaveno ručně, řádek po řádku</span>
+  </div>
+</footer>
+
+</body>
+</html>
