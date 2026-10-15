@@ -23,7 +23,7 @@
       f_note: 'postaveno ručně, řádek po řádku',
 
       cta_eyebrow: 'pojďme na to',
-      cta_title: 'Hledáš web, který <span class="accent">vyhraje set</span>?',
+      cta_title: 'Hledáš web, který <span class="accent">vyhraje zápas</span>?',
       cta_text: 'Napiš mi pár vět o tom, co potřebuješ. Ozvu se a domluvíme se, jak na to.',
       cta_btn: 'Napsat zprávu',
 
@@ -116,7 +116,7 @@
       ct_eyebrow: 'Kontakt',
       ct_t1: 'Napiš',
       ct_t2: 'mi<span class="accent">.</span>',
-      ct_lead: 'Hledáš web, který vyhraje set? Napiš mi pár vět o tom, co potřebuješ, a ozvu se co nejdřív.',
+      ct_lead: 'Hledáš web, který vyhraje zápas? Napiš mi pár vět o tom, co potřebuješ, a ozvu se co nejdřív.',
       ct_direct: 'Napřímo',
       ct_form: 'Nebo přes formulář',
       ct_ico: 'IČO: 24611581',
@@ -151,7 +151,7 @@
       f_note: 'built by hand, line by line',
 
       cta_eyebrow: 'let\'s do this',
-      cta_title: 'Looking for a website that <span class="accent">wins the set</span>?',
+      cta_title: 'Looking for a website that <span class="accent">wins the match</span>?',
       cta_text: 'Tell me in a few sentences what you need. I\'ll get back to you and we\'ll work out the plan.',
       cta_btn: 'Send a message',
 
@@ -240,7 +240,7 @@
       ct_eyebrow: 'Contact',
       ct_t1: 'Drop me',
       ct_t2: 'a line<span class="accent">.</span>',
-      ct_lead: 'Looking for a website that wins the set? Tell me in a few sentences what you need and I\'ll get back to you as soon as I can.',
+      ct_lead: 'Looking for a website that wins the match? Tell me in a few sentences what you need and I\'ll get back to you as soon as I can.',
       ct_direct: 'Directly',
       ct_form: 'Or use the form',
       ct_ico: 'Company ID (IČO): 24611581',
