@@ -10,10 +10,10 @@
 
   const I18N = {
     cs: {
-      title_home: 'Jakub Kočvara — volejbal × kód',
-      title_about: 'O mně — Jakub Kočvara',
-      title_services: 'Služby — Jakub Kočvara',
-      title_contact: 'Kontakt — Jakub Kočvara',
+      title_home: 'Tvorba webových stránek na míru | Jakub Kočvara',
+      title_about: 'O mně: volejbalista a webový vývojář | Jakub Kočvara',
+      title_services: 'Tvorba webů a weby pro sportovce | Jakub Kočvara',
+      title_contact: 'Kontakt a poptávka webu | Jakub Kočvara',
       title_404: 'Stránka nenalezena — Jakub Kočvara',
 
       skip: 'Přeskočit na obsah',
@@ -34,6 +34,9 @@
       f1_p: '<span>Česká extraliga, rakouská Bundesliga </span><span>a španělská Superliga 2 — pokaždé </span><span>mezi nejlepšími bodujícími hráči.</span>',
       f2_t: '<span>Weby na míru, </span><span>bez šablon</span>',
       f2_p: '<span>Rychlé, responzivní stránky </span><span>pro sportovce, kluby i firmy. </span><span>Tahle stránka je důkaz.</span>',
+      in_label: 'Weby na míru',
+      in_title: 'Tvorba webových stránek pro sportovce, kluby i firmy',
+      in_text: 'Jmenuju se Jakub Kočvara, jsem profesionální volejbalista a tvořím webové stránky na míru. Pracuju online pro klienty z celého Česka: sportovce, sportovní kluby, živnostníky i menší firmy. Každý web píšu ručně a bez šablon, takže je rychlý, funguje na mobilu a vyhledávače mu dobře rozumí.',
       aria_stats: 'Výsledky v číslech',
       stat1_num: '<span>2.</span> &amp; <span>3.</span>',
       stat1_label: 'Místo na MČR juniorů ve volejbale',
@@ -88,10 +91,10 @@
       stack_a11y: 'Přístupnost a SEO',
 
       // services
-      sv_eyebrow: 'Služby',
+      sv_eyebrow: 'Tvorba webových stránek',
       sv_t1: 'Co pro tebe',
       sv_t2: 'můžu udělat<span class="accent">.</span>',
-      sv_lead: 'Jasná nabídka bez keců — tři věci, se kterými za mnou můžeš přijít.',
+      sv_lead: 'Weby na míru, weby pro sportovce a sportovní kluby a jejich údržba. Jasná nabídka bez keců — tři věci, se kterými za mnou můžeš přijít.',
       sv_btn: 'Nezávazně se ozvi',
       sv1_title: 'Prezentační web',
       sv1_desc: 'Moderní web pro tebe, tvou firmu nebo projekt — od jedné stránky po několik podstránek. Rychlý, responzivní, žádné šablony.',
@@ -138,10 +141,10 @@
     },
 
     en: {
-      title_home: 'Jakub Kočvara — volleyball × code',
-      title_about: 'About — Jakub Kočvara',
-      title_services: 'Services — Jakub Kočvara',
-      title_contact: 'Contact — Jakub Kočvara',
+      title_home: 'Custom website design | Jakub Kočvara',
+      title_about: 'About: volleyball player and web developer | Jakub Kočvara',
+      title_services: 'Websites and sites for athletes | Jakub Kočvara',
+      title_contact: 'Contact and website enquiry | Jakub Kočvara',
       title_404: 'Page not found — Jakub Kočvara',
 
       skip: 'Skip to content',
@@ -161,6 +164,9 @@
       f1_p: '<span>Czech Extraliga, Austrian Bundesliga </span><span>and Spain\'s Superliga 2 — every season </span><span>among the top scorers.</span>',
       f2_t: '<span>Custom websites, </span><span>no templates</span>',
       f2_p: '<span>Fast, responsive websites </span><span>for athletes, clubs and businesses. </span><span>This page is the proof.</span>',
+      in_label: 'Custom websites',
+      in_title: 'Websites for athletes, clubs and businesses',
+      in_text: 'I\'m Jakub Kočvara, a professional volleyball player who builds custom websites. I work online with clients from all over Czechia: athletes, sports clubs, freelancers and small businesses. Every site is written by hand, without templates, so it loads fast, works on phones and search engines understand it well.',
       aria_stats: 'Results in numbers',
       stat1_num: '<span>2nd</span> &amp; <span>3rd</span>',
       stat1_label: 'Place at the Czech Junior Volleyball Championship',
@@ -213,10 +219,10 @@
       st_sub: 'The technologies I work with — and a small sample of how I think about myself in code.',
       stack_a11y: 'Accessibility & SEO',
 
-      sv_eyebrow: 'Services',
+      sv_eyebrow: 'Web design &amp; development',
       sv_t1: 'What I can',
       sv_t2: 'do for you<span class="accent">.</span>',
-      sv_lead: 'A clear offer, no fluff — three things you can come to me with.',
+      sv_lead: 'Custom websites, sites for athletes and sports clubs, and their upkeep. A clear offer, no fluff — three things you can come to me with.',
       sv_btn: 'Get in touch',
       sv1_title: 'Presentation website',
       sv1_desc: 'A modern site for you, your business or your project — from a single page to several subpages. Fast, responsive, no templates.',

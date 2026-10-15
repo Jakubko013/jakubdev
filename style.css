@@ -349,6 +349,10 @@ button, input, textarea{ font:inherit; color:inherit; }
 .js .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
 .js .reveal.in{ opacity:1; transform:none; }
 
+/* ---------- home: intro (who / what / for whom) ---------- */
+.section--intro{ padding-bottom:0; }
+.section--intro .s-head{ margin-bottom:0; }
+
 /* ---------- stats (scoreboard) ---------- */
 .section--band{ padding-block:72px; }
 .band-more{ display:flex; justify-content:flex-end; margin-top:28px; }
