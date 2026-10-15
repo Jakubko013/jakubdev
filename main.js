@@ -551,7 +551,9 @@
         if (!res.ok) throw new Error('HTTP ' + res.status);
         form.reset();
         say('ok', dict.f_ok);
-      } catch {
+      } catch (err) {
+        // 404/405 here means Netlify has not registered the form (form detection off or no redeploy since)
+        console.error('Contact form submit failed:', err);
         const body = message + '\n\n— ' + (data.get('jmeno') || '') + ' (' + (data.get('email') || '') + ')';
         say('err', dict.f_err);
         const link = status.querySelector('a');
