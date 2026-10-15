@@ -497,6 +497,40 @@ button, input, textarea{ font:inherit; color:inherit; }
 .note p{ color:var(--ink-dim); }
 .note b{ color:var(--sand); font-weight:600; }
 
+/* ---------- references ---------- */
+.shot{
+  border:1px solid var(--line-strong); border-radius:8px; overflow:hidden;
+  background:#14171c; box-shadow:0 30px 60px -24px rgba(0,0,0,.7);
+}
+.shot-bar{ display:flex; align-items:center; gap:7px; padding:10px 14px; border-bottom:1px solid var(--line); }
+.shot-bar span{ width:9px; height:9px; border-radius:50%; background:var(--line-strong); }
+.shot-bar small{
+  margin-left:10px; padding:4px 12px; border-radius:999px; background:var(--bg);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  font:400 .74rem/1 var(--mono); color:var(--ink-dim);
+}
+.shot a{ display:block; }
+.shot img{ width:100%; height:auto; }
+.ref-feature{ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:64px; align-items:center; }
+.ref-feature--flip{ grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); }
+.ref-highlight{ margin-top:96px; }
+.ref-name{ margin-top:12px; font:600 clamp(2rem, 3.4vw, 2.8rem)/1.1 var(--display); text-wrap:balance; }
+.ref-name--sm{ font-size:clamp(1.6rem, 2.6vw, 2.1rem); }
+.ref-body > p:not(.axis-kicker){ max-width:52ch; margin-top:16px; color:var(--ink-dim); }
+.ref-meta{ list-style:none; display:grid; gap:8px; margin-top:22px; font:500 1.05rem/1.35 var(--ui); letter-spacing:.02em; color:var(--ink-dim); }
+.ref-meta b{ font-weight:600; color:var(--ink); }
+.ref-links{ display:flex; flex-wrap:wrap; align-items:center; gap:16px 30px; margin-top:28px; }
+.ref-gal-label{ margin-top:110px; margin-bottom:32px; }
+.ref-gallery{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:52px 40px; align-items:start; }
+.ref-figure figcaption{ margin-top:14px; font:500 1.02rem/1.4 var(--ui); letter-spacing:.02em; color:var(--ink-dim); }
+@media (max-width:880px){
+  .ref-feature, .ref-feature--flip{ grid-template-columns:minmax(0,1fr); gap:36px; }
+  .ref-feature--flip .ref-body{ order:2; }
+  .ref-highlight{ margin-top:72px; }
+  .ref-gal-label{ margin-top:80px; }
+  .ref-gallery{ grid-template-columns:minmax(0,1fr); gap:44px; }
+}
+
 /* ---------- call to action band ---------- */
 .cta-band{
   position:relative; overflow:hidden;
