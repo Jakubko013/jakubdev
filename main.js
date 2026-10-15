@@ -85,7 +85,9 @@
       st_label: 'Stack',
       s2_title: 'Co umím mimo hřiště',
       st_sub: 'Technologie, se kterými pracuju — a malá ukázka, jak o sobě přemýšlím v kódu.',
-      stack_git: 'Git / nasazování',
+      stack_ai: 'Vývoj s AI (Claude Code)',
+      stack_deploy: 'Netlify — nasazení',
+      stack_a11y: 'Přístupnost a SEO',
 
       // services
       sv_eyebrow: 'Služby',
@@ -211,7 +213,9 @@
       st_label: 'Stack',
       s2_title: 'What I do off the court',
       st_sub: 'The technologies I work with — and a small sample of how I think about myself in code.',
-      stack_git: 'Git / deployment',
+      stack_ai: 'Building with AI (Claude Code)',
+      stack_deploy: 'Netlify — deployment',
+      stack_a11y: 'Accessibility & SEO',
 
       sv_eyebrow: 'Services',
       sv_t1: 'What I can',
