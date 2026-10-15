@@ -62,7 +62,7 @@
       // about
       ab_eyebrow: 'O mně',
       ab_t1: 'Z palubovky',
-      ab_t2: 'k editoru<span class="accent">.</span>',
+      ab_t2: 'k monitoru<span class="accent">.</span>',
       ab_lead: 'Je mi 24 a na hřišti hraju jako diagonální útočník. Šest sezón jsem odehrál v ligách tří zemí — a mezitím jsem pro radost stavěl weby. Teď z toho dělám práci a beru do ní všechno, co mě naučila palubovka.',
       car_label: 'Kariéra',
       s1_title: 'Kariéra na hřišti',
@@ -188,7 +188,7 @@
 
       ab_eyebrow: 'About',
       ab_t1: 'From the court',
-      ab_t2: 'to the editor<span class="accent">.</span>',
+      ab_t2: 'to the screen<span class="accent">.</span>',
       ab_lead: 'I\'m 24 and on the court I play as an opposite hitter. I\'ve spent six seasons in the leagues of three countries — and built websites for fun along the way. Now I\'m making it my work, and bringing everything the court taught me.',
       car_label: 'Career',
       s1_title: 'Career on the court',
