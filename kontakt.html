@@ -101,18 +101,18 @@
         <p class="eyebrow" data-i18n="ct_form">Nebo přes formulář</p>
         <form class="form" id="contactForm" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="kontakt">
-          <p class="hp"><label><span data-i18n="f_hp">Tohle pole nevyplňuj:</span> <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <p class="hp" aria-hidden="true"><label><span data-i18n="f_hp">Tohle pole nevyplňuj:</span> <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <div class="field">
             <label for="f-name" data-i18n="f_name">Jméno</label>
-            <input id="f-name" name="jmeno" type="text" autocomplete="name" required>
+            <input id="f-name" name="jmeno" type="text" autocomplete="name" maxlength="100" required>
           </div>
           <div class="field">
             <label for="f-email" data-i18n="f_email">E-mail</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required>
+            <input id="f-email" name="email" type="email" autocomplete="email" maxlength="254" required>
           </div>
           <div class="field">
             <label for="f-msg" data-i18n="f_msg">Co potřebuješ?</label>
-            <textarea id="f-msg" name="zprava" required></textarea>
+            <textarea id="f-msg" name="zprava" minlength="10" maxlength="5000" required></textarea>
           </div>
           <div class="form-foot">
             <button class="btn btn-primary" type="submit" data-i18n="f_send">Odeslat zprávu</button>

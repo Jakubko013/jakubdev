@@ -155,6 +155,8 @@
       f_hp: 'Tohle pole nevyplňuj:',
       f_send: 'Odeslat zprávu',
       f_sending: 'Odesílám…',
+      f_fast: 'To bylo nějak rychlé. Počkej prosím pár sekund a odešli zprávu znovu.',
+      f_links: 'Zpráva obsahuje moc odkazů. Nech v ní prosím nejvýš dva a odešli ji znovu.',
       f_ok: 'Díky, zpráva dorazila. Ozvu se co nejdřív.',
       f_err: 'Zprávu se nepodařilo odeslat. <a href="mailto:' + MAIL + '">Napiš mi přímo e-mailem</a> — text se ti předvyplní.',
       f_subject: 'Poptávka webu',
@@ -308,6 +310,8 @@
       f_hp: 'Leave this field empty:',
       f_send: 'Send message',
       f_sending: 'Sending…',
+      f_fast: 'That was quick. Please wait a few seconds and send it again.',
+      f_links: 'The message contains too many links. Please keep two at most and send it again.',
       f_ok: 'Thanks, your message arrived. I\'ll get back to you soon.',
       f_err: 'The message could not be sent. <a href="mailto:' + MAIL + '">Email me directly</a> — your text will be prefilled.',
       f_subject: 'Website enquiry',
@@ -498,18 +502,45 @@
   }
 
   // ---------- contact form (Netlify Forms, mail fallback) ----------
+  // Spam protection is layered: Netlify checks the honeypot and runs its own
+  // spam filter on the server; the checks below stop simple bots before a
+  // request is even sent, without any third-party captcha or cookies.
   const form = document.getElementById('contactForm');
   if (form) {
     const status = document.getElementById('formStatus');
     const submit = form.querySelector('button[type="submit"]');
+    const MIN_FILL_MS = 3000;  // nobody types name, email and a message faster
+    const MAX_LINKS = 2;       // link-stuffed messages are almost always spam
+    const shownAt = Date.now();
+
+    const say = (cls, html) => {
+      status.className = 'form-status' + (cls ? ' ' + cls : '');
+      status.innerHTML = html;
+    };
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const dict = I18N[lang];
       const data = new FormData(form);
+      const message = String(data.get('zprava') || '');
+
+      // a filled honeypot means a bot: act as if it worked, send nothing
+      if (String(data.get('bot-field') || '').trim()) {
+        form.reset();
+        say('ok', dict.f_ok);
+        return;
+      }
+      if (Date.now() - shownAt < MIN_FILL_MS) {
+        say('err', dict.f_fast);
+        return;
+      }
+      if ((message.match(/https?:\/\/|www\./gi) || []).length > MAX_LINKS) {
+        say('err', dict.f_links);
+        return;
+      }
+
       submit.disabled = true;
-      status.className = 'form-status';
-      status.textContent = dict.f_sending;
+      say('', dict.f_sending);
 
       try {
         const res = await fetch('/', {
@@ -519,12 +550,10 @@
         });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         form.reset();
-        status.classList.add('ok');
-        status.textContent = dict.f_ok;
+        say('ok', dict.f_ok);
       } catch {
-        const body = (data.get('zprava') || '') + '\n\n— ' + (data.get('jmeno') || '') + ' (' + (data.get('email') || '') + ')';
-        status.classList.add('err');
-        status.innerHTML = dict.f_err;
+        const body = message + '\n\n— ' + (data.get('jmeno') || '') + ' (' + (data.get('email') || '') + ')';
+        say('err', dict.f_err);
         const link = status.querySelector('a');
         if (link) link.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(dict.f_subject) + '&body=' + encodeURIComponent(body);
       } finally {
