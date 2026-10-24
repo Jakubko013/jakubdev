@@ -6,7 +6,7 @@
 (() => {
   'use strict';
 
-  const MAIL = 'JakubDev@outlook.com';
+  const MAIL = 'JakubDev@outlook.cz';
 
   const I18N = {
     cs: {
