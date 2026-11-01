@@ -25,6 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="fx/fx.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,6 +48,7 @@
 </script>
 <script>document.documentElement.classList.add('js');</script>
 <script src="main.js" defer></script>
+<script type="module" src="fx/fx.js"></script>
 </head>
 <body>
 
@@ -118,6 +120,7 @@
             <button class="btn btn-primary" type="submit" data-i18n="f_send">Odeslat zprávu</button>
             <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
           </div>
+          <p class="form-privacy" data-i18n="f_privacy">Údaje z formuláře použiju jen k odpovědi na tvou zprávu. Více v <a href="ochrana-osobnich-udaju.html">zásadách ochrany osobních údajů</a>.</p>
         </form>
       </div>
     </div>
@@ -139,6 +142,7 @@
   </div>
   <div class="foot-meta">
     <span>© 2026 Jakub Kočvara · IČO: 24611581</span>
+    <a class="foot-legal" href="ochrana-osobnich-udaju.html" data-i18n="nav_privacy">Ochrana osobních údajů</a>
     <span data-i18n="f_note">postaveno ručně, řádek po řádku</span>
   </div>
 </footer>

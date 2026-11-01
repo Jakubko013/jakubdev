@@ -1,0 +1,3 @@
+# test tooling lives in the repo but is not part of the site
+/tests/*    /404.html    404!
+/.github/*  /404.html    404!
