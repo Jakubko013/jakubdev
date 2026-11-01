@@ -497,6 +497,39 @@ button, input, textarea{ font:inherit; color:inherit; }
 .note p{ color:var(--ink-dim); }
 .note b{ color:var(--sand); font-weight:600; }
 
+/* ---------- pricing ---------- */
+.price-grid{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px; max-width:980px; }
+.price-card{
+  display:flex; flex-direction:column; gap:14px;
+  padding:34px 30px 32px; border:1px solid var(--line-strong); border-radius:4px; background:var(--bg-soft);
+}
+.price-card--main{ border-color:var(--red); }
+.price-name{ font:600 1.45rem/1.1 var(--ui); letter-spacing:.03em; text-transform:uppercase; }
+.price-amount{ display:flex; align-items:baseline; gap:10px; }
+.price-from{ font:600 .9rem/1 var(--ui); letter-spacing:.2em; text-transform:uppercase; color:var(--ink-dim); }
+.price-num{ font:700 clamp(2.2rem, 3.4vw, 2.9rem)/1 var(--display); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.price-desc{ color:var(--ink-dim); font-size:.97rem; }
+.price-list{ list-style:none; display:grid; gap:10px; margin-top:6px; padding-top:18px; border-top:1px solid var(--line); }
+.price-list li{ position:relative; padding-left:22px; font-size:.97rem; }
+.price-list li::before{ content:''; position:absolute; left:2px; top:.62em; width:10px; height:2px; background:var(--red); }
+.price-note{ display:flex; flex-wrap:wrap; align-items:center; gap:14px 28px; margin-top:32px; color:var(--ink-dim); }
+@media (max-width:880px){ .price-grid{ grid-template-columns:minmax(0,1fr); } }
+
+/* ---------- legal (privacy policy) ---------- */
+.legal{ max-width:72ch; }
+.legal h2{ margin:48px 0 14px; font:600 clamp(1.4rem, 2.2vw, 1.8rem)/1.15 var(--display); }
+.legal h2:first-child{ margin-top:0; }
+.legal p, .legal li{ color:var(--ink-dim); line-height:1.7; }
+.legal p + p{ margin-top:12px; }
+.legal b{ color:var(--ink); font-weight:600; }
+.legal ul{ display:grid; gap:8px; margin:12px 0; padding-left:22px; }
+.legal a, .form-privacy a{ color:var(--ink); text-decoration:underline; text-underline-offset:3px; }
+.legal a:hover, .form-privacy a:hover{ color:var(--red-hover); }
+.legal-date{ margin-top:48px; padding-top:20px; border-top:1px solid var(--line); font-size:.92rem; }
+.form-privacy{ color:var(--ink-dim); font-size:.88rem; line-height:1.5; }
+.foot-legal{ transition:color .2s; }
+.foot-legal:hover{ color:var(--red-hover); }
+
 /* ---------- references ---------- */
 .shot{
   border:1px solid var(--line-strong); border-radius:8px; overflow:hidden;

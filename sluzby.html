@@ -25,6 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="fx/fx.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,6 +48,7 @@
 </script>
 <script>document.documentElement.classList.add('js');</script>
 <script src="main.js" defer></script>
+<script type="module" src="fx/fx.js"></script>
 </head>
 <body>
 
@@ -140,6 +142,29 @@
     </div>
   </section>
 
+  <section class="section section--tight section--calm" id="cenik">
+    <div class="s-head reveal">
+      <p class="s-label" data-i18n="price_label">Ceník</p>
+      <h2 class="s-title" data-i18n="price_title">Kolik to stojí</h2>
+      <p class="s-sub" data-i18n="price_sub">Jasné startovní ceny. Přesnou částku ti řeknu po krátké domluvě, podle rozsahu a obsahu webu.</p>
+    </div>
+    <div class="price-grid reveal">
+      <article class="price-card">
+        <h3 class="price-name" data-i18n="price1_name">Prezentační web</h3>
+        <p class="price-amount"><span class="price-from" data-i18n="price_from">od</span> <span class="price-num" data-i18n="price1_amt">10 000 Kč</span></p>
+        <p class="price-desc" data-i18n="price1_desc">Jedna stránka, která o tobě nebo tvé firmě řekne vše podstatné. Hodí se i jako profil sportovce.</p>
+        <ul class="price-list" data-i18n="price1_list"><li>Design na míru, bez šablon</li><li>Funguje na mobilu i počítači</li><li>Kontaktní formulář</li><li>Základní SEO</li></ul>
+      </article>
+      <article class="price-card price-card--main">
+        <h3 class="price-name" data-i18n="price2_name">Vícestránkový web</h3>
+        <p class="price-amount"><span class="price-from" data-i18n="price_from">od</span> <span class="price-num" data-i18n="price2_amt">20 000 Kč</span></p>
+        <p class="price-desc" data-i18n="price2_desc">Web s několika podstránkami pro firmy a projekty, které potřebují víc prostoru: služby, reference, galerie.</p>
+        <ul class="price-list" data-i18n="price2_list"><li>Vše z prezentačního webu</li><li>Více podstránek</li><li>Prvky na míru, třeba kalkulačka</li><li>SEO pro každou podstránku</li></ul>
+      </article>
+    </div>
+    <p class="price-note reveal"><span data-i18n="price_note">Nejsem plátce DPH — uvedené ceny jsou konečné. Úpravy a údržbu stávajícího webu naceňuji podle rozsahu.</span> <a class="text-link" href="kontakt.html"><span data-i18n="price_cta">Chci nabídku</span> <span class="arr" aria-hidden="true">→</span></a></p>
+  </section>
+
   <section class="section section--tight" id="postup">
     <div class="s-head reveal">
       <p class="s-label" data-i18n="proc_label">Postup</p>
@@ -206,6 +231,7 @@
   </div>
   <div class="foot-meta">
     <span>© 2026 Jakub Kočvara · IČO: 24611581</span>
+    <a class="foot-legal" href="ochrana-osobnich-udaju.html" data-i18n="nav_privacy">Ochrana osobních údajů</a>
     <span data-i18n="f_note">postaveno ručně, řádek po řádku</span>
   </div>
 </footer>

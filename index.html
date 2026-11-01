@@ -25,6 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="fx/fx.css">
 <link rel="preload" as="image" href="hero-cut.webp" fetchpriority="high">
 <script type="application/ld+json">
 {
@@ -93,6 +94,11 @@
               "@type": "Service",
               "name": "Prezentační web na míru",
               "url": "https://www.jakubdev.net/sluzby.html#weby"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 10000,
+              "priceCurrency": "CZK"
             }
           },
           {
@@ -127,6 +133,7 @@
 </script>
 <script>document.documentElement.classList.add('js');</script>
 <script src="main.js" defer></script>
+<script type="module" src="fx/fx.js"></script>
 </head>
 <body>
 
@@ -321,6 +328,7 @@
   </div>
   <div class="foot-meta">
     <span>© 2026 Jakub Kočvara · IČO: 24611581</span>
+    <a class="foot-legal" href="ochrana-osobnich-udaju.html" data-i18n="nav_privacy">Ochrana osobních údajů</a>
     <span data-i18n="f_note">postaveno ručně, řádek po řádku</span>
   </div>
 </footer>

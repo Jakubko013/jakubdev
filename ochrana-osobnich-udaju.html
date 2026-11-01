@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ochrana osobních údajů | Jakub Kočvara</title>
+<meta name="description" content="Jak na jakubdev.net zpracovávám osobní údaje z kontaktního formuláře a e-mailu: účel, právní základ, doba uložení, příjemci a tvoje práva podle GDPR.">
+<link rel="canonical" href="https://www.jakubdev.net/ochrana-osobnich-udaju.html">
+<meta name="theme-color" content="#0a0b0d">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jakub Kočvara">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:url" content="https://www.jakubdev.net/ochrana-osobnich-udaju.html">
+<meta property="og:title" content="Ochrana osobních údajů | Jakub Kočvara">
+<meta property="og:description" content="Jak na jakubdev.net zpracovávám osobní údaje z kontaktního formuláře a e-mailu: účel, právní základ, doba uložení, příjemci a tvoje práva podle GDPR.">
+<meta property="og:image" content="https://www.jakubdev.net/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jakub Kočvara – Disciplína z hřiště, teď psaná v kódu.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="fx/fx.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Domů",
+      "item": "https://www.jakubdev.net/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ochrana osobních údajů",
+      "item": "https://www.jakubdev.net/ochrana-osobnich-udaju.html"
+    }
+  ]
+}
+</script>
+<script>document.documentElement.classList.add('js');</script>
+<script src="main.js" defer></script>
+<script type="module" src="fx/fx.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#main" data-i18n="skip">Přeskočit na obsah</a>
+
+<header class="site-header" id="siteHeader">
+  <a class="logo" href="index.html" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+  <nav class="site-nav" id="siteNav" aria-label="Hlavní navigace" data-i18n-aria="aria_nav">
+    <ul>
+      <li><a href="o-mne.html" data-i18n="nav_about">O mně</a></li>
+      <li><a href="sluzby.html" data-i18n="nav_services">Služby</a></li>
+      <li><a href="reference.html" data-i18n="nav_refs">Reference</a></li>
+      <li><a class="nav-cta" href="kontakt.html" data-i18n="nav_contact">Kontakt</a></li>
+    </ul>
+  </nav>
+  <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English">EN</button>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span></button>
+</header>
+
+<main id="main" data-page="privacy">
+
+  <section class="page-hero">
+    <svg class="court" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect class="fade" x="260" y="230" width="1080" height="540" fill="rgba(247,245,239,.014)"/>
+      <rect class="draw" pathLength="1" x="260" y="230" width="1080" height="540" fill="none" stroke="rgba(247,245,239,.075)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M620 230V770M980 230V770" stroke="rgba(247,245,239,.06)" stroke-width="2"/>
+      <path class="draw" pathLength="1" d="M800 150V850" stroke="rgba(247,245,239,.14)" stroke-width="2.5"/>
+    </svg>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="page-hero-inner">
+      <p class="ph-eyebrow" data-i18n="gd_eyebrow">GDPR</p>
+      <h1 class="ph-title">
+        <span data-i18n="gd_t1">Ochrana</span>
+        <span data-i18n="gd_t2">osobních údajů<span class="accent">.</span></span>
+      </h1>
+      <p class="ph-lead" data-i18n="gd_lead">Stručně a srozumitelně: jaké údaje od tebe dostávám, proč, jak dlouho je mám a jaká máš práva.</p>
+    </div>
+  </section>
+
+  <section class="section section--calm">
+    <div class="legal">
+      <h2 data-i18n="gd_h1">1. Kdo údaje zpracovává</h2>
+      <div data-i18n="gd_b1"><p>Správcem osobních údajů je <b>Jakub Kočvara</b>, IČO 24611581, fyzická osoba podnikající podle živnostenského zákona (dále „já“). S čímkoli ohledně osobních údajů mi napiš na <a href="mailto:JakubDev@outlook.cz">JakubDev@outlook.cz</a>.</p></div>
+
+      <h2 data-i18n="gd_h2">2. Jaké údaje zpracovávám a proč</h2>
+      <div data-i18n="gd_b2">
+        <p><b>Kontaktní formulář a e-mail.</b> Jméno, e-mailová adresa a obsah zprávy. Používám je jen k tomu, abych ti odpověděl a případně připravil nabídku. Právním základem je jednání o smlouvě na tvou žádost (čl. 6 odst. 1 písm. b) GDPR) a můj oprávněný zájem odpovědět na dotaz (čl. 6 odst. 1 písm. f) GDPR).</p>
+        <p><b>Spolupráce.</b> Pokud spolu uzavřeme smlouvu, zpracovávám identifikační a fakturační údaje potřebné k jejímu plnění (čl. 6 odst. 1 písm. b) GDPR) a k plnění povinností podle daňových předpisů (čl. 6 odst. 1 písm. c) GDPR).</p>
+        <p><b>Technické údaje.</b> Při návštěvě webu hostingová služba automaticky zpracovává technické údaje, jako je IP adresa a typ prohlížeče, a měří rychlost načítání stránek. Důvodem je bezpečný a spolehlivý provoz webu (oprávněný zájem, čl. 6 odst. 1 písm. f) GDPR).</p>
+      </div>
+
+      <h2 data-i18n="gd_h3">3. Jak dlouho údaje uchovávám</h2>
+      <div data-i18n="gd_b3"><p>Zprávy z formuláře a e-mailu uchovávám po dobu vyřízení dotazu, nejdéle 12 měsíců od naší poslední komunikace. Pokud uzavřeme smlouvu, uchovávám údaje po dobu její platnosti a dále jen po dobu, kterou vyžadují daňové a účetní předpisy.</p></div>
+
+      <h2 data-i18n="gd_h4">4. Komu údaje předávám</h2>
+      <div data-i18n="gd_b4">
+        <p>Údaje neprodávám ani je nepředávám nikomu pro marketing. Pracují s nimi jen poskytovatelé služeb, které k provozu webu a komunikaci používám (zpracovatelé):</p>
+        <ul>
+          <li><b>Netlify, Inc.</b> (USA): hosting webu, příjem zpráv z formuláře a měření rychlosti načítání.</li>
+          <li><b>Microsoft Corporation</b> (USA): e-mailová schránka Outlook, kam zprávy přicházejí.</li>
+          <li><b>Google LLC</b> (USA): načítání písem (Google Fonts), při kterém se Googlu předává IP adresa návštěvníka.</li>
+        </ul>
+        <p>Předání do USA probíhá v rámci EU-U.S. Data Privacy Framework, kterého se tito poskytovatelé účastní, případně na základě standardních smluvních doložek schválených Evropskou komisí.</p>
+      </div>
+
+      <h2 data-i18n="gd_h5">5. Cookies</h2>
+      <div data-i18n="gd_b5"><p>Sám na webu nepoužívám cookies ani reklamní či sledovací nástroje. Zvolený jazyk si pamatuje jen tvůj prohlížeč (localStorage) a nikam se neodesílá.</p></div>
+
+      <h2 data-i18n="gd_h6">6. Tvoje práva</h2>
+      <div data-i18n="gd_b6">
+        <p>Máš právo požadovat přístup ke svým údajům, jejich opravu nebo výmaz, omezení zpracování a přenositelnost údajů. Proti zpracování na základě oprávněného zájmu můžeš vznést námitku. Stačí napsat na <a href="mailto:JakubDev@outlook.cz">JakubDev@outlook.cz</a>, odpovím nejpozději do jednoho měsíce.</p>
+        <p>Pokud si myslíš, že s údaji nakládám v rozporu s předpisy, můžeš podat stížnost u Úřadu pro ochranu osobních údajů (<a href="https://uoou.gov.cz" target="_blank" rel="noopener">uoou.gov.cz</a>).</p>
+        <p>K automatizovanému rozhodování ani profilování nedochází.</p>
+      </div>
+
+      <p class="legal-date" data-i18n="gd_date">Platné od 25. 10. 2026.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="foot-grid">
+    <a class="logo" href="index.html" aria-label="Jakub Kočvara"><span class="dot"></span><span>JAKUB<span class="logo-dim">.KOCVARA</span></span></a>
+    <nav class="foot-nav" aria-label="Odkazy v patičce" data-i18n-aria="aria_foot">
+      <a href="index.html" data-i18n="nav_home">Domů</a>
+      <a href="o-mne.html" data-i18n="nav_about">O mně</a>
+      <a href="sluzby.html" data-i18n="nav_services">Služby</a>
+      <a href="reference.html" data-i18n="nav_refs">Reference</a>
+      <a href="kontakt.html" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+    <a class="foot-mail" href="mailto:JakubDev@outlook.cz">JakubDev@outlook.cz</a>
+  </div>
+  <div class="foot-meta">
+    <span>© 2026 Jakub Kočvara · IČO: 24611581</span>
+    <a class="foot-legal" href="ochrana-osobnich-udaju.html" aria-current="page" data-i18n="nav_privacy">Ochrana osobních údajů</a>
+    <span data-i18n="f_note">postaveno ručně, řádek po řádku</span>
+  </div>
+</footer>
+
+</body>
+</html>
