@@ -766,3 +766,21 @@ h1,h2,h3{ overflow-wrap:break-word; hyphens:auto; }
   .hero-stats .stat .num{ font-size:19px; }
   .gallery-grid{ grid-template-columns:1fr; }
 }
+
+/* Sticky call bar (phones only) */
+.call-bar{ display:none; }
+@media (max-width: 640px){
+  .call-bar{
+    display:flex; gap:8px;
+    position:fixed; left:0; right:0; bottom:0; z-index:80;
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,0.96);
+    border-top:1px solid var(--slate-line);
+    box-shadow:0 -6px 20px rgba(11,37,69,0.12);
+  }
+  .call-bar a{ display:flex; align-items:center; justify-content:center; min-height:48px; border-radius:999px; font-weight:700; font-size:15px; }
+  .call-bar-call{ flex:1 1 auto; background:var(--blue); color:var(--white); }
+  .call-bar-order{ flex:0 0 auto; padding:0 20px; background:var(--navy); color:var(--white); }
+  body{ padding-bottom:calc(68px + env(safe-area-inset-bottom)); }
+  body.menu-open .call-bar{ display:none; }
+}
