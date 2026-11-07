@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Reference: ukázky webů | Jakub Kočvara</title>
-<meta name="description" content="Ukázky webových stránek, které jsem vytvořil: firemní web ISO.Paneels pro dodavatele CLT panelů z Brna. Screenshoty a odkaz na živý web.">
+<title>Reference: ukázky webů a aplikací | Jakub Kočvara</title>
+<meta name="description" content="Ukázky mé práce: aplikace VolleyStat pro zápis volejbalové statistiky a firemní web ISO.Paneels pro dodavatele CLT panelů z Brna. Screenshoty a odkazy na živé weby.">
 <link rel="canonical" href="https://www.jakubdev.net/reference.html">
 <meta name="theme-color" content="#0a0b0d">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Jakub Kočvara">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:url" content="https://www.jakubdev.net/reference.html">
-<meta property="og:title" content="Reference: ukázky webů | Jakub Kočvara">
-<meta property="og:description" content="Ukázky webových stránek, které jsem vytvořil: firemní web ISO.Paneels pro dodavatele CLT panelů z Brna. Screenshoty a odkaz na živý web.">
+<meta property="og:title" content="Reference: ukázky webů a aplikací | Jakub Kočvara">
+<meta property="og:description" content="Ukázky mé práce: aplikace VolleyStat pro zápis volejbalové statistiky a firemní web ISO.Paneels pro dodavatele CLT panelů z Brna. Screenshoty a odkazy na živé weby.">
 <meta property="og:image" content="https://www.jakubdev.net/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -84,11 +84,61 @@
         <span data-i18n="rf_t1">Hotová</span>
         <span data-i18n="rf_t2">práce<span class="accent">.</span></span>
       </h1>
-      <p class="ph-lead" data-i18n="rf_lead">Weby, které jsem postavil. U každého najdeš screenshoty a odkaz, abys ho mohl projít naživo.</p>
+      <p class="ph-lead" data-i18n="rf_lead">Weby a aplikace, které jsem postavil. U každé ukázky najdeš screenshoty a odkaz, abys ji mohl projít naživo.</p>
     </div>
   </section>
 
-  <section class="section" id="isopaneels">
+  <section class="section ref-case" id="volleystat">
+    <div class="ref-feature reveal">
+      <div class="shot"><div class="shot-bar" aria-hidden="true"><span></span><span></span><span></span><small>volleystat.cz</small></div><a href="img/ref-volleystat-1.webp"><img src="img/ref-volleystat-1.webp" width="1280" height="800" alt="Úvodní stránka aplikace volleystat.cz"></a></div>
+      <div class="ref-body">
+        <p class="axis-kicker" data-i18n="vs_kicker">Webová aplikace · vlastní produkt</p>
+        <h2 class="ref-name">VolleyStat</h2>
+        <p data-i18n="vs_desc">Aplikace pro zápis volejbalové statistiky přímo během zápasu. Je navržená pro iPad u lavičky: jedno klepnutí zapíše jednu akci. Funguje i bez internetu, soupisky si sama stáhne z webu Českého volejbalového svazu a zápasy synchronizuje mezi zařízeními celého klubu. Je to můj vlastní produkt, který klubům prodávám jako roční licenci.</p>
+        <ul class="ref-meta">
+          <li data-i18n="vs_m_type"><b>Typ:</b> vlastní produkt, roční klubová licence</li>
+          <li data-i18n="vs_m_platforms"><b>Platformy:</b> web, iPad, Android a Windows</li>
+          <li data-i18n="vs_m_stack"><b>Technologie:</b> React, TypeScript, Supabase, Stripe</li>
+        </ul>
+        <div class="t-tags" data-i18n="vs_tags"><span>Offline režim</span><span>Účty a licence</span><span>Platby kartou</span><span>Export PDF a CSV</span></div>
+        <div class="ref-links">
+          <a class="btn btn-primary" href="https://volleystat.cz/" target="_blank" rel="noopener"><span data-i18n="ref_open">Otevřít web</span> <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-feature ref-feature--flip ref-highlight reveal">
+      <div class="ref-body">
+        <p class="axis-kicker" data-i18n="vs_hl_kicker">Hlavní tahák</p>
+        <h3 class="ref-name ref-name--sm" data-i18n="vs_hl_title">Zápis jedním klepnutím</h3>
+        <p data-i18n="vs_hl_text">Celý zápas se zapisuje do jedné tabulky pro oba týmy. Klepnutí na políčko zapíše hráči podání, přihrávku, útok nebo blok. Skóre, sety i podání aplikace počítá sama, střídání hlídá podle pravidel a poslední akci jde jedním tlačítkem vrátit.</p>
+      </div>
+      <div class="shot"><div class="shot-bar" aria-hidden="true"><span></span><span></span><span></span><small>volleystat.cz/app</small></div><a href="img/ref-volleystat-zapis.webp"><img src="img/ref-volleystat-zapis.webp" width="1180" height="820" alt="Zápis zápasu v aplikaci VolleyStat na iPadu" loading="lazy"></a></div>
+    </div>
+
+    <p class="eyebrow ref-gal-label reveal" data-i18n="vs_shots">Screenshoty z aplikace</p>
+    <div class="ref-gallery reveal">
+        <figure class="ref-figure">
+          <div class="shot"><div class="shot-bar" aria-hidden="true"><span></span><span></span><span></span><small>volleystat.cz/app</small></div><a href="img/ref-volleystat-2.webp"><img src="img/ref-volleystat-2.webp" width="1180" height="645" alt="Statistiky po zápase i po setech" loading="lazy"></a></div>
+          <figcaption data-i18n="vs_cap2">Statistiky za celý zápas i po setech, nejlepší hodnoty se zvýrazní</figcaption>
+        </figure>
+        <figure class="ref-figure">
+          <div class="shot"><div class="shot-bar" aria-hidden="true"><span></span><span></span><span></span><small>volleystat.cz/app</small></div><a href="img/ref-volleystat-3.webp"><img src="img/ref-volleystat-3.webp" width="928" height="370" alt="Výběr hráčů na zápas" loading="lazy"></a></div>
+          <figcaption data-i18n="vs_cap3">Výběr hráčů na zápas. Soupiska se stáhne z webu svazu, nebo se vloží jako text</figcaption>
+        </figure>
+        <figure class="ref-figure">
+          <div class="shot"><div class="shot-bar" aria-hidden="true"><span></span><span></span><span></span><small>volleystat.cz/app</small></div><a href="img/ref-volleystat-4.webp"><img src="img/ref-volleystat-4.webp" width="1180" height="349" alt="Přehled zápasů klubu" loading="lazy"></a></div>
+          <figcaption data-i18n="vs_cap4">Přehled zápasů klubu, rozehraný zápas jde hned dohrát</figcaption>
+        </figure>
+        <figure class="ref-figure">
+          <div class="shot"><div class="shot-bar" aria-hidden="true"><span></span><span></span><span></span><small>volleystat.cz</small></div><a href="img/ref-volleystat-5.webp"><img src="img/ref-volleystat-5.webp" width="1200" height="799" alt="Úvodní web s ceníkem klubové licence" loading="lazy"></a></div>
+          <figcaption data-i18n="vs_cap5">Úvodní web s ceníkem klubové licence</figcaption>
+        </figure>
+    </div>
+    <p class="ref-note reveal" data-i18n="vs_note">Snímky z aplikace používají smyšlená jména z ukázkového zápasu.</p>
+  </section>
+
+  <section class="section ref-case" id="isopaneels">
     <div class="ref-feature reveal">
       <div class="shot"><div class="shot-bar" aria-hidden="true"><span></span><span></span><span></span><small>isopaneels.cz</small></div><a href="img/ref-isopaneels-1.webp"><img src="img/ref-isopaneels-1.webp" width="760" height="761" alt="Úvodní stránka webu isopaneels.cz"></a></div>
       <div class="ref-body">

@@ -556,12 +556,21 @@ button, input, textarea{ font:inherit; color:inherit; }
 .ref-gal-label{ margin-top:110px; margin-bottom:32px; }
 .ref-gallery{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:52px 40px; align-items:start; }
 .ref-figure figcaption{ margin-top:14px; font:500 1.02rem/1.4 var(--ui); letter-spacing:.02em; color:var(--ink-dim); }
+.ref-case + .ref-case{ border-top:1px solid var(--line); }
+.ref-note{ margin-top:28px; font-size:.9rem; color:var(--ink-dim); }
+.ref-duo{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:48px 40px; align-items:start; }
+.ref-card{ display:flex; flex-direction:column; }
+.ref-card .shot{ margin-bottom:28px; }
+.ref-card .shot img{ aspect-ratio:16 / 10; object-fit:cover; object-position:top; }
+.ref-card > p:not(.axis-kicker){ max-width:52ch; margin-top:14px; color:var(--ink-dim); }
+.ref-card .ref-links{ margin-top:22px; }
 @media (max-width:880px){
   .ref-feature, .ref-feature--flip{ grid-template-columns:minmax(0,1fr); gap:36px; }
   .ref-feature--flip .ref-body{ order:2; }
   .ref-highlight{ margin-top:72px; }
   .ref-gal-label{ margin-top:80px; }
   .ref-gallery{ grid-template-columns:minmax(0,1fr); gap:44px; }
+  .ref-duo{ grid-template-columns:minmax(0,1fr); gap:56px; }
 }
 
 /* ---------- call to action band ---------- */
